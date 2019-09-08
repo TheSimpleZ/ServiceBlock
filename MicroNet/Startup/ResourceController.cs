@@ -51,7 +51,11 @@ namespace MicroNet.Startup
         [HttpPost]
         public async Task<ActionResult<T>> Post(T resource)
         {
-            var transformed = await _transformer?.OnCreate(resource) ?? resource;
+            var transformed = resource;
+
+            if (_transformer != null)
+                transformed = await _transformer?.OnCreate(resource);
+
             return Ok(await _storage.Create(transformed));
         }
 
@@ -66,8 +70,8 @@ namespace MicroNet.Startup
         public async Task<ActionResult<T>> Delete(Guid Id)
         {
             await _transformer?.OnDelete(Id);
-
-            return Ok(await _storage.Delete(Id));
+            await _storage.Delete(Id);
+            return Ok();
         }
     }
 }

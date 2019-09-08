@@ -11,7 +11,7 @@ namespace MicroNet.Storage
 
         Task<T> Create(T resource);
         Task<T> Replace(T resource);
-        Task<T> Delete(Guid Id);
+        Task Delete(Guid Id);
 
     }
 }

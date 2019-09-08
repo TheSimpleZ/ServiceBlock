@@ -44,5 +44,10 @@ namespace WeatherForecast
         {
             throw new NotImplementedException();
         }
+
+        Task IStorage<WeatherForecast>.Delete(Guid Id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

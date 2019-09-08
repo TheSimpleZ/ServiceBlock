@@ -15,5 +15,7 @@ namespace WeatherForecast
 
         public string Summary { get; set; }
         public Guid Id { get; set; }
+
+
     }
 }
