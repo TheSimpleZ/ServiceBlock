@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Startup;
 
 namespace WeatherForecast
@@ -12,16 +13,36 @@ namespace WeatherForecast
         {
             "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
         };
-        public IEnumerable<WeatherForecast> Get()
+
+        public Task<WeatherForecast> Create(WeatherForecast resource)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<WeatherForecast> Delete(Guid Id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IEnumerable<WeatherForecast>> Get()
         {
             var rng = new Random();
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
+            return Task.FromResult(Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
                 Date = DateTime.Now.AddDays(index),
                 TemperatureC = rng.Next(-20, 55),
                 Summary = Summaries[rng.Next(Summaries.Length)]
-            })
-            .ToArray();
+            }));
+        }
+
+        public Task<WeatherForecast> Get(Guid Id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<WeatherForecast> Replace(WeatherForecast resource)
+        {
+            throw new NotImplementedException();
         }
     }
 }

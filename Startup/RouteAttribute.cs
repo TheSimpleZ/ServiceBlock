@@ -3,9 +3,9 @@ using System;
 namespace Startup
 {
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = false)]
-    public class ResourceAttribute : Attribute
+    public class RouteAttribute : Attribute
     {
-        public ResourceAttribute(string route)
+        public RouteAttribute(string route)
         {
             Route = route;
         }

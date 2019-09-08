@@ -12,12 +12,12 @@ namespace Startup
         public void PopulateFeature(IEnumerable<ApplicationPart> parts, ControllerFeature feature)
         {
             var currentAssembly = Assembly.GetEntryAssembly();
-            var candidates = currentAssembly.GetExportedTypes().Where(x => x.GetCustomAttributes<ResourceAttribute>().Any());
+            var candidates = currentAssembly.GetExportedTypes().Where(x => x.GetCustomAttributes<RouteAttribute>().Any());
 
             foreach (var candidate in candidates)
             {
                 feature.Controllers.Add(
-                    typeof(GenericController<>).MakeGenericType(candidate).GetTypeInfo()
+                    typeof(ResourceController<>).MakeGenericType(candidate).GetTypeInfo()
                 );
             }
         }
