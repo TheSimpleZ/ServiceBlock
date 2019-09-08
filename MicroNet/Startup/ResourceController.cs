@@ -9,7 +9,7 @@ using Microsoft.Extensions.Logging;
 namespace MicroNet.Startup
 {
     [ApiController]
-    [Microsoft.AspNetCore.Mvc.Route("[controller]")]
+    [Route("[controller]")]
     public class ResourceController<T> : ControllerBase
     {
 

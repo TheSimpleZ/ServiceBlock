@@ -4,7 +4,6 @@ using MicroNet.Startup;
 
 namespace WeatherForecast
 {
-    [Route("/WeatherForecast")]
     public class WeatherForecast : IResource
     {
         public DateTime Date { get; set; }

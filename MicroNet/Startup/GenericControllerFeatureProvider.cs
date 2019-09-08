@@ -11,7 +11,7 @@ namespace MicroNet.Startup
         public void PopulateFeature(IEnumerable<ApplicationPart> parts, ControllerFeature feature)
         {
             var currentAssembly = Assembly.GetEntryAssembly();
-            var candidates = currentAssembly.GetExportedTypes().Where(x => x.GetCustomAttributes<RouteAttribute>().Any());
+            var candidates = currentAssembly.GetExportedTypes().Where(x => typeof(IResource).IsAssignableFrom(x));
 
             foreach (var candidate in candidates)
             {

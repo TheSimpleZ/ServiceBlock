@@ -34,12 +34,12 @@ namespace MicroNet.Startup
                 m.FeatureProviders.Add(new GenericControllerFeatureProvider()
             ));
 
-            // services.Scan(scan =>
-            //     scan.FromEntryAssembly().AddClasses(classes =>
-            //         classes.AssignableTo(typeof(IStorage<>)))
-            //         .AsImplementedInterfaces()
-            //         .WithSingletonLifetime()
-            //     );
+            services.Scan(scan =>
+                scan.FromEntryAssembly().AddClasses(classes =>
+                    classes.AssignableTo(typeof(ITransformer<>)))
+                    .AsImplementedInterfaces()
+                    .WithSingletonLifetime()
+                );
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

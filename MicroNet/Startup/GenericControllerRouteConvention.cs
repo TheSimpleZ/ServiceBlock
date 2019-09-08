@@ -12,14 +12,14 @@ namespace MicroNet.Startup
             {
                 var genericType = controller.ControllerType.GenericTypeArguments[0];
                 var customNameAttribute = genericType.GetCustomAttribute<RouteAttribute>();
+                var attr = new Microsoft.AspNetCore.Mvc.RouteAttribute($"/{genericType.Name}");
 
-                if (customNameAttribute?.Route != null)
+                // TODO: Add custom routes
+
+                controller.Selectors.Add(new SelectorModel
                 {
-                    controller.Selectors.Add(new SelectorModel
-                    {
-                        AttributeRouteModel = new AttributeRouteModel(new Microsoft.AspNetCore.Mvc.RouteAttribute(customNameAttribute.Route)),
-                    });
-                }
+                    AttributeRouteModel = new AttributeRouteModel(attr),
+                });
             }
         }
     }
