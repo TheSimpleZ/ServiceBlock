@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace MicroNet
 {
-    public interface ITransformer<T>
+    public interface IResourceEventListener<T>
     {
         Task<IEnumerable<T>> OnGet(IEnumerable<T> resources);
         Task<T> OnGet(T resource);

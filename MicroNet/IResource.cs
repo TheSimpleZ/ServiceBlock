@@ -5,6 +5,6 @@ namespace MicroNet
 {
     public interface IResource
     {
-        Guid Id { get; set; }
+        Guid Id { get; }
     }
 }
