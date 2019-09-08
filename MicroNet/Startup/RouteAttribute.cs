@@ -1,6 +1,6 @@
 using System;
 
-namespace Startup
+namespace MicroNet.Startup
 {
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = false)]
     public class RouteAttribute : Attribute

@@ -2,7 +2,7 @@ using System.Reflection;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
 
-namespace Startup
+namespace MicroNet.Startup
 {
     public class GenericControllerRouteConvention : IControllerModelConvention
     {

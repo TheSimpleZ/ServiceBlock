@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Startup
+namespace MicroNet
 {
     public interface IResource
     {

@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Startup
+namespace MicroNet.Storage
 {
     public interface IStorage<T>
     {

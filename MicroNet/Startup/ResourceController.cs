@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using MicroNet.Storage;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-namespace Startup.Controllers
+namespace MicroNet.Startup
 {
     [ApiController]
     [Microsoft.AspNetCore.Mvc.Route("[controller]")]
@@ -20,18 +21,18 @@ namespace Startup.Controllers
 
         public ResourceController(ILogger<ResourceController<T>> logger, IStorage<T> storage, ITransformer<T> transformer = null)
         {
-            this._transformer = transformer;
+            _transformer = transformer;
             _logger = logger;
-            this._storage = storage;
+            _storage = storage;
         }
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<T>>> Get()
         {
-            var resources = await this._storage.Get();
+            var resources = await _storage.Get();
 
-            if (this._transformer != null)
-                return Ok(await this._transformer.OnGet(resources));
+            if (_transformer != null)
+                return Ok(await _transformer.OnGet(resources));
 
             return Ok(resources);
         }
@@ -39,10 +40,10 @@ namespace Startup.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<IEnumerable<T>>> Get(Guid Id)
         {
-            var resource = await this._storage.Get(Id);
+            var resource = await _storage.Get(Id);
 
-            if (this._transformer != null)
-                return Ok(await this._transformer.OnGet(resource));
+            if (_transformer != null)
+                return Ok(await _transformer.OnGet(resource));
 
             return Ok(resource);
         }
@@ -50,23 +51,23 @@ namespace Startup.Controllers
         [HttpPost]
         public async Task<ActionResult<T>> Post(T resource)
         {
-            var transformed = await this._transformer?.OnCreate(resource) ?? resource;
-            return Ok(await this._storage.Create(transformed));
+            var transformed = await _transformer?.OnCreate(resource) ?? resource;
+            return Ok(await _storage.Create(transformed));
         }
 
         [HttpPut("{id}")]
         public async Task<ActionResult<T>> Put(Guid Id, T resource)
         {
-            var transformed = await this._transformer?.OnReplace(resource) ?? resource;
-            return Ok(await this._storage.Replace(transformed));
+            var transformed = await _transformer?.OnReplace(resource) ?? resource;
+            return Ok(await _storage.Replace(transformed));
         }
 
         [HttpDelete("{id}")]
         public async Task<ActionResult<T>> Delete(Guid Id)
         {
-            await this._transformer?.OnDelete(Id);
+            await _transformer?.OnDelete(Id);
 
-            return Ok(await this._storage.Delete(Id));
+            return Ok(await _storage.Delete(Id));
         }
     }
 }

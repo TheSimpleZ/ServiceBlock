@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Startup\Startup.csproj" />
+    <ProjectReference Include="..\..\MicroNet\MicroNet.csproj" />
   </ItemGroup>
 
 </Project>

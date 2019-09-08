@@ -13,9 +13,9 @@ using Microsoft.Extensions.Logging;
 
 namespace WeatherForecast
 {
-    public class Startup
+    public class MicroNet
     {
-        public Startup(IConfiguration configuration)
+        public MicroNet(IConfiguration configuration)
         {
             Configuration = configuration;
         }
