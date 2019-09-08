@@ -17,9 +17,9 @@ namespace MicroNet.Startup
         private readonly ILogger<ResourceController<T>> _logger;
         private readonly IStorage<T> _storage;
 
-        private readonly ITransformer<T> _transformer;
+        private readonly IResourceEventListener<T> _transformer;
 
-        public ResourceController(ILogger<ResourceController<T>> logger, IStorage<T> storage, ITransformer<T> transformer = null)
+        public ResourceController(ILogger<ResourceController<T>> logger, IStorage<T> storage, IResourceEventListener<T> transformer = null)
         {
             _transformer = transformer;
             _logger = logger;

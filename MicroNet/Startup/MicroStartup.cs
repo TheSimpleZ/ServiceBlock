@@ -36,7 +36,7 @@ namespace MicroNet.Startup
 
             services.Scan(scan =>
                 scan.FromEntryAssembly().AddClasses(classes =>
-                    classes.AssignableTo(typeof(ITransformer<>)))
+                    classes.AssignableTo(typeof(IResourceEventListener<>)))
                     .AsImplementedInterfaces()
                     .WithSingletonLifetime()
                 );
