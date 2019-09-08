@@ -1,7 +1,7 @@
 using System;
 using Startup;
 
-namespace Example
+namespace WeatherForecast
 {
     [Resource("/WeatherForecast")]
     public class WeatherForecast

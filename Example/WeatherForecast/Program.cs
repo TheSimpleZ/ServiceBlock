@@ -8,7 +8,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Startup;
 
-namespace Example
+namespace WeatherForecast
 {
     public class Program
     {

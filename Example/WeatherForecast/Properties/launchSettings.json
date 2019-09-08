@@ -17,7 +17,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "Example": {
+    "WeatherForecast": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "weatherforecast",

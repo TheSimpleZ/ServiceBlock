@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Startup;
 
-namespace Example
+namespace WeatherForecast
 {
     public class ForecastStorage : IStorage<WeatherForecast>
     {
