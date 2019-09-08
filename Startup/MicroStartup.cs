@@ -25,7 +25,20 @@ namespace Startup
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            services.
+            AddMvc(o => o.Conventions.Add(
+                new GenericControllerRouteConvention()
+            )).
+            ConfigureApplicationPartManager(m =>
+                m.FeatureProviders.Add(new GenericControllerFeatureProvider()
+            ));
+
+            services.Scan(scan =>
+                scan.FromEntryAssembly().AddClasses(classes =>
+                    classes.AssignableTo(typeof(IStorage<>)))
+                    .AsImplementedInterfaces()
+                    .WithSingletonLifetime()
+                );
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

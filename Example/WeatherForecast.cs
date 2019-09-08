@@ -1,7 +1,9 @@
 using System;
+using Startup;
 
 namespace Example
 {
+    [Resource("/WeatherForecast")]
     public class WeatherForecast
     {
         public DateTime Date { get; set; }
