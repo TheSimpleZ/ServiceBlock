@@ -8,8 +8,8 @@ using Microsoft.Extensions.Logging;
 
 namespace MicroNet.Startup
 {
-    [ApiController]
-    [Route("[controller]")]
+    // [ApiController]
+    // [Route("[controller]")]
     public class ResourceController<T> : ControllerBase
     {
 
@@ -38,7 +38,7 @@ namespace MicroNet.Startup
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<IEnumerable<T>>> Get(Guid Id)
+        public async Task<ActionResult<IEnumerable<T>>> Get([FromRoute]Guid Id)
         {
             var resource = await _storage.Get(Id);
 
@@ -49,7 +49,7 @@ namespace MicroNet.Startup
         }
 
         [HttpPost]
-        public async Task<ActionResult<T>> Post(T resource)
+        public async Task<ActionResult<T>> Post([FromBody]T resource)
         {
             var transformed = resource;
 
@@ -60,18 +60,19 @@ namespace MicroNet.Startup
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult<T>> Put(Guid Id, T resource)
+        public async Task<ActionResult<T>> Put([FromRoute]Guid Id, [FromBody]T resource)
         {
             var transformed = await _transformer?.OnReplace(resource) ?? resource;
             return Ok(await _storage.Replace(transformed));
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult<T>> Delete(Guid Id)
+        public async Task<ActionResult<T>> Delete([FromRoute]Guid Id)
         {
             await _transformer?.OnDelete(Id);
             await _storage.Delete(Id);
             return Ok();
         }
+
     }
 }
