@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel.DataAnnotations;
 using MicroNet.Interface;
 using MicroNet.Interface.Storage;
 
@@ -13,6 +14,7 @@ namespace WeatherForecast.Interface
 
     public class Person
     {
+        [Required]
         public string Name { get; set; }
     }
 }

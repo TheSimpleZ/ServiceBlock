@@ -103,6 +103,10 @@ namespace MicroNet.Startup
 
         public async Task<ActionResult<TT>> HandleRequest<TT>(Func<Task<ActionResult<TT>>> onRequest)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
             return await onRequest();
         }
 

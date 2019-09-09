@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using MicroNet.Extensions;
 using MicroNet.Interface;
 using Microsoft.AspNetCore.Mvc.ApplicationParts;
 using Microsoft.AspNetCore.Mvc.Controllers;
@@ -11,13 +12,7 @@ namespace MicroNet.Startup
     {
         public void PopulateFeature(IEnumerable<ApplicationPart> parts, ControllerFeature feature)
         {
-            var entryAssembly = Assembly.GetEntryAssembly();
-            var referencedTypes = entryAssembly.GetReferencedAssemblies()
-                                                 .Where(a => !a.Name.StartsWith("Microsoft") && !a.Name.StartsWith("System"))
-                                                 .SelectMany(a => Assembly.Load(a).GetExportedTypes());
-
-            var candidates = entryAssembly.GetExportedTypes()
-                                    .Concat(referencedTypes).Where(x => typeof(IResource).IsAssignableFrom(x) && x.IsClass && !x.IsAbstract);
+            var candidates = Assembly.GetEntryAssembly().GetAllTypes().Where(x => typeof(IResource).IsAssignableFrom(x) && x.IsClass && !x.IsAbstract);
 
             foreach (var candidate in candidates)
             {

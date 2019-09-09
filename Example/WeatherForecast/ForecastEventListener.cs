@@ -14,9 +14,9 @@ namespace WeatherForecast
             return Task.FromResult(resource);
         }
 
-        public async Task OnDelete(Guid Id)
+        public Task OnDelete(Guid Id)
         {
-            return;
+            return Task.CompletedTask;
         }
 
         public Task<IEnumerable<WeatherForecasts>> OnGet(IEnumerable<WeatherForecasts> resources)
@@ -24,10 +24,10 @@ namespace WeatherForecast
             return Task.FromResult(resources);
         }
 
-        public async Task<WeatherForecasts> OnGet(WeatherForecasts resource)
+        public Task<WeatherForecasts> OnGet(WeatherForecasts resource)
         {
-            resource.Summary = "Ha hahaha gahahah";
-            return resource;
+            resource.Summary = "Ha hahaha hahaha";
+            return Task.FromResult(resource);
         }
 
         public Task<WeatherForecasts> OnReplace(WeatherForecasts resource)

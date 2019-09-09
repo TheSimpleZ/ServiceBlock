@@ -20,7 +20,7 @@ namespace MicroNet.Extensions
 
         public static void AddStorageServices(this IServiceCollection services)
         {
-            var storageAttributes = Assembly.GetEntryAssembly().GetTypes().Select(t => t.GetCustomAttribute<StorageAttribute>()).Where(t => t != null);
+            var storageAttributes = Assembly.GetEntryAssembly().GetAllTypes().Select(t => t.GetCustomAttribute<StorageAttribute>()).Where(t => t != null);
 
             foreach (var attr in storageAttributes)
             {
