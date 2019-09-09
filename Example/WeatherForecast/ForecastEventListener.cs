@@ -13,14 +13,14 @@ namespace WeatherForecast
             return Task.FromResult(resource);
         }
 
-        public Task<WeatherForecast> OnDelete(Guid Id)
+        public async Task OnDelete(Guid Id)
         {
-            throw new NotImplementedException();
+            return;
         }
 
         public Task<IEnumerable<WeatherForecast>> OnGet(IEnumerable<WeatherForecast> resources)
         {
-            throw new NotImplementedException();
+            return Task.FromResult(resources);
         }
 
         public async Task<WeatherForecast> OnGet(WeatherForecast resource)

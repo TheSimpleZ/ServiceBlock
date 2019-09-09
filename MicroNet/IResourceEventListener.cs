@@ -11,7 +11,7 @@ namespace MicroNet
 
         Task<T> OnCreate(T resource);
         Task<T> OnReplace(T resource);
-        Task<T> OnDelete(Guid Id);
+        Task OnDelete(Guid Id);
 
     }
 }
