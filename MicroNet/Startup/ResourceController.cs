@@ -102,7 +102,7 @@ namespace MicroNet.Startup
 
         public async Task<ActionResult<TT>> HandleRequest<TT>(Func<Task<ActionResult<TT>>> onRequest)
         {
-            return Ok(await onRequest());
+            return await onRequest();
         }
 
     }
