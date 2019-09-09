@@ -11,8 +11,13 @@ namespace MicroNet.Startup
     {
         public void PopulateFeature(IEnumerable<ApplicationPart> parts, ControllerFeature feature)
         {
-            var currentAssembly = Assembly.GetEntryAssembly();
-            var candidates = currentAssembly.GetExportedTypes().Where(x => typeof(IResource).IsAssignableFrom(x));
+            var entryAssembly = Assembly.GetEntryAssembly();
+            var referencedTypes = entryAssembly.GetReferencedAssemblies()
+                                                 .Where(a => !a.Name.StartsWith("Microsoft") && !a.Name.StartsWith("System"))
+                                                 .SelectMany(a => Assembly.Load(a).GetExportedTypes());
+
+            var candidates = entryAssembly.GetExportedTypes()
+                                    .Concat(referencedTypes).Where(x => typeof(IResource).IsAssignableFrom(x) && x.IsClass && !x.IsAbstract);
 
             foreach (var candidate in candidates)
             {
