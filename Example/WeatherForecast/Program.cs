@@ -23,11 +23,7 @@ namespace WeatherForecast
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    webBuilder.ConfigureServices((IServiceCollection servicesCollection) =>
-                        {
-                            servicesCollection.AddSingleton<IStorage<WeatherForecast>, MemoryStorage<WeatherForecast>>();
-                            servicesCollection.AddSingleton<IStorage<Invoice>, MemoryStorage<Invoice>>();
-                        }).UseStartup<MicroStartup>();
+                    webBuilder.UseStartup<MicroStartup>();
                 });
     }
 }

@@ -13,6 +13,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Microsoft.AspNetCore.Mvc.Controllers;
+using System.Reflection;
+using MicroNet.Extensions;
 
 namespace MicroNet.Startup
 {
@@ -36,12 +38,10 @@ namespace MicroNet.Startup
                 m.FeatureProviders.Add(new GenericControllerFeatureProvider()
             ));
 
-            services.Scan(scan =>
-                scan.FromEntryAssembly().AddClasses(classes =>
-                    classes.AssignableTo(typeof(IResourceEventListener<>)))
-                    .AsImplementedInterfaces()
-                    .WithSingletonLifetime()
-                );
+
+
+            services.AddResourceEventListeners();
+            services.AddStorageServices();
 
             // Register the Swagger generator, defining 1 or more Swagger documents
             services.AddSwaggerGen(c =>
