@@ -28,11 +28,20 @@ namespace MicroNet.Interface.Storage
 
         public Task<T> Get(Guid Id)
         {
-            return Task.FromResult(storage.FirstOrDefault(x => x.Key == Id).Value);
+
+            var resource = storage.SingleOrDefault(x => x.Key == Id).Value;
+
+            if (resource == null)
+                throw new NotFoundException();
+
+            return Task.FromResult(resource);
         }
 
         public Task<T> Replace(T resource)
         {
+            if (storage[resource.Id] == null)
+                throw new NotFoundException();
+
             storage[resource.Id] = resource;
             return Task.FromResult(resource);
         }

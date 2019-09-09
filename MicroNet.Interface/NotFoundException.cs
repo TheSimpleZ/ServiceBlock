@@ -1,7 +1,7 @@
 using System;
 using System.Runtime.Serialization;
 
-namespace MicroNet.Startup
+namespace MicroNet.Interface
 {
     [Serializable]
     internal class NotFoundException : Exception
