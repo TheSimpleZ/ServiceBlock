@@ -1,7 +1,7 @@
 using System;
 using System.Linq;
 
-namespace MicroNet.Storage
+namespace MicroNet.Interface.Storage
 {
     [AttributeUsage(AttributeTargets.Class, Inherited = false, AllowMultiple = false)]
     public class StorageAttribute : Attribute

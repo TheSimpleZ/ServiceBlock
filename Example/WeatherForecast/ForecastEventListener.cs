@@ -1,13 +1,14 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using MicroNet;
+using MicroNet.Interface;
+using WeatherForecast.Interface;
 
 namespace WeatherForecast
 {
-    public class ForecastEventListener : IResourceEventListener<WeatherForecast>
+    public class ForecastEventListener : IResourceEventListener<WeatherForecasts>
     {
-        public Task<WeatherForecast> OnCreate(WeatherForecast resource)
+        public Task<WeatherForecasts> OnCreate(WeatherForecasts resource)
         {
             resource.Id = Guid.NewGuid();
             return Task.FromResult(resource);
@@ -18,18 +19,18 @@ namespace WeatherForecast
             return;
         }
 
-        public Task<IEnumerable<WeatherForecast>> OnGet(IEnumerable<WeatherForecast> resources)
+        public Task<IEnumerable<WeatherForecasts>> OnGet(IEnumerable<WeatherForecasts> resources)
         {
             return Task.FromResult(resources);
         }
 
-        public async Task<WeatherForecast> OnGet(WeatherForecast resource)
+        public async Task<WeatherForecasts> OnGet(WeatherForecasts resource)
         {
             resource.Summary = "Ha hahaha gahahah";
             return resource;
         }
 
-        public Task<WeatherForecast> OnReplace(WeatherForecast resource)
+        public Task<WeatherForecasts> OnReplace(WeatherForecasts resource)
         {
             throw new NotImplementedException();
         }

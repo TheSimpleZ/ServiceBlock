@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace MicroNet
+namespace MicroNet.Interface
 {
     public interface IResourceEventListener<T>
     {

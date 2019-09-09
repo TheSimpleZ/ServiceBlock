@@ -1,12 +1,11 @@
 using System;
-using MicroNet;
-using MicroNet.Startup;
-using MicroNet.Storage;
+using MicroNet.Interface;
+using MicroNet.Interface.Storage;
 
-namespace WeatherForecast
+namespace WeatherForecast.Interface
 {
     [Storage(typeof(MemoryStorage<Invoice>))]
-    public class WeatherForecast : IResource
+    public class WeatherForecasts : IResource
     {
         public Guid Id { get; set; }
         public DateTime Date { get; set; }

@@ -1,6 +1,7 @@
 using System.Linq;
 using System.Reflection;
-using MicroNet.Storage;
+using MicroNet.Interface;
+using MicroNet.Interface.Storage;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace MicroNet.Extensions

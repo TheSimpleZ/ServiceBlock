@@ -6,6 +6,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\MicroNet\MicroNet.csproj" />
+    <ProjectReference Include="..\WeatherForecast.Interface\WeatherForecast.Interface.csproj" />
+    <ProjectReference Include="..\..\MicroNet.Interface\MicroNet.Interface.csproj" />
   </ItemGroup>
 
 </Project>

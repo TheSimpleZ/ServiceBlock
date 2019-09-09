@@ -10,4 +10,8 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.0.0-rc2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\MicroNet.Interface\MicroNet.Interface.csproj" />
+  </ItemGroup>
+
 </Project>

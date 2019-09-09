@@ -1,8 +1,8 @@
 using System;
-using MicroNet;
-using MicroNet.Storage;
+using MicroNet.Interface;
+using MicroNet.Interface.Storage;
 
-namespace WeatherForecast
+namespace WeatherForecast.Interface
 {
     [Storage(typeof(MemoryStorage<Invoice>))]
     public class Invoice : IResource

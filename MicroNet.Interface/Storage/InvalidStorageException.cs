@@ -1,4 +1,4 @@
-namespace MicroNet.Storage
+namespace MicroNet.Interface.Storage
 {
     [System.Serializable]
     public class InvalidStorageException : System.Exception

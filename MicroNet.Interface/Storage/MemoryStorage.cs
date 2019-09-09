@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Linq;
 
-namespace MicroNet.Storage
+namespace MicroNet.Interface.Storage
 {
     public class MemoryStorage<T> : IStorage<T> where T : IResource
     {
