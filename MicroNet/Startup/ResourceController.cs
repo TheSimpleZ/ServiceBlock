@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using MicroNet.Interface;
 using MicroNet.Interface.Storage;
 using MicroNet.Storage;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -48,8 +49,8 @@ namespace MicroNet.Startup
             });
         }
 
-        [HttpGet("{id}")]
-        public async Task<ActionResult<T>> Get([FromRoute]Guid Id)
+        [HttpGet("{Id}")]
+        public async Task<ActionResult<T>> Get([FromRoute] Guid Id)
         {
             return await HandleRequest<T>(async () =>
             {
@@ -76,7 +77,7 @@ namespace MicroNet.Startup
             });
         }
 
-        [HttpPut("{id}")]
+        [HttpPut("{Id}")]
         public async Task<ActionResult<T>> Put([FromRoute]Guid Id, [FromBody]T resource)
         {
             return await HandleRequest<T>(async () =>
@@ -90,7 +91,7 @@ namespace MicroNet.Startup
             });
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("{Id}")]
         public async Task<ActionResult<T>> Delete([FromRoute]Guid Id)
         {
             return await HandleRequest<T>(async () =>
@@ -107,7 +108,21 @@ namespace MicroNet.Startup
             {
                 return BadRequest(ModelState);
             }
-            return await onRequest();
+
+            try
+            {
+                return await onRequest();
+            }
+            catch (NotImplementedException e)
+            {
+                _logger.LogError(e, "Method not implemented");
+                return StatusCode(StatusCodes.Status501NotImplemented);
+            }
+            catch (NotFoundException e)
+            {
+                _logger.LogError(e, "Resource not found");
+                return NotFound();
+            }
         }
 
     }

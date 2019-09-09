@@ -1,3 +1,5 @@
+using System.Runtime.Serialization;
+
 namespace MicroNet.Storage
 {
     [System.Serializable]
@@ -6,8 +8,6 @@ namespace MicroNet.Storage
         public NoStorageException() { }
         public NoStorageException(string message) : base(message) { }
         public NoStorageException(string message, System.Exception inner) : base(message, inner) { }
-        protected NoStorageException(
-            System.Runtime.Serialization.SerializationInfo info,
-            System.Runtime.Serialization.StreamingContext context) : base(info, context) { }
+        protected NoStorageException(SerializationInfo info, StreamingContext context) : base(info, context) { }
     }
 }
