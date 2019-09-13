@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MicroNet.Interface\MicroNet.Interface.csproj" />
+    <ProjectReference Include="..\mService.Interface\mService.Interface.csproj" />
   </ItemGroup>
 
 </Project>

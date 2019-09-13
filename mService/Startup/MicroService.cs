@@ -5,7 +5,7 @@ using Serilog;
 using Serilog.Core;
 using Serilog.Events;
 
-namespace MicroNet.Startup
+namespace mService.Startup
 {
     public class MicroService
     {

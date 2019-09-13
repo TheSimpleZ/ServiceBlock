@@ -5,9 +5,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\MicroNet\MicroNet.csproj" />
+    <ProjectReference Include="..\..\mService\mService.csproj" />
     <ProjectReference Include="..\WeatherForecast.Interface\WeatherForecast.Interface.csproj" />
-    <ProjectReference Include="..\..\MicroNet.Interface\MicroNet.Interface.csproj" />
+    <ProjectReference Include="..\..\mService.Interface\mService.Interface.csproj" />
   </ItemGroup>
 
 </Project>

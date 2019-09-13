@@ -2,7 +2,7 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using MicroNet.Storage;
+using mService.Storage;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -14,10 +14,10 @@ using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Microsoft.AspNetCore.Mvc.Controllers;
 using System.Reflection;
-using MicroNet.Extensions;
+using mService.Extensions;
 using Serilog;
 
-namespace MicroNet.Startup
+namespace mService.Startup
 {
     public class MicroStartup
     {

@@ -1,6 +1,6 @@
 using System;
 
-namespace MicroNet.Interface
+namespace mService.Interface
 {
     public interface IResource
     {

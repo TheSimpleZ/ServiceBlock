@@ -1,6 +1,6 @@
 using System.Runtime.Serialization;
 
-namespace MicroNet.Storage
+namespace mService.Storage
 {
     [System.Serializable]
     public class NoStorageException : System.Exception

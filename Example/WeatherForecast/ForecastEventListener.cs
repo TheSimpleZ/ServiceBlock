@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using MicroNet.Interface;
+using mService.Interface;
 using WeatherForecast.Interface;
 
 namespace WeatherForecast

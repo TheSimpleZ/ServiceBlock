@@ -1,7 +1,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
-using MicroNet.Interface;
-using MicroNet.Interface.Storage;
+using mService.Interface;
+using mService.Interface.Storage;
 
 namespace WeatherForecast.Interface
 {

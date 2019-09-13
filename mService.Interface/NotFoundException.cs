@@ -1,7 +1,7 @@
 using System;
 using System.Runtime.Serialization;
 
-namespace MicroNet.Interface
+namespace mService.Interface
 {
     [Serializable]
     public class NotFoundException : Exception

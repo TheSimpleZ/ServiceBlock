@@ -1,10 +1,10 @@
 using System.Linq;
 using System.Reflection;
-using MicroNet.Interface;
-using MicroNet.Interface.Storage;
+using mService.Interface;
+using mService.Interface.Storage;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace MicroNet.Extensions
+namespace mService.Extensions
 {
     public static class ServiceCollectionExtensions
     {

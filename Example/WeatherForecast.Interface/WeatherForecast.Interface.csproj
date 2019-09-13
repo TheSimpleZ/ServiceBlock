@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
-    <ProjectReference Include="..\..\MicroNet.Interface\MicroNet.Interface.csproj" />
+    <ProjectReference Include="..\..\mService.Interface\mService.Interface.csproj" />
   </ItemGroup>
 
   <PropertyGroup>

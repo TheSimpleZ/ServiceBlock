@@ -1,6 +1,6 @@
 using System;
-using MicroNet.Interface;
-using MicroNet.Interface.Storage;
+using mService.Interface;
+using mService.Interface.Storage;
 
 namespace WeatherForecast.Interface
 {

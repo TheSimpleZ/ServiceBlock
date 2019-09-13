@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace MicroNet.Interface.Storage
+namespace mService.Interface.Storage
 {
     public interface IStorage<T>
     {

@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace MicroNet.Interface
+namespace mService.Interface
 {
     public abstract class ResourceEventListener<T>
     {

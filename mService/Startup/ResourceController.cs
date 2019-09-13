@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using MicroNet.Interface;
-using MicroNet.Interface.Storage;
-using MicroNet.Storage;
+using mService.Interface;
+using mService.Interface.Storage;
+using mService.Storage;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-namespace MicroNet.Startup
+namespace mService.Startup
 {
     // [ApiController]
     // [Route("[controller]")]
