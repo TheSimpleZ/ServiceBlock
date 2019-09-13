@@ -15,4 +15,5 @@ jobs:
           nuget_key: ${{ secrets.NugetKey }}
         run: |
           dotnet pack
-          dotnet nuget push * -k $nuget_key -s https://api.nuget.org/v3/index.json
+          dotnet nuget push ServiceBlock/bin/Release/ServiceBlock.*.nupkg -k $nuget_key -s https://api.nuget.org/v3/index.json
+          dotnet nuget push ServiceBlock.Interface/bin/Release/ServiceBlock.Interface.*.nupkg -k $nuget_key -s https://api.nuget.org/v3/index.json
