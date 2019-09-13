@@ -2,11 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using mService.Interface;
-using mService.Interface.Storage;
+using ServiceBlock.Interface;
+using ServiceBlock.Interface.Storage;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace mService.Extensions
+namespace ServiceBlock.Extensions
 {
     public static class AssemblyExtensions
     {

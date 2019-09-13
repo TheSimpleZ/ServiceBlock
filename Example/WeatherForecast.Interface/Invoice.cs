@@ -1,7 +1,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
-using mService.Interface;
-using mService.Interface.Storage;
+using ServiceBlock.Interface;
+using ServiceBlock.Interface.Storage;
 
 namespace WeatherForecast.Interface
 {

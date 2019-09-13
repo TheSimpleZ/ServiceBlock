@@ -1,4 +1,4 @@
-namespace mService.Interface.Storage
+namespace ServiceBlock.Interface.Storage
 {
     [System.Serializable]
     public class InvalidStorageException : System.Exception

@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace mService.Interface.Storage
+namespace ServiceBlock.Interface.Storage
 {
     public interface IStorage<T>
     {

@@ -1,7 +1,7 @@
 using System;
 using System.Runtime.Serialization;
 
-namespace mService.Interface
+namespace ServiceBlock.Interface
 {
     [Serializable]
     public class NotFoundException : Exception

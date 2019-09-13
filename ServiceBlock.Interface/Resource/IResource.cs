@@ -1,6 +1,6 @@
 using System;
 
-namespace mService.Interface
+namespace ServiceBlock.Interface
 {
     public interface IResource
     {

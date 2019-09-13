@@ -6,9 +6,9 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using mService.Startup;
+using ServiceBlock.Startup;
 using Microsoft.Extensions.DependencyInjection;
-using mService.Storage;
+using ServiceBlock.Storage;
 using Serilog;
 
 namespace WeatherForecast

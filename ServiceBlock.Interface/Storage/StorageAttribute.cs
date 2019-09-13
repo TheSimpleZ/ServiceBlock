@@ -1,7 +1,7 @@
 using System;
 using System.Linq;
 
-namespace mService.Interface.Storage
+namespace ServiceBlock.Interface.Storage
 {
     [AttributeUsage(AttributeTargets.Class, Inherited = false, AllowMultiple = false)]
     public class StorageAttribute : Attribute

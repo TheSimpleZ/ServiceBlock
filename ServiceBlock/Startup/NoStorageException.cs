@@ -1,6 +1,6 @@
 using System.Runtime.Serialization;
 
-namespace mService.Storage
+namespace ServiceBlock.Storage
 {
     [System.Serializable]
     public class NoStorageException : System.Exception

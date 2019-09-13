@@ -1,12 +1,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using mService.Extensions;
-using mService.Interface;
+using ServiceBlock.Extensions;
+using ServiceBlock.Interface;
 using Microsoft.AspNetCore.Mvc.ApplicationParts;
 using Microsoft.AspNetCore.Mvc.Controllers;
 
-namespace mService.Startup
+namespace ServiceBlock.Startup
 {
     public class GenericControllerFeatureProvider : IApplicationFeatureProvider<ControllerFeature>
     {

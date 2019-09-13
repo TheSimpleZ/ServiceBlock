@@ -5,7 +5,7 @@ using Serilog;
 using Serilog.Core;
 using Serilog.Events;
 
-namespace mService.Startup
+namespace ServiceBlock.Startup
 {
     public class MicroService
     {

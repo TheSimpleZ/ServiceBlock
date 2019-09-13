@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace mService.Interface
+namespace ServiceBlock.Interface
 {
     public abstract class ResourceEventListener<T>
     {

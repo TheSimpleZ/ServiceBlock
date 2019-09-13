@@ -5,7 +5,7 @@ using System.Linq;
 using Microsoft.Extensions.Logging;
 
 
-namespace mService.Interface.Storage
+namespace ServiceBlock.Interface.Storage
 {
     public class MemoryStorage<T> : IStorage<T> where T : IResource
     {

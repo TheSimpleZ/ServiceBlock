@@ -5,9 +5,9 @@ VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherForecast", "Example\WeatherForecast\WeatherForecast.csproj", "{8C589BED-B85F-4937-A847-EDCE1AA9F169}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mService", "mService\mService.csproj", "{9288B640-F540-4A7B-AD6D-2E635D578F8A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceBlock", "ServiceBlock\ServiceBlock.csproj", "{9288B640-F540-4A7B-AD6D-2E635D578F8A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mService.Interface", "mService.Interface\mService.Interface.csproj", "{4719F43D-AAEA-4F8D-AE29-68C540A52F02}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceBlock.Interface", "ServiceBlock.Interface\ServiceBlock.Interface.csproj", "{4719F43D-AAEA-4F8D-AE29-68C540A52F02}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Example", "Example", "{6B33D772-A3F4-4B4F-A781-29CC99DFA0D5}"
 EndProject

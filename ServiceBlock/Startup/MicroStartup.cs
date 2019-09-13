@@ -2,7 +2,7 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using mService.Storage;
+using ServiceBlock.Storage;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -14,10 +14,10 @@ using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Microsoft.AspNetCore.Mvc.Controllers;
 using System.Reflection;
-using mService.Extensions;
+using ServiceBlock.Extensions;
 using Serilog;
 
-namespace mService.Startup
+namespace ServiceBlock.Startup
 {
     public class MicroStartup
     {

@@ -5,9 +5,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\mService\mService.csproj" />
+    <ProjectReference Include="..\..\ServiceBlock\ServiceBlock.csproj" />
     <ProjectReference Include="..\WeatherForecast.Interface\WeatherForecast.Interface.csproj" />
-    <ProjectReference Include="..\..\mService.Interface\mService.Interface.csproj" />
+    <ProjectReference Include="..\..\ServiceBlock.Interface\ServiceBlock.Interface.csproj" />
   </ItemGroup>
 
 </Project>
