@@ -19,16 +19,16 @@ namespace MicroNet.Startup
         private readonly ILogger<ResourceController<T>> _logger;
         private readonly IStorage<T> _storage;
 
-        private readonly IResourceEventListener<T> _transformer;
+        private readonly ResourceEventListener<T> _transformer;
 
-        public ResourceController(ILogger<ResourceController<T>> logger, IStorage<T> storage = null, IResourceEventListener<T> transformer = null)
+        public ResourceController(ILogger<ResourceController<T>> logger, IStorage<T> storage = null, ResourceEventListener<T> transformer = null)
         {
             _transformer = transformer;
             _logger = logger;
 
             if (storage == null)
             {
-                throw new NoStorageException($"The resource {typeof(T).Name} does not have a storage associated with it.");
+                throw new NoStorageException($"The resource {typeof(T).Name} does not have a compatible storage associated with it.");
             }
 
             _storage = storage;

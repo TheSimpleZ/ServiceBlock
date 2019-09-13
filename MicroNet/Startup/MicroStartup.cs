@@ -15,11 +15,13 @@ using Microsoft.OpenApi.Models;
 using Microsoft.AspNetCore.Mvc.Controllers;
 using System.Reflection;
 using MicroNet.Extensions;
+using Serilog;
 
 namespace MicroNet.Startup
 {
     public class MicroStartup
     {
+
         public MicroStartup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -30,6 +32,9 @@ namespace MicroNet.Startup
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            services.Configure<ConsoleLifetimeOptions>(options => options.SuppressStatusMessages = true);
+
             services.
             AddMvc(o => o.Conventions.Add(
                 new GenericControllerRouteConvention()
@@ -60,6 +65,8 @@ namespace MicroNet.Startup
             }
 
             app.UseHttpsRedirection();
+
+            app.UseSerilogRequestLogging();
 
             // Enable middleware to serve generated Swagger as a JSON endpoint.
             app.UseSwagger();

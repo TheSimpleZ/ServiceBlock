@@ -4,14 +4,29 @@ using System.Threading.Tasks;
 
 namespace MicroNet.Interface
 {
-    public interface IResourceEventListener<T>
+    public abstract class ResourceEventListener<T>
     {
-        Task<IEnumerable<T>> OnGet(IEnumerable<T> resources);
-        Task<T> OnGet(T resource);
+        public virtual Task<IEnumerable<T>> OnGet(IEnumerable<T> resources)
+        {
+            return Task.FromResult(resources);
+        }
+        public virtual Task<T> OnGet(T resource)
+        {
+            return Task.FromResult(resource);
+        }
 
-        Task<T> OnCreate(T resource);
-        Task<T> OnReplace(T resource);
-        Task OnDelete(Guid Id);
+        public virtual Task<T> OnCreate(T resource)
+        {
+            return Task.FromResult(resource);
+        }
+        public virtual Task<T> OnReplace(T resource)
+        {
+            return Task.FromResult(resource);
+        }
+        public virtual Task OnDelete(Guid Id)
+        {
+            return Task.CompletedTask;
+        }
 
     }
 }

@@ -9,6 +9,7 @@ using Microsoft.Extensions.Logging;
 using MicroNet.Startup;
 using Microsoft.Extensions.DependencyInjection;
 using MicroNet.Storage;
+using Serilog;
 
 namespace WeatherForecast
 {
@@ -16,14 +17,7 @@ namespace WeatherForecast
     {
         public static void Main(string[] args)
         {
-            CreateHostBuilder(args).Build().Run();
+            MicroService.Run(args);
         }
-
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseStartup<MicroStartup>();
-                });
     }
 }

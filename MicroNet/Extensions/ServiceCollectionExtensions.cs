@@ -12,7 +12,7 @@ namespace MicroNet.Extensions
         {
             services.Scan(scan =>
                 scan.FromEntryAssembly()
-                    .AddClasses(classes => classes.AssignableTo(typeof(IResourceEventListener<>)))
+                    .AddClasses(classes => classes.AssignableTo(typeof(ResourceEventListener<>)))
                     .AsImplementedInterfaces()
                     .WithScopedLifetime()
             );

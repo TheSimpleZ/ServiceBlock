@@ -4,7 +4,7 @@ using MicroNet.Interface.Storage;
 
 namespace WeatherForecast.Interface
 {
-    [Storage(typeof(MemoryStorage<Invoice>))]
+    [Storage(typeof(MemoryStorage<WeatherForecasts>))]
     public class WeatherForecasts : IResource
     {
         public Guid Id { get; set; }
