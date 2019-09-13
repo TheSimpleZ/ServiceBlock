@@ -7,7 +7,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - uses: actions/checkout@master
       - uses: actions/setup-dotnet@v1
         with:
           dotnet-version: "3.0.100-preview9-014004"
-      - run: cd MicroNet && dotnet pack
+      - run: dotnet pack
