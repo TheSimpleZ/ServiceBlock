@@ -7,6 +7,7 @@ using ServiceBlock.Interface.Storage;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using ServiceBlock.Interface.Resource;
 
 namespace ServiceBlock.Core
 {

@@ -6,6 +6,7 @@ using ServiceBlock.Interface;
 using Microsoft.AspNetCore.Mvc.ApplicationParts;
 using Microsoft.AspNetCore.Mvc.Controllers;
 using Serilog;
+using ServiceBlock.Interface.Resource;
 
 namespace ServiceBlock.Core
 {

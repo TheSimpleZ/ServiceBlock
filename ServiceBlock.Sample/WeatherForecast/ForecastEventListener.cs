@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using ServiceBlock.Interface;
+using ServiceBlock.Interface.Resource;
 using WeatherForecast.Interface;
 
 namespace WeatherForecast

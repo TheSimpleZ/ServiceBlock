@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Linq;
 using Microsoft.Extensions.Logging;
-
+using ServiceBlock.Interface.Resource;
 
 namespace ServiceBlock.Interface.Storage
 {
