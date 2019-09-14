@@ -5,9 +5,9 @@ using Serilog;
 using Serilog.Core;
 using Serilog.Events;
 
-namespace ServiceBlock.Startup
+namespace ServiceBlock.Core
 {
-    public class MicroService
+    public class Service
     {
         public static void Run(string[] args, Logger logger = null)
         {
@@ -47,7 +47,7 @@ namespace ServiceBlock.Startup
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    webBuilder.UseStartup<MicroStartup>().UseSerilog();
+                    webBuilder.UseStartup<Startup>().UseSerilog();
                 });
     }
 }

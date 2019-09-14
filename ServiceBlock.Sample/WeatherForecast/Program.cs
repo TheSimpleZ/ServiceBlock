@@ -6,10 +6,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using ServiceBlock.Startup;
 using Microsoft.Extensions.DependencyInjection;
-using ServiceBlock.Storage;
-using Serilog;
+using ServiceBlock.Core;
 
 namespace WeatherForecast
 {
@@ -17,7 +15,7 @@ namespace WeatherForecast
     {
         public static void Main(string[] args)
         {
-            MicroService.Run(args);
+            Service.Run(args);
         }
     }
 }

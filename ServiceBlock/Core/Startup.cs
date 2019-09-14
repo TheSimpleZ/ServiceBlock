@@ -1,28 +1,20 @@
-using System;
 using System.Linq;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using ServiceBlock.Storage;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Microsoft.AspNetCore.Mvc.Controllers;
-using System.Reflection;
 using ServiceBlock.Extensions;
 using Serilog;
 
-namespace ServiceBlock.Startup
+namespace ServiceBlock.Core
 {
-    public class MicroStartup
+    public class Startup
     {
 
-        public MicroStartup(IConfiguration configuration)
+        public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }

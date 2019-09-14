@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using ServiceBlock.Interface;
 using ServiceBlock.Interface.Storage;
-using ServiceBlock.Storage;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-namespace ServiceBlock.Startup
+namespace ServiceBlock.Core
 {
     // [ApiController]
     // [Route("[controller]")]

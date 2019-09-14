@@ -2,7 +2,7 @@ using System.Reflection;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
 
-namespace ServiceBlock.Startup
+namespace ServiceBlock.Core
 {
     public class GenericControllerRouteConvention : IControllerModelConvention
     {
@@ -12,7 +12,7 @@ namespace ServiceBlock.Startup
             {
                 var genericType = controller.ControllerType.GenericTypeArguments[0];
                 var customNameAttribute = genericType.GetCustomAttribute<RouteAttribute>();
-                var attr = new Microsoft.AspNetCore.Mvc.RouteAttribute($"/{genericType.Name}");
+                var attr = new RouteAttribute($"/{genericType.Name}");
 
                 // TODO: Add custom routes
 

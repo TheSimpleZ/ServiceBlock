@@ -5,8 +5,9 @@ using ServiceBlock.Extensions;
 using ServiceBlock.Interface;
 using Microsoft.AspNetCore.Mvc.ApplicationParts;
 using Microsoft.AspNetCore.Mvc.Controllers;
+using Serilog;
 
-namespace ServiceBlock.Startup
+namespace ServiceBlock.Core
 {
     public class GenericControllerFeatureProvider : IApplicationFeatureProvider<ControllerFeature>
     {
@@ -19,6 +20,7 @@ namespace ServiceBlock.Startup
                 feature.Controllers.Add(
                     typeof(ResourceController<>).MakeGenericType(candidate).GetTypeInfo()
                 );
+                Log.Logger.Information("Controller for resource {ResourceName} has been registered.", candidate.Name);
             }
         }
     }
