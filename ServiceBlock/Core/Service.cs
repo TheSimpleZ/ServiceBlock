@@ -1,3 +1,4 @@
+#nullable enable
 using System;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
@@ -9,7 +10,7 @@ namespace ServiceBlock.Core
 {
     public class Service
     {
-        public static void Run(string[] args, Logger logger = null)
+        public static void Run(string[] args, Logger? logger = null)
         {
 
             if (logger != null)

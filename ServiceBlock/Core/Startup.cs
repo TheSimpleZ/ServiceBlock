@@ -44,7 +44,7 @@ namespace ServiceBlock.Core
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
-                c.TagActionsBy(api => new[] { (api.ActionDescriptor as ControllerActionDescriptor).ControllerTypeInfo.GetGenericArguments().Single().Name });
+                c.TagActionsBy(api => new[] { (api.ActionDescriptor as ControllerActionDescriptor)?.ControllerTypeInfo.GetGenericArguments().Single().Name });
             });
         }
 

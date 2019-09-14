@@ -13,7 +13,7 @@ namespace ServiceBlock.Extensions
         public static IEnumerable<Type> GetAllTypes(this Assembly asm)
         {
             var referencedTypes = asm.GetReferencedAssemblies()
-                                                 .Where(a => !a.Name.StartsWith("Microsoft") && !a.Name.StartsWith("System"))
+                                                 .Where(a => a.Name?.StartsWith("Microsoft") == false && a.Name?.StartsWith("System") == false)
                                                  .SelectMany(a => Assembly.Load(a).GetExportedTypes());
 
             return asm.GetExportedTypes().Concat(referencedTypes);

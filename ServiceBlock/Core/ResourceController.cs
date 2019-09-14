@@ -1,4 +1,5 @@
-﻿using System;
+﻿#nullable enable
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using ServiceBlock.Interface;
@@ -18,9 +19,9 @@ namespace ServiceBlock.Core
         private readonly ILogger<ResourceController<T>> _logger;
         private readonly IStorage<T> _storage;
 
-        private readonly ResourceEventListener<T> _transformer;
+        private readonly ResourceEventListener<T>? _transformer;
 
-        public ResourceController(ILogger<ResourceController<T>> logger, IStorage<T> storage = null, ResourceEventListener<T> transformer = null)
+        public ResourceController(ILogger<ResourceController<T>> logger, IStorage<T>? storage = null, ResourceEventListener<T>? transformer = null)
         {
             _transformer = transformer;
             _logger = logger;
@@ -70,7 +71,7 @@ namespace ServiceBlock.Core
                 var transformed = resource;
 
                 if (_transformer != null)
-                    transformed = await _transformer?.OnCreate(resource);
+                    transformed = await _transformer.OnCreate(resource);
 
                 return Ok(await _storage.Create(transformed));
             });
@@ -95,7 +96,8 @@ namespace ServiceBlock.Core
         {
             return await HandleRequest<T>(async () =>
             {
-                await _transformer?.OnDelete(Id);
+                if (_transformer != null)
+                    await _transformer.OnDelete(Id);
                 await _storage.Delete(Id);
                 return Ok();
             });

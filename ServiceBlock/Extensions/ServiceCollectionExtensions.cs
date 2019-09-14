@@ -20,13 +20,16 @@ namespace ServiceBlock.Extensions
 
         public static void AddStorageServices(this IServiceCollection services)
         {
-            var storageAttributes = Assembly.GetEntryAssembly().GetAllTypes().Select(t => t.GetCustomAttribute<StorageAttribute>()).Where(t => t != null);
-
-            foreach (var attr in storageAttributes)
-            {
-                var innerType = attr.storageType.GetGenericArguments().Single();
-                services.AddSingleton(typeof(IStorage<>).MakeGenericType(innerType), attr.storageType);
-            }
+            var storageAttributes = Assembly.GetEntryAssembly()?.GetAllTypes().Select(t => t.GetCustomAttribute<StorageAttribute>()).Where(t => t != null);
+            if (storageAttributes != null)
+                foreach (var attr in storageAttributes)
+                {
+                    if (attr != null)
+                    {
+                        var innerType = attr.storageType.GetGenericArguments().Single();
+                        services.AddSingleton(typeof(IStorage<>).MakeGenericType(innerType), attr.storageType);
+                    }
+                }
         }
     }
 }
