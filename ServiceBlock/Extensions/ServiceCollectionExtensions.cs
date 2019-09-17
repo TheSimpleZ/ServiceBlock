@@ -1,9 +1,8 @@
 using System.Linq;
 using System.Reflection;
-using ServiceBlock.Interface;
-using ServiceBlock.Interface.Storage;
 using Microsoft.Extensions.DependencyInjection;
 using ServiceBlock.Interface.Resource;
+using ServiceBlock.Interface.Storage;
 
 namespace ServiceBlock.Extensions
 {

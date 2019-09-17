@@ -7,10 +7,8 @@ using ServiceBlock.Interface.Storage;
 namespace WeatherForecast.Interface
 {
     [Storage(typeof(MemoryStorage<Invoice>))]
-    public class Invoice : IResource
+    public class Invoice : Resource
     {
-        [ReadOnly(true)]
-        public Guid Id { get; set; }
         public Person Sender { get; set; }
     }
 

@@ -5,9 +5,8 @@ using ServiceBlock.Interface.Storage;
 namespace WeatherForecast.Interface
 {
     [Storage(typeof(MemoryStorage<WeatherForecasts>))]
-    public class WeatherForecasts : IResource
+    public class WeatherForecasts : Resource
     {
-        public Guid Id { get; set; }
         public DateTime Date { get; set; }
 
         public int TemperatureC { get; set; }

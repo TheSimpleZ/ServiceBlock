@@ -13,7 +13,7 @@ namespace ServiceBlock.Core
 {
     // [ApiController]
     // [Route("[controller]")]
-    public class ResourceController<T> : ControllerBase where T : IResource
+    public class ResourceController<T> : ControllerBase where T : Resource
     {
 
 
