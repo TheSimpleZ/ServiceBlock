@@ -22,7 +22,7 @@ Then go to your Program.cs and call `ServiceBlock.Startup.Block.Run(args)`.
 
 Create a new project called `<YOUR_PROJECT_NAME>.Interface`. This project will contain the public interface of your service. Now you can start defining resources.
 
-## Usage
+## Usage guide
 
 The framework can be used to easily define resources in your REST API. To define a resource simply inherit from the `AbstractResource` class.
 For each class that inherits from `AbstractResource` the framework will create a GetAll, Get, Post, Put and Delete endpoint.
@@ -82,3 +82,15 @@ The `ResourceEventListener<T>` class allows you to listen for any CRUD operation
 -   `Task<T> OnCreate(T resource)`
 -   `Task<T> OnReplace(T resource)`
 -   `Task OnDelete(Guid Id)`
+
+## Deploy API
+
+The application is meant to be run as a docker container. To build the container, simply run:
+
+```
+dotnet build
+docker build -t InvoiceService .
+docker run --rm -it -p 8080:80 InvoiceService
+```
+
+Now open your web browser an navigate to `http://localhost:8080`.

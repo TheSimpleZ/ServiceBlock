@@ -13,7 +13,7 @@ namespace ServiceBlock.Extensions
             services.Scan(scan =>
                 scan.FromEntryAssembly()
                     .AddClasses(classes => classes.AssignableTo(typeof(ResourceEventListener<>)))
-                    .AsImplementedInterfaces()
+                    .AsImplementedInterfaces() // TODO: FIX BUG
                     .WithScopedLifetime()
             );
         }
