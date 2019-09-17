@@ -7,7 +7,7 @@ using ServiceBlock.Interface.Storage;
 namespace WeatherForecast.Interface
 {
     [Storage(typeof(MemoryStorage<Invoice>))]
-    public class Invoice : Resource
+    public class Invoice : AbstractResource
     {
         public Person Sender { get; set; }
     }

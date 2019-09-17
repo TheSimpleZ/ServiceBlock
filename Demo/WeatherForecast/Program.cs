@@ -15,7 +15,7 @@ namespace WeatherForecast
     {
         public static void Main(string[] args)
         {
-            Service.Run(args);
+            Block.Run(args);
         }
     }
 }

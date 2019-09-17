@@ -7,7 +7,7 @@ using ServiceBlock.Interface.Resource;
 
 namespace ServiceBlock.Interface.Storage
 {
-    public class MemoryStorage<T> : IStorage<T> where T : Resource.Resource
+    public class MemoryStorage<T> : IStorage<T> where T : AbstractResource
     {
         private Dictionary<Guid, T> storage = new Dictionary<Guid, T>();
         private readonly ILogger<MemoryStorage<T>> _logger;

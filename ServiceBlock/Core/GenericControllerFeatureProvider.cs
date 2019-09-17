@@ -15,7 +15,7 @@ namespace ServiceBlock.Core
         public void PopulateFeature(IEnumerable<ApplicationPart> parts, ControllerFeature feature)
         {
 
-            var candidates = Assembly.GetEntryAssembly()?.GetAllTypes().Where(x => typeof(Resource).IsAssignableFrom(x) && x.IsClass && !x.IsAbstract);
+            var candidates = Assembly.GetEntryAssembly()?.GetAllTypes().Where(x => typeof(AbstractResource).IsAssignableFrom(x) && x.IsClass && !x.IsAbstract);
             if (candidates != null)
                 foreach (var candidate in candidates)
                 {

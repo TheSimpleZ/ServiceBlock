@@ -8,7 +8,7 @@ using Serilog.Events;
 
 namespace ServiceBlock.Core
 {
-    public class Service
+    public class Block
     {
         public static void Run(string[] args, Logger? logger = null)
         {
