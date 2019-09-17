@@ -11,8 +11,6 @@ using ServiceBlock.Interface.Resource;
 
 namespace ServiceBlock.Core
 {
-    // [ApiController]
-    // [Route("[controller]")]
     public class ResourceController<T> : ControllerBase where T : AbstractResource
     {
 
@@ -58,9 +56,9 @@ namespace ServiceBlock.Core
                 var resource = await _storage.Get(Id);
 
                 if (_transformer != null)
-                    return await _transformer.OnGet(resource);
+                    return Ok(await _transformer.OnGet(resource));
 
-                return resource;
+                return Ok(resource);
             });
         }
 

@@ -9,7 +9,7 @@
     <IsPackable>true</IsPackable>
     <Version>1.1.0</Version>
     <Authors>Zrean Tofiq</Authors>
-    <PackageTags>Microservice, API, OpenAPI, REST, ASP.Net Core</PackageTags>
+    <PackageTags>Microservice, API, OpenAPI, REST, ASP.Net Core, ServiceBlock</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>
