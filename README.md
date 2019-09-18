@@ -2,6 +2,8 @@
 
 This library gives you a declarative approach to defining REST APIs. It's based on ASP.NET, but gives your a resource oriented workflow.
 
+The purpose of this library is not to provide customizability. Rather, it's to force a simple structure where the developer can focus of writing business logic.
+
 ## Installation
 
 You can either choose to use our template to scaffold a new project, or you can install the library and migrate your current structure to ServiceBlock.
