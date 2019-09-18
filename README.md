@@ -85,6 +85,14 @@ The `ResourceEventListener<T>` class allows you to listen for any CRUD operation
 -   `Task<T> OnReplace(T resource)`
 -   `Task OnDelete(Guid Id)`
 
+All read operation events are fired **after** the resource is retrieved from storage. The return value will be returned to the caller.
+
+All write operation events are fired **before** the resource is sent to storage. The return value will be the value that's stored.
+
+#### Using a storage in an event listener
+
+_TODO_
+
 ## Deploy API
 
 The application is meant to be run as a docker container. To build the container, simply run:
