@@ -6,7 +6,7 @@
     <Nullable>enable</Nullable>
     <NullableContextOptions>enable</NullableContextOptions>
     <IsPackable>true</IsPackable>
-    <Version>1.1.0</Version>
+    <Version>1.2.0</Version>
     <Authors>Zrean Tofiq</Authors>
     <PackageTags>Microservice, API, OpenAPI, REST, ASP.Net Core</PackageTags>
   </PropertyGroup>
