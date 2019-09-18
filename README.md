@@ -24,7 +24,7 @@ Then go to your Program.cs and call `ServiceBlock.Startup.Block.Run(args)`.
 
 Create a new project called `<YOUR_PROJECT_NAME>.Interface`. This project will contain the public interface of your service. Now you can start defining resources.
 
-## Usage guide
+## Guide
 
 The framework can be used to easily define resources in your REST API. To define a resource simply inherit from the `AbstractResource` class.
 For each class that inherits from `AbstractResource` the framework will create a GetAll, Get, Post, Put and Delete endpoint.
