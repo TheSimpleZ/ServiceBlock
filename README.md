@@ -10,7 +10,20 @@ You can either choose to use our template to scaffold a new project, or you can 
 
 ### Quick start
 
-Use [ServiceBlock.Sample](https://github.com/TheSimpleZ/ServiceBlock.Sample) to scaffold new projects.
+The dotnet CLI comes with build in scaffolding tools. We provide a package containing useful templates for creating ServiceBlocks.
+
+To install all templates, run:
+
+```
+dotnet new -i ServiceBlock.Templates
+```
+
+#### Create a ServiceBlock service
+
+```
+mkdir <YOUR_PROJECT_NAME> && cd <YOUR_PROJECT_NAME>
+dotnet new serviceblock
+```
 
 ### Migrate existing project
 
