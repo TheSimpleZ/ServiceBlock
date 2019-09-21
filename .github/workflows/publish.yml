@@ -13,8 +13,8 @@ jobs:
           dotnet-version: "3.0.100-preview9-014004"
       - env: # Or as an environment variable
           nuget_key: ${{ secrets.NugetKey }}
-        
-        run: dotnet pack -c Release
-        run: dotnet nuget push ServiceBlock/bin/Release/ServiceBlock.*.nupkg -k $nuget_key -s https://api.nuget.org/v3/index.json
-        run: dotnet nuget push ServiceBlock.Interface/bin/Release/ServiceBlock.Interface.*.nupkg -k $nuget_key -s https://api.nuget.org/v3/index.json
-        run: dotnet nuget push ServiceBlock.Templates/bin/Release/ServiceBlock.Templates.*.nupkg -k $nuget_key -s https://api.nuget.org/v3/index.json
+        run: |
+          dotnet pack -c Release
+          dotnet nuget push ServiceBlock/bin/Release/ServiceBlock.*.nupkg -k $nuget_key -s https://api.nuget.org/v3/index.json || exit 0
+          dotnet nuget push ServiceBlock.Interface/bin/Release/ServiceBlock.Interface.*.nupkg -k $nuget_key -s https://api.nuget.org/v3/index.json || exit 0
+          dotnet nuget push ServiceBlock.Templates/bin/Release/ServiceBlock.Templates.*.nupkg -k $nuget_key -s https://api.nuget.org/v3/index.json || exit 0
