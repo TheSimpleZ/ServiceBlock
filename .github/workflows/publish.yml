@@ -17,3 +17,4 @@ jobs:
           dotnet pack -c Release
           dotnet nuget push ServiceBlock/bin/Release/ServiceBlock.*.nupkg -k $nuget_key -s https://api.nuget.org/v3/index.json
           dotnet nuget push ServiceBlock.Interface/bin/Release/ServiceBlock.Interface.*.nupkg -k $nuget_key -s https://api.nuget.org/v3/index.json
+          dotnet nuget push ServiceBlock.Templates/bin/Release/ServiceBlock.Templates.*.nupkg -k $nuget_key -s https://api.nuget.org/v3/index.json
