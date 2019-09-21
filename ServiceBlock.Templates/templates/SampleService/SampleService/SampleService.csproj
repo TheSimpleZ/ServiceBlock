@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="ServiceBlock" Version="1.0.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SampleService.Interface\SampleService.Interface.csproj" />
+    <!-- <ProjectReference Include="..\..\ServiceBlock\ServiceBlock\ServiceBlock.csproj" /> -->
+  </ItemGroup>
+
+</Project>

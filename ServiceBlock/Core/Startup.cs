@@ -35,6 +35,8 @@ namespace ServiceBlock.Core
                 m.FeatureProviders.Add(new GenericControllerFeatureProvider()
             ));
 
+            services.AddHealthChecks();
+
 
 
             services.AddResourceEventListeners();
@@ -63,6 +65,7 @@ namespace ServiceBlock.Core
             app.UseHttpsRedirection();
 
             app.UseSerilogRequestLogging();
+            app.UseHealthChecks("/health");
 
             // Enable middleware to serve generated Swagger as a JSON endpoint.
             app.UseSwagger();
@@ -78,6 +81,7 @@ namespace ServiceBlock.Core
             app.UseRouting();
 
             app.UseAuthorization();
+
 
             app.UseEndpoints(endpoints =>
             {

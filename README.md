@@ -89,16 +89,16 @@ All read operation events are fired **after** the resource is retrieved from sto
 
 All write operation events are fired **before** the resource is sent to storage. The return value will be the value that's stored.
 
-#### Using a storage in an event listener
+### Health checks
 
-_TODO_
+A basic health check endpoint has been implemented at `/health`.
 
 ## Deploy API
 
 The application is meant to be run as a docker container. To build the container, simply run:
 
 ```
-dotnet build
+dotnet build -c Release
 docker build -t InvoiceService .
 docker run --rm -it -p 8080:80 InvoiceService
 ```
