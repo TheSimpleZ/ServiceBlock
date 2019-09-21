@@ -43,6 +43,21 @@ The framework can be used to easily define resources in your REST API. To define
 For each class that inherits from `AbstractResource` the framework will create a GetAll, Get, Post, Put and Delete endpoint.
 The `AbstractResource` class has an ID property that will be inherited by all resources.
 
+### Authentication
+
+To add authentication to the service, simply provide the following json in you appsetting.json.
+
+```
+"ServiceBlock": {
+    "Security": {
+        "Domain": "https://<YOUR_IDP>.com/",
+        "ApiIdentifier": "<YOUR_API_ID>"
+    }
+}
+```
+
+Authentication will be activated for all your resources.
+
 ### Resources
 
 Here's an example of an Invoice resource:

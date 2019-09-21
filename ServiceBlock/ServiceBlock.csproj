@@ -7,13 +7,14 @@
     <Nullable>enable</Nullable>
     <NullableContextOptions>enable</NullableContextOptions>
     <IsPackable>true</IsPackable>
-    <Version>1.2.1</Version>
+    <Version>1.3.0</Version>
     <Authors>Zrean Tofiq</Authors>
     <Description>This library gives you a declarative approach to defining REST APIs. It's based on ASP.NET, but gives your a resource oriented workflow.</Description>
     <PackageTags>Microservice, API, OpenAPI, REST, ASP.Net Core, ServiceBlock</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="2.2.0" />
     <PackageReference Include="Scrutor" Version="3.1.0" />
     <PackageReference Include="Serilog.AspNetCore" Version="3.0.0" />
     <PackageReference Include="Serilog.Extensions.Logging" Version="3.0.1" />

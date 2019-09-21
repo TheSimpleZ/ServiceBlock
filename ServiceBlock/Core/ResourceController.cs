@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using ServiceBlock.Interface.Resource;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ServiceBlock.Core
 {

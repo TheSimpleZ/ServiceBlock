@@ -8,6 +8,8 @@ using Microsoft.OpenApi.Models;
 using Microsoft.AspNetCore.Mvc.Controllers;
 using ServiceBlock.Extensions;
 using Serilog;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Mvc.Authorization;
 
 namespace ServiceBlock.Core
 {
@@ -26,16 +28,34 @@ namespace ServiceBlock.Core
         {
 
             services.Configure<ConsoleLifetimeOptions>(options => options.SuppressStatusMessages = true);
+            var section = Configuration.GetSection(nameof(ServiceBlock));
+            var settings = section.Get<Options.ServiceBlock>();
+            services.Configure<Options.ServiceBlock>(section);
 
-            services.
-            AddMvc(o => o.Conventions.Add(
-                new GenericControllerRouteConvention()
-            )).
+            services.AddMvc(o =>
+            {
+                o.Conventions.Add(new GenericControllerRouteConvention());
+
+                if (settings?.Security != null)
+                    o.Filters.Add(new AuthorizeFilter());
+            }).
             ConfigureApplicationPartManager(m =>
                 m.FeatureProviders.Add(new GenericControllerFeatureProvider()
             ));
 
             services.AddHealthChecks();
+
+
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+
+            }).AddJwtBearer(options =>
+            {
+                options.Authority = settings?.Security?.Domain;
+                options.Audience = settings?.Security?.ApiIdentifier;
+            });
 
 
 
@@ -49,7 +69,7 @@ namespace ServiceBlock.Core
                 c.TagActionsBy(api => new[]
                 { (api.ActionDescriptor as ControllerActionDescriptor)?.ControllerTypeInfo.GetGenericArguments().SingleOrDefault()?.Name
                     ?? (api.ActionDescriptor as ControllerActionDescriptor)?.ControllerName
-                });
+});
                 c.SchemaFilter<ReadOnlySchemaFilter>();
             });
         }
@@ -79,6 +99,8 @@ namespace ServiceBlock.Core
 
             app.UseRouting();
 
+
+            app.UseAuthentication();
             app.UseAuthorization();
 
 
