@@ -9,6 +9,7 @@
     <IsPackable>true</IsPackable>
     <Version>1.2.1</Version>
     <Authors>Zrean Tofiq</Authors>
+    <Description>This library gives you a declarative approach to defining REST APIs. It's based on ASP.NET, but gives your a resource oriented workflow.</Description>
     <PackageTags>Microservice, API, OpenAPI, REST, ASP.Net Core, ServiceBlock</PackageTags>
   </PropertyGroup>
 

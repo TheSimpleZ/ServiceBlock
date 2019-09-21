@@ -8,6 +8,7 @@
     <IsPackable>true</IsPackable>
     <Version>1.2.1</Version>
     <Authors>Zrean Tofiq</Authors>
+    <Description>Interface package for ServiceBlock</Description>
     <PackageTags>Microservice, API, OpenAPI, REST, ASP.Net Core</PackageTags>
   </PropertyGroup>
 
