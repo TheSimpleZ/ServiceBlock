@@ -16,12 +16,12 @@ jobs:
       - name: Publish main package
         env: # Or as an environment variable
           nuget_key: ${{ secrets.NugetKey }}
-        run: dotnet nuget push ServiceBlock/bin/Release/ServiceBlock.*.nupkg -k $nuget_key -s https://api.nuget.org/v3/index.json || exit 0
+        run: dotnet nuget push ServiceBlock/bin/Release/ServiceBlock.*.nupkg -k $nuget_key -s https://api.nuget.org/v3/index.json
       - name: Publish interface
         env: # Or as an environment variable
           nuget_key: ${{ secrets.NugetKey }}
-        run: dotnet nuget push ServiceBlock.Interface/bin/Release/ServiceBlock.Interface.*.nupkg -k $nuget_key -s https://api.nuget.org/v3/index.json || exit 0
+        run: dotnet nuget push ServiceBlock.Interface/bin/Release/ServiceBlock.Interface.*.nupkg -k $nuget_key -s https://api.nuget.org/v3/index.json
       - name: Publish templates
         env: # Or as an environment variable
           nuget_key: ${{ secrets.NugetKey }}
-        run: dotnet nuget push ServiceBlock.Templates/bin/Release/ServiceBlock.Templates.*.nupkg -k $nuget_key -s https://api.nuget.org/v3/index.json || exit 0
+        run: dotnet nuget push ServiceBlock.Templates/bin/Release/ServiceBlock.Templates.*.nupkg -k $nuget_key -s https://api.nuget.org/v3/index.json
