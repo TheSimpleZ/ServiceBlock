@@ -25,3 +25,4 @@ Take a look in the [wiki](https://github.com/TheSimpleZ/ServiceBlock/wiki) for a
 -   Inter-service communication with authentication.
 -   Secret management.
 -   Remote config with hot-reloading.
+-   Subscribable APIs
