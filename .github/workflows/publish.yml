@@ -1,6 +1,9 @@
 name: Pack and publish dotnet core library
 
-on: push
+on:
+  push:
+    tags:
+      - v*
 
 jobs:
   pack:
@@ -12,16 +15,9 @@ jobs:
         with:
           dotnet-version: "3.0.100-preview9-014004"
       - name: Pack nugets
-        run: dotnet pack -c Release
-      - name: Publish main package
-        env: # Or as an environment variable
-          nuget_key: ${{ secrets.NugetKey }}
-        run: dotnet nuget push ServiceBlock/bin/Release/ServiceBlock.*.nupkg -k $nuget_key -s https://api.nuget.org/v3/index.json || exit 0
-      - name: Publish interface
-        env: # Or as an environment variable
-          nuget_key: ${{ secrets.NugetKey }}
-        run: dotnet nuget push ServiceBlock.Interface/bin/Release/ServiceBlock.Interface.*.nupkg -k $nuget_key -s https://api.nuget.org/v3/index.json || exit 0
-      - name: Publish templates
-        env: # Or as an environment variable
-          nuget_key: ${{ secrets.NugetKey }}
-        run: dotnet nuget push ServiceBlock.Templates/bin/Release/ServiceBlock.Templates.*.nupkg -k $nuget_key -s https://api.nuget.org/v3/index.json || exit 0
+        run: echo $GITHUB_REF
+      #   run: dotnet pack -c Release -o output
+      # - name: Publish packages
+      #   env: # Or as an environment variable
+      #     nuget_key: ${{ secrets.NugetKey }}
+      #   run: dotnet nuget push output/*.nupkg -k $nuget_key -s https://api.nuget.org/v3/index.json
