@@ -5,6 +5,19 @@ This library gives you a declarative approach to defining REST APIs. It's based 
 The purpose of this library is not to provide customizability.
 Rather, it's to reduce a lot of the noise that comes with setting up a micro-service, allowing the developer to focus on writing business logic.
 
+-   [ServiceBlock](#serviceblock)
+    -   [Installation](#installation)
+        -   [Quick start](#quick-start)
+            -   [Create a ServiceBlock service](#create-a-serviceblock-service)
+        -   [Migrate existing project](#migrate-existing-project)
+    -   [Guide](#guide)
+        -   [Authentication](#authentication)
+        -   [Resources](#resources)
+            -   [The ReadOnly attribute](#the-readonly-attribute)
+        -   [Resource event listeners](#resource-event-listeners)
+        -   [Health checks](#health-checks)
+    -   [Deploy API](#deploy-api)
+
 ## Installation
 
 You can either choose to use our template to scaffold a new project, or you can install the library and migrate your current structure to ServiceBlock.
