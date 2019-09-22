@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace ServiceBlock.Core
 {
-    public class ResourceController<T> : ControllerBase where T : AbstractResource
+    class ResourceController<T> : ControllerBase where T : AbstractResource
     {
 
 

@@ -7,7 +7,7 @@ using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace ServiceBlock.Core
 {
-    public class ReadOnlySchemaFilter : ISchemaFilter
+    class ReadOnlySchemaFilter : ISchemaFilter
     {
         public void Apply(OpenApiSchema model, SchemaFilterContext context)
         {

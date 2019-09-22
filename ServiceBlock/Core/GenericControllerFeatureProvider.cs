@@ -10,7 +10,7 @@ using ServiceBlock.Interface.Resource;
 
 namespace ServiceBlock.Core
 {
-    public class GenericControllerFeatureProvider : IApplicationFeatureProvider<ControllerFeature>
+    class GenericControllerFeatureProvider : IApplicationFeatureProvider<ControllerFeature>
     {
         public void PopulateFeature(IEnumerable<ApplicationPart> parts, ControllerFeature feature)
         {

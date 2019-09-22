@@ -17,7 +17,7 @@ using System.Reflection;
 
 namespace ServiceBlock.Core
 {
-    public class Startup
+    class Startup
     {
 
         public Startup(IConfiguration configuration)

@@ -6,7 +6,7 @@ using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace ServiceBlock.Core
 {
-    public class SecurityRequirementsOperationFilter : IOperationFilter
+    class SecurityRequirementsOperationFilter : IOperationFilter
     {
 
         public void Apply(OpenApiOperation operation, OperationFilterContext context)

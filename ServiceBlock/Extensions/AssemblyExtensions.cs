@@ -5,7 +5,7 @@ using System.Reflection;
 
 namespace ServiceBlock.Extensions
 {
-    public static class AssemblyExtensions
+    static class AssemblyExtensions
     {
         public static IEnumerable<Type> GetAllTypes(this Assembly asm)
         {

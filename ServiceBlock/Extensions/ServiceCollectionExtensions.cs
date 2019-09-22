@@ -6,7 +6,7 @@ using ServiceBlock.Interface.Storage;
 
 namespace ServiceBlock.Extensions
 {
-    public static class ServiceCollectionExtensions
+    static class ServiceCollectionExtensions
     {
         public static void AddResourceEventListeners(this IServiceCollection services)
         {

@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc.ApplicationModels;
 
 namespace ServiceBlock.Core
 {
-    public class GenericControllerRouteConvention : IControllerModelConvention
+    class GenericControllerRouteConvention : IControllerModelConvention
     {
         public void Apply(ControllerModel controller)
         {
