@@ -13,9 +13,8 @@ jobs:
         with:
           dotnet-version: "3.0.100-preview9-014004"
       - name: Pack nugets
-        run: echo $GITHUB_REF
-      #   run: dotnet pack -c Release -o output
-      # - name: Publish packages
-      #   env: # Or as an environment variable
-      #     nuget_key: ${{ secrets.NugetKey }}
-      #   run: dotnet nuget push output/*.nupkg -k $nuget_key -s https://api.nuget.org/v3/index.json
+        run: dotnet pack -c Release -o output /p:PackageVersion=$(basename $GITHUB_REF)
+      - name: Publish packages
+        env: # Or as an environment variable
+          nuget_key: ${{ secrets.NugetKey }}
+        run: dotnet nuget push output/*.nupkg -k $nuget_key -s https://api.nuget.org/v3/index.json
