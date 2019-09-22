@@ -2,7 +2,8 @@
 
 This library gives you a declarative approach to defining REST APIs. It's based on ASP.NET, but gives your a resource oriented workflow.
 
-The purpose of this library is not to provide customizability. Rather, it's to force a simple structure where the developer can focus of writing business logic.
+The purpose of this library is not to provide customizability.
+Rather, it's to reduce a lot of the noise that comes with setting up a micro-service, allowing the developer to focus on writing business logic.
 
 ## Installation
 
@@ -33,7 +34,7 @@ Migrate from ASP.NET:
 dotnet add package ServiceBlock
 ```
 
-Then go to your Program.cs and call `ServiceBlock.Startup.Block.Run(args)`.
+Then go to your Program.cs and call `ServiceBlock.Startup.Block.Run(args)` from your main function.
 
 Create a new project called `<YOUR_PROJECT_NAME>.Interface`. This project will contain the public interface of your service. Now you can start defining resources.
 
@@ -45,13 +46,17 @@ The `AbstractResource` class has an ID property that will be inherited by all re
 
 ### Authentication
 
-To add authentication to the service, simply provide the following json in you appsetting.json.
+To add authentication to the service, simply provide the following json in you appsettings.json.
 
 ```
 "ServiceBlock": {
     "Security": {
-        "Domain": "https://<YOUR_IDP>.com/",
-        "ApiIdentifier": "<YOUR_API_ID>"
+        "Domain": "https://<YOUR_IDP_URL>/",
+        "ApiIdentifier": "<YOUR_API_ID>",
+        "ClientId": "<YOUR_CLIENT_ID>",
+        "Scopes": {
+            "email": "Example Scope"
+        }
     }
 }
 ```

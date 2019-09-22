@@ -33,7 +33,7 @@ namespace ServiceBlock.Core
 
             services.Configure<ConsoleLifetimeOptions>(options => options.SuppressStatusMessages = true);
             var section = Configuration.GetSection(nameof(ServiceBlock));
-            var settings = section.Get<Options.ServiceBlock>();
+            var settings = section.Get<Options.ServiceBlock>() ?? new Options.ServiceBlock();
             services.Configure<Options.ServiceBlock>(section);
 
             services.AddMvc(o =>
@@ -90,7 +90,7 @@ namespace ServiceBlock.Core
                         {
                             Implicit = new OpenApiOAuthFlow
                             {
-                                AuthorizationUrl = new Uri($"{settings?.Security?.Domain}/authorize", UriKind.Absolute),
+                                AuthorizationUrl = new Uri($"{settings?.Security?.Domain}authorize", UriKind.Absolute),
                                 Scopes = settings?.Security?.Scopes
                             }
                         },
@@ -120,12 +120,16 @@ namespace ServiceBlock.Core
             // specifying the Swagger JSON endpoint.
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+                var apiName = Assembly.GetEntryAssembly()?.GetName().Name ?? "ServiceBlock API";
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", apiName);
                 c.RoutePrefix = string.Empty;
                 if (settings.SecurityEnabled)
                 {
                     c.OAuthClientId(settings.Security?.ClientId);
-                    c.OAuthAppName(settings.Security?.ApiIdentifier);
+                    c.OAuthAppName(apiName);
+                    c.OAuthAdditionalQueryStringParams(new Dictionary<string, string> {
+                        {"audience", settings.Security?.ApiIdentifier ?? ""}
+                    });
                 }
             });
 
