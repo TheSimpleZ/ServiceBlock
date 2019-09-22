@@ -15,6 +15,6 @@ jobs:
       - name: Pack nugets
         run: dotnet pack -c Release -o output /p:PackageVersion=$(basename $GITHUB_REF)
       - name: Publish packages
-        env: # Or as an environment variable
+        env:
           nuget_key: ${{ secrets.NugetKey }}
         run: dotnet nuget push output/*.nupkg -k $nuget_key -s https://api.nuget.org/v3/index.json
