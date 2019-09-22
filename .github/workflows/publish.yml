@@ -1,9 +1,7 @@
 name: Pack and publish dotnet core library
 
 on:
-  push:
-    tags:
-      - v*
+  push: tags
 
 jobs:
   pack:
