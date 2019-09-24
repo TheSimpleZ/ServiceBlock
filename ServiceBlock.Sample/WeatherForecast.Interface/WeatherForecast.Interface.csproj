@@ -2,6 +2,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\ServiceBlock.Interface\ServiceBlock.Interface.csproj" />
+    <ProjectReference Include="..\..\ServiceBlock.Storage\ServiceBlock.Storage.csproj" />
   </ItemGroup>
 
   <PropertyGroup>
