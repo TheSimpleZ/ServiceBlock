@@ -5,9 +5,8 @@ using ServiceBlock.Interface.Storage;
 namespace SampleService.Interface
 {
     [Storage(typeof(MemoryStorage<Invoice>))]
-    public class Invoice : IResource
+    public class Invoice : AbstractResource
     {
-        public Guid Id { get; set; }
         public string Name { get; set; }
     }
 }
