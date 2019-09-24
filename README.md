@@ -22,7 +22,7 @@ Take a look in the [wiki](https://github.com/TheSimpleZ/ServiceBlock/wiki) for a
 ### Planned features
 
 -   Service discovery.
--   Inter-service communication with authentication.
+-   Inter-service communication.
 -   Secret management.
 -   Remote config with hot-reloading.
 -   Subscribable APIs
