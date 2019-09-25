@@ -13,11 +13,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="EasyNetQ" Version="3.7.0" />
     <PackageReference Include="Microsoft.Extensions.Logging" Version="2.2.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ServiceBlock.Interface\ServiceBlock.Interface.csproj"/>
+    <ProjectReference Include="..\ServiceBlock.Interface\ServiceBlock.Interface.csproj" />
   </ItemGroup>
 
 </Project>

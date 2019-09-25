@@ -5,13 +5,13 @@ using ServiceBlock.Interface.Resource;
 
 namespace ServiceBlock.Interface.Storage
 {
-    public interface IStorage<T> where T: AbstractResource
+    public interface IStorage<T> where T : AbstractResource
     {
-        Task<IEnumerable<T>> Get();
-        Task<T> Get(Guid Id);
+        Task<IEnumerable<T>> Read();
+        Task<T> Read(Guid Id);
 
         Task<T> Create(T resource);
-        Task<T> Replace(T resource);
+        Task<T> Update(T resource);
         Task Delete(Guid Id);
 
     }

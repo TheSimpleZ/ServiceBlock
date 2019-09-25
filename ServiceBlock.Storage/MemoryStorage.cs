@@ -4,8 +4,10 @@ using System.Threading.Tasks;
 using System.Linq;
 using Microsoft.Extensions.Logging;
 using ServiceBlock.Interface.Resource;
+using ServiceBlock.Interface;
+using ServiceBlock.Interface.Storage;
 
-namespace ServiceBlock.Interface.Storage
+namespace ServiceBlock.Storage
 {
     public class MemoryStorage<T> : IStorage<T> where T : AbstractResource
     {
@@ -14,17 +16,17 @@ namespace ServiceBlock.Interface.Storage
 
         public MemoryStorage(ILogger<MemoryStorage<T>> logger)
         {
-            this._logger = logger;
+            _logger = logger;
             logger.LogInformation("Memory storage initialized");
         }
 
 
-        public Task<IEnumerable<T>> Get()
+        public Task<IEnumerable<T>> Read()
         {
             return Task.FromResult(storage.Values.AsEnumerable());
         }
 
-        public Task<T> Get(Guid Id)
+        public Task<T> Read(Guid Id)
         {
 
             var resource = storage.SingleOrDefault(x => x.Key == Id).Value;
@@ -37,18 +39,18 @@ namespace ServiceBlock.Interface.Storage
 
         public Task<T> Create(T resource)
         {
-            this.storage.Add(resource.Id, resource);
+            storage.Add(resource.Id, resource);
             return Task.FromResult(resource);
         }
 
         public Task Delete(Guid Id)
         {
-            this.storage.Remove(Id);
+            storage.Remove(Id);
             return Task.CompletedTask;
         }
 
 
-        public Task<T> Replace(T resource)
+        public Task<T> Update(T resource)
         {
             if (storage[resource.Id] == null)
                 throw new NotFoundException();

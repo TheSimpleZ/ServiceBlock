@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
 using ServiceBlock.Interface.Resource;
 using ServiceBlock.Interface.Storage;
+using ServiceBlock.Storage;
 
 namespace WeatherForecast.Interface
 {
