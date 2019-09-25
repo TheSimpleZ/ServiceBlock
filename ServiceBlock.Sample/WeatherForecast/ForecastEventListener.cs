@@ -6,7 +6,7 @@ using WeatherForecast.Interface;
 
 namespace WeatherForecast
 {
-    public class ForecastEventListener : ResourceEventListener<WeatherForecasts>
+    public class ForecastEventListener : ResourceTransformer<WeatherForecasts>
     {
         public override Task<WeatherForecasts> OnCreate(WeatherForecasts resource)
         {

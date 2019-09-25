@@ -12,7 +12,7 @@ namespace ServiceBlock.Extensions
         {
             services.Scan(scan =>
                 scan.FromEntryAssembly()
-                    .AddClasses(classes => classes.AssignableTo(typeof(ResourceEventListener<>)))
+                    .AddClasses(classes => classes.AssignableTo(typeof(ResourceTransformer<>)))
                     .As(classes => new[] { classes.BaseType }) // TODO: FIX BUG
                     .WithScopedLifetime()
             );

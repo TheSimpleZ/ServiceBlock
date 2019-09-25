@@ -19,11 +19,11 @@ namespace ServiceBlock.Core
         private readonly ILogger<ResourceController<T>> _logger;
         private readonly IStorage<T> _storage;
 
-        private readonly ResourceEventListener<T>? _listener;
+        private readonly ResourceTransformer<T>? _transformer;
 
-        public ResourceController(ILogger<ResourceController<T>> logger, IStorage<T>? storage = null, ResourceEventListener<T>? listener = null)
+        public ResourceController(ILogger<ResourceController<T>> logger, IStorage<T>? storage = null, ResourceTransformer<T>? transformer = null)
         {
-            _listener = listener;
+            _transformer = transformer;
             _logger = logger;
 
             if (storage == null)
@@ -43,8 +43,8 @@ namespace ServiceBlock.Core
             {
                 var resources = await _storage.Get();
 
-                if (_listener != null)
-                    return Ok(await _listener.OnGet(resources));
+                if (_transformer != null)
+                    return Ok(await _transformer.OnGet(resources));
                 return Ok(resources);
             });
         }
@@ -56,8 +56,8 @@ namespace ServiceBlock.Core
             {
                 var resource = await _storage.Get(Id);
 
-                if (_listener != null)
-                    return Ok(await _listener.OnGet(resource));
+                if (_transformer != null)
+                    return Ok(await _transformer.OnGet(resource));
 
                 return Ok(resource);
             });
@@ -70,8 +70,8 @@ namespace ServiceBlock.Core
             {
                 var transformed = resource;
 
-                if (_listener != null)
-                    transformed = await _listener.OnCreate(resource);
+                if (_transformer != null)
+                    transformed = await _transformer.OnCreate(resource);
 
                 return Ok(await _storage.Create(transformed));
             });
@@ -84,8 +84,8 @@ namespace ServiceBlock.Core
             {
                 var transformed = resource;
 
-                if (_listener != null)
-                    transformed = await _listener.OnReplace(transformed);
+                if (_transformer != null)
+                    transformed = await _transformer.OnReplace(transformed);
 
                 return Ok(await _storage.Replace(transformed));
             });
@@ -96,8 +96,8 @@ namespace ServiceBlock.Core
         {
             return await HandleRequest<T>(async () =>
             {
-                if (_listener != null)
-                    await _listener.OnDelete(Id);
+                if (_transformer != null)
+                    await _transformer.OnDelete(Id);
                 await _storage.Delete(Id);
                 return Ok();
             });

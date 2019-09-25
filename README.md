@@ -7,6 +7,8 @@ Rather, it's to reduce a lot of the noise that comes with setting up a micro-ser
 
 Take a look in the [wiki](https://github.com/TheSimpleZ/ServiceBlock/wiki) for a quick start guide!
 
+**Since this library is still in early development APIs might change drastically until v2.0.0**
+
 ## Requirements
 
 -   .Net Core 3.

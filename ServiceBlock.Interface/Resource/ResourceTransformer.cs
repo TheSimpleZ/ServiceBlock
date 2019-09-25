@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace ServiceBlock.Interface.Resource
 {
-    public abstract class ResourceEventListener<T> where T : AbstractResource
+    public abstract class ResourceTransformer<T> where T : AbstractResource
     {
         public virtual Task<IEnumerable<T>> OnGet(IEnumerable<T> resources)
         {
