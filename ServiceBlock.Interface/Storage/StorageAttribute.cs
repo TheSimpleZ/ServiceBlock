@@ -11,7 +11,7 @@ namespace ServiceBlock.Interface.Storage
 
         public StorageAttribute(Type storageType)
         {
-            if (!storageType.GetInterfaces().Any(i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IStorage<>)))
+            if (!storageType.GetInterfaces().Any(i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(Storage<>)))
                 throw new InvalidStorageException($"{storageType} must implement IStorage<>");
 
             this.storageType = storageType;

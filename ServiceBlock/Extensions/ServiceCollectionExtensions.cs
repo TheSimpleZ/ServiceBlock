@@ -27,7 +27,7 @@ namespace ServiceBlock.Extensions
                     if (attr != null)
                     {
                         var innerType = attr.storageType.GetGenericArguments().Single();
-                        services.AddSingleton(typeof(IStorage<>).MakeGenericType(innerType), attr.storageType);
+                        services.AddSingleton(typeof(Storage<>).MakeGenericType(innerType), attr.storageType);
                     }
                 }
         }

@@ -1,5 +1,6 @@
 #nullable enable
 using System;
+using System.Reflection;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 using Serilog;

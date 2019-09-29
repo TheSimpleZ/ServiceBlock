@@ -8,19 +8,12 @@
     <IsPackable>true</IsPackable>
     <Version>1.3.0</Version>
     <Authors>Zrean Tofiq</Authors>
-    <Description>Messaging package for ServiceBlock</Description>
+    <Description>Extensions package for ServiceBlock</Description>
     <PackageTags>Microservice, API, OpenAPI, REST, ASP.Net Core</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="EasyNetQ" Version="3.7.0" />
-    <PackageReference Include="Microsoft.CSharp" Version="4.6.0" />
     <PackageReference Include="Microsoft.Extensions.Logging" Version="2.2.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\ServiceBlock.Interface\ServiceBlock.Interface.csproj" />
-    <ProjectReference Include="..\ServiceBlock.Extensions\ServiceBlock.Extensions.csproj" />
   </ItemGroup>
 
 </Project>

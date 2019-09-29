@@ -6,7 +6,7 @@ using WeatherForecast.Interface;
 
 namespace WeatherForecast
 {
-    public class ForecastEventListener : ResourceTransformer<WeatherForecasts>
+    public class ForecastTransformer : ResourceTransformer<WeatherForecasts>
     {
         public override Task<WeatherForecasts> OnCreate(WeatherForecasts resource)
         {
@@ -15,7 +15,7 @@ namespace WeatherForecast
         }
 
 
-        public override Task<WeatherForecasts> OnGet(WeatherForecasts resource)
+        public override Task<WeatherForecasts> OnRead(WeatherForecasts resource)
         {
             resource.Summary = "Ha hahaha hahaha";
             return Task.FromResult(resource);

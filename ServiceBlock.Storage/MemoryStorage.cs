@@ -9,7 +9,7 @@ using ServiceBlock.Interface.Storage;
 
 namespace ServiceBlock.Storage
 {
-    public class MemoryStorage<T> : IStorage<T> where T : AbstractResource
+    public class MemoryStorage<T> : Storage<T> where T : AbstractResource
     {
         private Dictionary<Guid, T> storage = new Dictionary<Guid, T>();
         private readonly ILogger<MemoryStorage<T>> _logger;
@@ -21,12 +21,12 @@ namespace ServiceBlock.Storage
         }
 
 
-        public Task<IEnumerable<T>> Read()
+        protected override Task<IEnumerable<T>> InternalRead()
         {
             return Task.FromResult(storage.Values.AsEnumerable());
         }
 
-        public Task<T> Read(Guid Id)
+        protected override Task<T> InternalRead(Guid Id)
         {
 
             var resource = storage.SingleOrDefault(x => x.Key == Id).Value;
@@ -37,20 +37,20 @@ namespace ServiceBlock.Storage
             return Task.FromResult(resource);
         }
 
-        public Task<T> Create(T resource)
+        protected override Task<T> InternalCreate(T resource)
         {
             storage.Add(resource.Id, resource);
             return Task.FromResult(resource);
         }
 
-        public Task Delete(Guid Id)
+        protected override Task InternalDelete(Guid Id)
         {
             storage.Remove(Id);
             return Task.CompletedTask;
         }
 
 
-        public Task<T> Update(T resource)
+        protected override Task<T> InternalUpdate(T resource)
         {
             if (storage[resource.Id] == null)
                 throw new NotFoundException();

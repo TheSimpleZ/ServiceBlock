@@ -1,6 +1,5 @@
 ﻿#nullable enable
 using System;
-using System.Linq;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using ServiceBlock.Interface;
@@ -9,9 +8,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using ServiceBlock.Interface.Resource;
-using Microsoft.AspNetCore.Authorization;
-using ServiceBlock.Messaging;
-using ServiceBlock.Extensions;
 
 namespace ServiceBlock.Core
 {
@@ -20,18 +16,11 @@ namespace ServiceBlock.Core
 
 
         private readonly ILogger<ResourceController<T>> _logger;
-        private readonly IStorage<T> _storage;
+        private readonly Storage<T> _storage;
 
-        private readonly ResourceTransformer<T>? _transformer;
-        private readonly ResourceEventService? _eventService;
 
-        private bool _shouldPublishEvent(ResourceEventType type) => _eventService != null
-                                                                     && typeof(T).GetAttributeValue((EmitEventsAttribute attr) => attr.EventTypes).Contains(type);
-
-        public ResourceController(ILogger<ResourceController<T>> logger, IStorage<T>? storage = null, ResourceTransformer<T>? transformer = null, ResourceEventService? eventService = null)
+        public ResourceController(ILogger<ResourceController<T>> logger, Storage<T>? storage)
         {
-            _transformer = transformer;
-            this._eventService = eventService;
             _logger = logger;
 
             if (storage == null)
@@ -49,70 +38,26 @@ namespace ServiceBlock.Core
         {
             return await HandleRequest<IEnumerable<T>>(async () =>
             {
-                var resources = await _storage.Read();
-
-                if (_transformer != null)
-                    return Ok(await _transformer.OnGet(resources));
-                return Ok(resources);
+                return Ok(await _storage.Read());
             });
         }
 
         [HttpGet("{Id}")]
         public async Task<ActionResult<T>> Get([FromRoute] Guid Id)
         {
-            return await HandleRequest<T>(async () =>
-            {
-                var resource = await _storage.Read(Id);
-
-                if (_transformer != null)
-                    return Ok(await _transformer.OnGet(resource));
-
-                return Ok(resource);
-            });
+            return await HandleRequest<T>(async () => Ok(await _storage.Read(Id)));
         }
 
         [HttpPost]
         public async Task<ActionResult<T>> Post([FromBody]T resource)
         {
-            return await HandleRequest<T>(async () =>
-            {
-                var transformed = resource;
-
-                if (_transformer != null)
-                    transformed = await _transformer.OnCreate(resource);
-
-                var created = await _storage.Create(transformed);
-
-                if (_shouldPublishEvent(ResourceEventType.Created))
-                {
-                    await _eventService!.Publish(ResourceEventType.Created, created);
-                }
-
-
-                return Ok(created);
-            });
+            return await HandleRequest<T>(async () => Ok(await _storage.Create(resource)));
         }
 
         [HttpPut("{Id}")]
         public async Task<ActionResult<T>> Put([FromRoute]Guid Id, [FromBody]T resource)
         {
-            return await HandleRequest<T>(async () =>
-            {
-                var transformed = resource;
-
-                if (_transformer != null)
-                    transformed = await _transformer.OnReplace(transformed);
-
-                var updated = await _storage.Update(transformed);
-
-                if (_shouldPublishEvent(ResourceEventType.Updated))
-                {
-                    await _eventService!.Publish(ResourceEventType.Updated, updated);
-                }
-
-
-                return Ok(updated);
-            });
+            return await HandleRequest<T>(async () => Ok(await _storage.Update(resource)));
         }
 
         [HttpDelete("{Id}")]
@@ -120,26 +65,7 @@ namespace ServiceBlock.Core
         {
             return await HandleRequest<T>(async () =>
             {
-
-                if (_shouldPublishEvent(ResourceEventType.Deleted))
-                {
-                    var resource = await _storage.Read(Id);
-
-                    if (_transformer != null)
-                        await _transformer.OnDelete(Id);
-
-                    await _storage.Delete(Id);
-
-                    await _eventService!.Publish(ResourceEventType.Deleted, resource);
-                }
-                else
-                {
-                    if (_transformer != null)
-                        await _transformer.OnDelete(Id);
-
-                    await _storage.Delete(Id);
-                }
-
+                await _storage.Delete(Id);
                 return Ok();
             });
         }
