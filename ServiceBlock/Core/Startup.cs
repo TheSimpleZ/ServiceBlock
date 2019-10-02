@@ -46,9 +46,6 @@ namespace ServiceBlock.Core
                 m.FeatureProviders.Add(new GenericControllerFeatureProvider()
             ));
 
-            var str = Configuration["RabbitMqSecrets:AmqpConnectionString"];
-
-
             services.AddHealthChecks();
             services.AddResourceTransformers();
             services.AddStorageServices();
