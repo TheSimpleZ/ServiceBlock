@@ -27,5 +27,15 @@ namespace ServiceBlock.Extensions
         {
             return type.GetCustomAttributes<T>(true).Any();
         }
+
+        public static bool IsSubclassOfRawGeneric(this Type toCheck, Type generic)
+        {
+            if (toCheck.BaseType?.IsGenericType == true && generic == toCheck.BaseType.GetGenericTypeDefinition())
+            {
+                return true;
+            }
+
+            return false;
+        }
     }
 }

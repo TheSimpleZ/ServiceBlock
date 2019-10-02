@@ -25,7 +25,7 @@ namespace ServiceBlock.Interface.Storage
 
         public async Task<IEnumerable<T>> Read()
         {
-            var resources = await InternalRead();
+            var resources = await ReadItems();
 
 
             return IsValidTransform(nameof(_transformer.OnRead))
@@ -34,7 +34,7 @@ namespace ServiceBlock.Interface.Storage
         }
         public async Task<T> Read(Guid Id)
         {
-            var resource = await InternalRead(Id);
+            var resource = await ReadItem(Id);
 
             return IsValidTransform(nameof(_transformer.OnRead))
                     ? (await _transformer!.OnRead(resource))
@@ -46,9 +46,10 @@ namespace ServiceBlock.Interface.Storage
             if (IsValidTransform(nameof(_transformer.OnCreate)))
                 resource = await _transformer!.OnCreate(resource);
 
-            var created = await InternalCreate(resource);
+            var created = await CreateItem(resource);
 
             OnCreate?.Invoke(this, created);
+
             return created;
         }
         public async Task<T> Update(T resource)
@@ -56,24 +57,28 @@ namespace ServiceBlock.Interface.Storage
             if (IsValidTransform(nameof(_transformer.OnUpdate)))
                 resource = await _transformer!.OnUpdate(resource);
 
-            var updated = await InternalUpdate(resource);
+            var updated = await UpdateItem(resource);
+
             OnUpdate?.Invoke(this, updated);
 
             return updated;
         }
         public async Task Delete(Guid Id)
         {
-            var resource = await InternalRead(Id);
 
-            await InternalDelete(Id);
+            var resource = await ReadItem(Id);
+
+            await DeleteItem(Id);
+
             OnDelete?.Invoke(this, resource);
+
         }
 
-        protected abstract Task<IEnumerable<T>> InternalRead();
-        protected abstract Task<T> InternalRead(Guid Id);
+        protected abstract Task<IEnumerable<T>> ReadItems();
+        protected abstract Task<T> ReadItem(Guid Id);
 
-        protected abstract Task<T> InternalCreate(T resource);
-        protected abstract Task<T> InternalUpdate(T resource);
-        protected abstract Task InternalDelete(Guid Id);
+        protected abstract Task<T> CreateItem(T resource);
+        protected abstract Task<T> UpdateItem(T resource);
+        protected abstract Task DeleteItem(Guid Id);
     }
 }

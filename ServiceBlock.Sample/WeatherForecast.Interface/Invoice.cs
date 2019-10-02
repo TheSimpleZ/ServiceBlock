@@ -4,10 +4,12 @@ using System.ComponentModel;
 using ServiceBlock.Interface.Resource;
 using ServiceBlock.Interface.Storage;
 using ServiceBlock.Storage;
+using ServiceBlock.Messaging;
 
 namespace WeatherForecast.Interface
 {
-    [Storage(typeof(MemoryStorage<Invoice>))]
+    [Storage(typeof(MemoryStorage<>))]
+    [EmitEvents]
     public class Invoice : AbstractResource
     {
         public Person Sender { get; set; }

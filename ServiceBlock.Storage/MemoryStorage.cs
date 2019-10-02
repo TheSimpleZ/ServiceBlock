@@ -21,12 +21,12 @@ namespace ServiceBlock.Storage
         }
 
 
-        protected override Task<IEnumerable<T>> InternalRead()
+        protected override Task<IEnumerable<T>> ReadItems()
         {
             return Task.FromResult(storage.Values.AsEnumerable());
         }
 
-        protected override Task<T> InternalRead(Guid Id)
+        protected override Task<T> ReadItem(Guid Id)
         {
 
             var resource = storage.SingleOrDefault(x => x.Key == Id).Value;
@@ -37,20 +37,20 @@ namespace ServiceBlock.Storage
             return Task.FromResult(resource);
         }
 
-        protected override Task<T> InternalCreate(T resource)
+        protected override Task<T> CreateItem(T resource)
         {
             storage.Add(resource.Id, resource);
             return Task.FromResult(resource);
         }
 
-        protected override Task InternalDelete(Guid Id)
+        protected override Task DeleteItem(Guid Id)
         {
             storage.Remove(Id);
             return Task.CompletedTask;
         }
 
 
-        protected override Task<T> InternalUpdate(T resource)
+        protected override Task<T> UpdateItem(T resource)
         {
             if (storage[resource.Id] == null)
                 throw new NotFoundException();

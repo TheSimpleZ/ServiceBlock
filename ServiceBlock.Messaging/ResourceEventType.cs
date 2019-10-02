@@ -1,4 +1,4 @@
-namespace ServiceBlock.Interface.Resource
+namespace ServiceBlock.Messaging
 {
     public enum ResourceEventType
     {

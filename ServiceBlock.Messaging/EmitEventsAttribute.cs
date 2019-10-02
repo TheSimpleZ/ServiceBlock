@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace ServiceBlock.Interface.Resource
+namespace ServiceBlock.Messaging
 {
     [AttributeUsage(AttributeTargets.Class, Inherited = false, AllowMultiple = false)]
     public class EmitEventsAttribute : Attribute

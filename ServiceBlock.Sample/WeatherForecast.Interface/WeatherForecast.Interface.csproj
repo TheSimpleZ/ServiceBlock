@@ -3,6 +3,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\ServiceBlock.Interface\ServiceBlock.Interface.csproj" />
     <ProjectReference Include="..\..\ServiceBlock.Storage\ServiceBlock.Storage.csproj" />
+    <ProjectReference Include="..\..\ServiceBlock.Messaging\ServiceBlock.Messaging.csproj" />
   </ItemGroup>
 
   <PropertyGroup>

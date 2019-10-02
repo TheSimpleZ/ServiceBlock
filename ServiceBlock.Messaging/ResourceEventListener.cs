@@ -8,7 +8,7 @@ namespace ServiceBlock.Messaging
     public abstract class ResourceEventListener<T> where T : AbstractResource
     {
 
-        public ResourceEventListener(Storage<T> storage, IMessageClient messageClient)
+        public ResourceEventListener(Storage<T> storage, EventClient messageClient)
         {
 
             var CreateIsOverride = GetType().HasOverriddenMethod(nameof(OnCreate));
@@ -31,12 +31,12 @@ namespace ServiceBlock.Messaging
             }
             else // Subscribe to AMQP events
             {
-                messageClient.OnReceive += (sender, args) =>
+                messageClient.MessageReceived += (sender, args) =>
                 {
                     switch (args.EventType)
                     {
                         case ResourceEventType.Created when CreateIsOverride:
-                            this.OnCreate(args.Resource);
+                            OnCreate(args.Resource);
                             break;
                         case ResourceEventType.Updated when UpdateIsOverride:
                             OnUpdate(args.Resource);
