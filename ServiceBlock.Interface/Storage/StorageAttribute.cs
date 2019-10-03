@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using ServiceBlock.Extensions;
 
 namespace ServiceBlock.Interface.Storage
 {
@@ -7,14 +8,14 @@ namespace ServiceBlock.Interface.Storage
     public class StorageAttribute : Attribute
     {
 
-        public Type storageType { get; set; }
+        public Type StorageType { get; set; }
 
         public StorageAttribute(Type storageType)
         {
-            if (!storageType.GetInterfaces().Any(i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IStorage<>)))
-                throw new InvalidStorageException($"{storageType} must implement IStorage<>");
+            if (!storageType.IsSubclassOfRawGeneric(typeof(Storage<>)))
+                throw new InvalidStorageException($"{storageType} must implement {nameof(Storage)}<T>");
 
-            this.storageType = storageType;
+            this.StorageType = storageType;
         }
     }
 }

@@ -13,7 +13,9 @@
       "args": [],
       "cwd": "${workspaceFolder}/ServiceBlock.Sample/WeatherForecast",
       "console": "internalConsole",
-      "stopAtEntry": false
+      "stopAtEntry": false,
+      "env": { "ASPNETCORE_ENVIRONMENT": "Development" },
+      "envFile": "${workspaceFolder}/.env"
     },
     {
       "name": ".NET Core Attach",

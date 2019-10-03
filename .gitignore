@@ -4,6 +4,8 @@
 !.vscode/launch.json
 !.vscode/extensions.json
 
+.env
+
 *.swp
 *.*~
 project.lock.json

@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using ServiceBlock.Interface.Resource;
-using Microsoft.AspNetCore.Authorization;
 
 namespace ServiceBlock.Core
 {
@@ -17,13 +16,11 @@ namespace ServiceBlock.Core
 
 
         private readonly ILogger<ResourceController<T>> _logger;
-        private readonly IStorage<T> _storage;
+        private readonly Storage<T> _storage;
 
-        private readonly ResourceEventListener<T>? _listener;
 
-        public ResourceController(ILogger<ResourceController<T>> logger, IStorage<T>? storage = null, ResourceEventListener<T>? listener = null)
+        public ResourceController(ILogger<ResourceController<T>> logger, Storage<T>? storage)
         {
-            _listener = listener;
             _logger = logger;
 
             if (storage == null)
@@ -41,54 +38,26 @@ namespace ServiceBlock.Core
         {
             return await HandleRequest<IEnumerable<T>>(async () =>
             {
-                var resources = await _storage.Get();
-
-                if (_listener != null)
-                    return Ok(await _listener.OnGet(resources));
-                return Ok(resources);
+                return Ok(await _storage.Read());
             });
         }
 
         [HttpGet("{Id}")]
         public async Task<ActionResult<T>> Get([FromRoute] Guid Id)
         {
-            return await HandleRequest<T>(async () =>
-            {
-                var resource = await _storage.Get(Id);
-
-                if (_listener != null)
-                    return Ok(await _listener.OnGet(resource));
-
-                return Ok(resource);
-            });
+            return await HandleRequest<T>(async () => Ok(await _storage.Read(Id)));
         }
 
         [HttpPost]
         public async Task<ActionResult<T>> Post([FromBody]T resource)
         {
-            return await HandleRequest<T>(async () =>
-            {
-                var transformed = resource;
-
-                if (_listener != null)
-                    transformed = await _listener.OnCreate(resource);
-
-                return Ok(await _storage.Create(transformed));
-            });
+            return await HandleRequest<T>(async () => Ok(await _storage.Create(resource)));
         }
 
         [HttpPut("{Id}")]
         public async Task<ActionResult<T>> Put([FromRoute]Guid Id, [FromBody]T resource)
         {
-            return await HandleRequest<T>(async () =>
-            {
-                var transformed = resource;
-
-                if (_listener != null)
-                    transformed = await _listener.OnReplace(transformed);
-
-                return Ok(await _storage.Replace(transformed));
-            });
+            return await HandleRequest<T>(async () => Ok(await _storage.Update(resource)));
         }
 
         [HttpDelete("{Id}")]
@@ -96,14 +65,12 @@ namespace ServiceBlock.Core
         {
             return await HandleRequest<T>(async () =>
             {
-                if (_listener != null)
-                    await _listener.OnDelete(Id);
                 await _storage.Delete(Id);
                 return Ok();
             });
         }
 
-        public async Task<ActionResult<TT>> HandleRequest<TT>(Func<Task<ActionResult<TT>>> onRequest)
+        private async Task<ActionResult<TT>> HandleRequest<TT>(Func<Task<ActionResult<TT>>> onRequest)
         {
             if (!ModelState.IsValid)
             {

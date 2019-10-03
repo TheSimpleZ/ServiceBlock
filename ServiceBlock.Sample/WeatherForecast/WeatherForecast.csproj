@@ -10,6 +10,7 @@
     <ProjectReference Include="..\..\ServiceBlock\ServiceBlock.csproj" />
     <ProjectReference Include="..\WeatherForecast.Interface\WeatherForecast.Interface.csproj" />
     <ProjectReference Include="..\..\ServiceBlock.Interface\ServiceBlock.Interface.csproj" />
+    <ProjectReference Include="..\..\ServiceBlock.Messaging\ServiceBlock.Messaging.csproj" />
   </ItemGroup>
 
 </Project>

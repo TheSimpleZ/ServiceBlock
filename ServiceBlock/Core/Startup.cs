@@ -6,7 +6,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Microsoft.AspNetCore.Mvc.Controllers;
-using ServiceBlock.Extensions;
 using Serilog;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc.Authorization;
@@ -48,8 +47,10 @@ namespace ServiceBlock.Core
             ));
 
             services.AddHealthChecks();
-            services.AddResourceEventListeners();
+            services.AddResourceTransformers();
             services.AddStorageServices();
+            services.RunServiceRegistrators(Configuration);
+
 
 
 
@@ -138,6 +139,8 @@ namespace ServiceBlock.Core
 
             app.UseAuthentication();
             app.UseAuthorization();
+
+            app.ApplicationServices.RunServiceWarmUp();
 
 
             app.UseEndpoints(endpoints =>
