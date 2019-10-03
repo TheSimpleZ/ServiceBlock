@@ -19,4 +19,4 @@ jobs:
       - name: Publish packages
         env:
           nuget_key: ${{ secrets.NugetKey }}
-        run: dotnet nuget push output/**/*.nupkg -k $nuget_key -s https://api.nuget.org/v3/index.json
+        run: dotnet nuget push output/**/*.nupkg -k $nuget_key -s https://api.nuget.org/v3/index.json || exit 0
