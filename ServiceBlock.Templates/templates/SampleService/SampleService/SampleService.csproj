@@ -5,12 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <!-- <PackageReference Include="ServiceBlock" Version="1.4.1" /> -->
+    <PackageReference Include="ServiceBlock" Version="1.5.1" />
+    <PackageReference Include="ServiceBlock.Interface" Version="1.5.1" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\SampleService.Interface\SampleService.Interface.csproj" />
-    <ProjectReference Include="..\..\..\..\ServiceBlock\ServiceBlock.csproj" />
     <ProjectReference Include="..\SampleService.Interface\SampleService.Interface.csproj" />
   </ItemGroup>
 
