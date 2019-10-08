@@ -51,7 +51,11 @@ namespace ServiceBlock.Core
         [HttpPost]
         public async Task<ActionResult<T>> Post([FromBody]T resource)
         {
-            return await HandleRequest<T>(async () => Ok(await _storage.Create(resource)));
+            return await HandleRequest<T>(async () =>
+            {
+                var createdResource = await _storage.Create(resource);
+                return CreatedAtAction(nameof(Get), new { id = createdResource.Id }, createdResource);
+            });
         }
 
         [HttpPut("{Id}")]

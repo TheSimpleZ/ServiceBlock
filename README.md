@@ -20,11 +20,11 @@ Take a look in the [wiki](https://github.com/TheSimpleZ/ServiceBlock/wiki) for a
 -   Integrated Swagger UI with auto-generated OpenAPI specification.
 -   Extensible interfaces for different types of messaging protocols, storages, etc.
 -   Containerized and ready for the cloud.
+-   Inter-service communication.
+-   Subscribable APIs (internal only for now)
 
 ### Planned features
 
 -   Service discovery.
--   Inter-service communication.
 -   Secret management.
 -   Remote config with hot-reloading.
--   Subscribable APIs

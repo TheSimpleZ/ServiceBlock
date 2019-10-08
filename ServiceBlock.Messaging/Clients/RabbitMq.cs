@@ -20,7 +20,7 @@ namespace ServiceBlock.Messaging.Clients
 
         public RabbitMq(IConfiguration config)
         {
-            var factory = new ConnectionFactory() { Uri = new Uri(Environment.GetEnvironmentVariable("AMQP_CONNECTION_STRING")) };
+            var factory = new ConnectionFactory() { Uri = new Uri(config.GetConnectionString("AMQP")) };
             connection = factory.CreateConnection();
 
             channel = connection.CreateModel();
