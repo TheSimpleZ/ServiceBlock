@@ -5,6 +5,9 @@ using System.Reflection;
 
 namespace ServiceBlock.Extensions
 {
+    /// <summary>
+    /// This class provides methods to easily access a Blocks properties.
+    /// </summary>
     public static class Block
     {
         public static string? Name => Assembly.GetEntryAssembly()?.GetName().Name;

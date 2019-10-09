@@ -6,7 +6,7 @@ using ServiceBlock.Interface.Storage;
 
 namespace ServiceBlock.Messaging
 {
-    public class ResourceEventPublisher<T> where T : AbstractResource
+    class ResourceEventPublisher<T> where T : AbstractResource
     {
         public ResourceEventPublisher(Storage<T> storage, EventClient messageClient)
         {

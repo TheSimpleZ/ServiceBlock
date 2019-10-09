@@ -11,7 +11,7 @@ using System.Text;
 
 namespace ServiceBlock.Messaging.Clients
 {
-    public class RabbitMq : EventClient
+    class RabbitMq : EventClient
     {
 
         private readonly IConnection connection;
