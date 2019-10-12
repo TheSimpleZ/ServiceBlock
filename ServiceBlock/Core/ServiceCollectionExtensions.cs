@@ -18,7 +18,7 @@ namespace ServiceBlock.Core
                 scan.FromEntryAssembly()
                     .AddClasses(classes => classes.AssignableTo(typeof(ResourceTransformer<>)))
                     .As(classes => new[] { classes.BaseType })
-                    .WithScopedLifetime()
+                    .WithSingletonLifetime()
             );
         }
 

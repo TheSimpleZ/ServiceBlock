@@ -1,4 +1,5 @@
 using System;
+using Microsoft.Extensions.Logging;
 using ServiceBlock.Extensions;
 using ServiceBlock.Interface.Resource;
 using ServiceBlock.Interface.Storage;
@@ -8,7 +9,7 @@ namespace ServiceBlock.Messaging
     public abstract class ResourceEventListener<T> where T : AbstractResource
     {
 
-        public ResourceEventListener(Storage<T> storage, EventClient messageClient)
+        public ResourceEventListener(Storage<T> storage, EventClient messageClient, ILogger logger)
         {
 
             var CreateIsOverride = GetType().HasOverriddenMethod(nameof(OnCreate));
@@ -33,18 +34,22 @@ namespace ServiceBlock.Messaging
             {
                 messageClient.MessageReceived += (sender, args) =>
                 {
-                    switch (args.EventType)
+                    if (args.Resource?.GetType() == typeof(T))
                     {
-                        case ResourceEventType.Created when CreateIsOverride:
-                            OnCreate(args.Resource);
-                            break;
-                        case ResourceEventType.Updated when UpdateIsOverride:
-                            OnUpdate(args.Resource);
-                            break;
-                        case ResourceEventType.Deleted when DeleteIsOverride:
-                            OnDelete(args.Resource);
-                            break;
-                    };
+                        logger.LogInformation("{EventType} event received for {Resource}", args.EventType, (T)args.Resource);
+                        switch (args.EventType)
+                        {
+                            case ResourceEventType.Created when CreateIsOverride:
+                                OnCreate(args.Resource);
+                                break;
+                            case ResourceEventType.Updated when UpdateIsOverride:
+                                OnUpdate(args.Resource);
+                                break;
+                            case ResourceEventType.Deleted when DeleteIsOverride:
+                                OnDelete(args.Resource);
+                                break;
+                        };
+                    }
                 };
             }
         }

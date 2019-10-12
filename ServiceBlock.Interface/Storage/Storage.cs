@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 using ServiceBlock.Extensions;
 using ServiceBlock.Interface.Resource;
 
@@ -9,14 +11,16 @@ namespace ServiceBlock.Interface.Storage
 {
     public abstract class Storage<T> where T : AbstractResource
     {
+        private readonly ILogger _logger;
         private readonly ResourceTransformer<T>? _transformer;
 
         public event EventHandler<T>? OnCreate;
         public event EventHandler<T>? OnUpdate;
         public event EventHandler<T>? OnDelete;
 
-        public Storage(ResourceTransformer<T>? transformer = null)
+        public Storage(ILogger logger, ResourceTransformer<T>? transformer = null)
         {
+            this._logger = logger;
             this._transformer = transformer;
         }
 
@@ -48,7 +52,7 @@ namespace ServiceBlock.Interface.Storage
 
             var created = await CreateItem(resource);
 
-            OnCreate?.Invoke(this, created);
+            await SendEvent(() => OnCreate?.Invoke(this, created), async () => await DeleteItem(resource.Id), resource);
 
             return created;
         }
@@ -56,22 +60,51 @@ namespace ServiceBlock.Interface.Storage
         {
             if (IsValidTransform(nameof(_transformer.OnUpdate)))
                 resource = await _transformer!.OnUpdate(resource);
+            var oldResource = await Read(resource.Id);
 
             var updated = await UpdateItem(resource);
 
             OnUpdate?.Invoke(this, updated);
+            await SendEvent(() => OnUpdate?.Invoke(this, updated), async () => await UpdateItem(oldResource), resource);
+
 
             return updated;
         }
         public async Task Delete(Guid Id)
         {
 
-            var resource = await ReadItem(Id);
+            var resource = await Read(Id);
 
             await DeleteItem(Id);
 
             OnDelete?.Invoke(this, resource);
 
+            await SendEvent(() => OnDelete?.Invoke(this, resource), async () => await CreateItem(resource), resource);
+
+
+        }
+
+        private async Task SendEvent(Action eventHandler, Func<Task> rollback, T resource, [CallerMemberName] string callerName = "")
+        {
+            try
+            {
+                eventHandler();
+                _logger.LogInformation("{EventType} event published for resource {Resource}", callerName, resource);
+            }
+            catch (Exception e)
+            {
+                _logger.LogWarning(e, "Could not send {EventType} event for resource {Resource}", callerName, resource);
+                try
+                {
+                    await rollback();
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogCritical(ex, "Could not roll back {EventType} for resource {Resource}", callerName, resource);
+                    throw;
+                }
+                throw;
+            }
         }
 
         protected abstract Task<IEnumerable<T>> ReadItems();
