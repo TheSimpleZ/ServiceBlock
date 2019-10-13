@@ -17,7 +17,6 @@ namespace ServiceBlock.Storage
         public MemoryStorage(ILogger<MemoryStorage<T>> logger, ResourceTransformer<T>? transformer = null) : base(logger, transformer)
         {
             _logger = logger;
-            logger.LogInformation("Memory storage initialized");
         }
 
 

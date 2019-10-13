@@ -11,17 +11,20 @@ namespace ServiceBlock.Interface.Storage
 {
     public abstract class Storage<T> where T : AbstractResource
     {
-        private readonly ILogger _logger;
+        private readonly ILogger<Storage<T>> _logger;
         private readonly ResourceTransformer<T>? _transformer;
 
         public event EventHandler<T>? OnCreate;
         public event EventHandler<T>? OnUpdate;
         public event EventHandler<T>? OnDelete;
 
-        public Storage(ILogger logger, ResourceTransformer<T>? transformer = null)
+        public Storage(ILogger<Storage<T>> logger, ResourceTransformer<T>? transformer = null)
         {
             this._logger = logger;
             this._transformer = transformer;
+
+            logger.LogDebug("{StorageType} initialized", GetType().PrettyName());
+
         }
 
         private bool IsValidTransform(string name) => _transformer != null && _transformer.GetType().HasOverriddenMethod(name);

@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using Microsoft.Extensions.Logging;
 using ServiceBlock.Extensions;
 using ServiceBlock.Interface.Resource;
 using ServiceBlock.Interface.Storage;
@@ -8,7 +9,7 @@ namespace ServiceBlock.Messaging
 {
     class ResourceEventPublisher<T> where T : AbstractResource
     {
-        public ResourceEventPublisher(Storage<T> storage, EventClient messageClient)
+        public ResourceEventPublisher(Storage<T> storage, EventClient messageClient, ILogger<ResourceEventPublisher<T>> logger)
         {
             EventHandler<T> publish(ResourceEventType type) => (sender, eventArgs) => messageClient.Publish(type, eventArgs);
 
@@ -23,6 +24,8 @@ namespace ServiceBlock.Messaging
 
             if (eventsToEmit.Contains(ResourceEventType.Deleted))
                 storage.OnDelete += publish(ResourceEventType.Deleted);
+
+            logger.LogDebug("Event publisher for resource {ResourceType} initialized. Emitting {EventTypes} events", typeof(T).Name, eventsToEmit);
         }
     }
 }

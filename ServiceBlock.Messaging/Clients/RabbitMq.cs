@@ -1,4 +1,5 @@
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using RabbitMQ.Client;
@@ -18,7 +19,7 @@ namespace ServiceBlock.Messaging.Clients
         private readonly IModel channel;
 
 
-        public RabbitMq(IConfiguration config)
+        public RabbitMq(IConfiguration config, ILogger<RabbitMq> logger) : base(logger)
         {
             var factory = new ConnectionFactory() { Uri = new Uri(config.GetConnectionString("AMQP")) };
             connection = factory.CreateConnection();

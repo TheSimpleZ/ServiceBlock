@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using Microsoft.Extensions.Logging;
 using ServiceBlock.Extensions;
 using ServiceBlock.Interface.Resource;
@@ -12,6 +14,16 @@ namespace ServiceBlock.Messaging
         private bool UpdateIsOverride => GetType().HasOverriddenMethod(nameof(OnUpdate));
         private bool DeleteIsOverride => GetType().HasOverriddenMethod(nameof(OnDelete));
 
+        private List<ResourceEventType> ListeningTo()
+        {
+            var listeningTo = new List<ResourceEventType>();
+            if (CreateIsOverride) listeningTo.Add(ResourceEventType.Created);
+            if (UpdateIsOverride) listeningTo.Add(ResourceEventType.Updated);
+            if (DeleteIsOverride) listeningTo.Add(ResourceEventType.Deleted);
+            return listeningTo;
+        }
+
+
         public ResourceEventListener(ILogger<ResourceEventListener<T>> logger, EventClient messageClient)
         {
             // If type T is defined in the same service that's running
@@ -22,24 +34,28 @@ namespace ServiceBlock.Messaging
             }
 
             messageClient.MessageReceived += (sender, args) =>
+            {
+                if (args.Resource?.GetType() == typeof(T))
                 {
-                    if (args.Resource?.GetType() == typeof(T))
+                    logger.LogInformation("{EventType} event received for {Resource}", args.EventType, (T)args.Resource);
+                    switch (args.EventType)
                     {
-                        logger.LogInformation("{EventType} event received for {Resource}", args.EventType, (T)args.Resource);
-                        switch (args.EventType)
-                        {
-                            case ResourceEventType.Created when CreateIsOverride:
-                                OnCreate(args.Resource);
-                                break;
-                            case ResourceEventType.Updated when UpdateIsOverride:
-                                OnUpdate(args.Resource);
-                                break;
-                            case ResourceEventType.Deleted when DeleteIsOverride:
-                                OnDelete(args.Resource);
-                                break;
-                        };
-                    }
-                };
+                        case ResourceEventType.Created when CreateIsOverride:
+                            OnCreate(args.Resource);
+                            break;
+                        case ResourceEventType.Updated when UpdateIsOverride:
+                            OnUpdate(args.Resource);
+                            break;
+                        case ResourceEventType.Deleted when DeleteIsOverride:
+                            OnDelete(args.Resource);
+                            break;
+                    };
+                }
+            };
+
+
+
+            logger.LogDebug("External listener {ListenerName} initialized. Listening to {EventTypes} events", GetType().Name, ListeningTo());
         }
 
         public ResourceEventListener(ILogger<ResourceEventListener<T>> logger, Storage<T> storage)
@@ -52,6 +68,8 @@ namespace ServiceBlock.Messaging
 
             if (DeleteIsOverride)
                 storage.OnDelete += (sender, eventArgs) => OnDelete(eventArgs);
+
+            logger.LogDebug("Internal listener {ListenerName} initialized. Listening to {EventTypes} events", GetType().Name, ListeningTo());
         }
 
         public virtual void OnCreate(T resource) => throw new NotImplementedException();

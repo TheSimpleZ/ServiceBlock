@@ -13,6 +13,7 @@ using System.Collections.Generic;
 using System;
 using Microsoft.Extensions.Options;
 using System.Reflection;
+using Microsoft.Extensions.Logging;
 
 namespace ServiceBlock.Core
 {
@@ -53,17 +54,17 @@ namespace ServiceBlock.Core
 
 
 
+            if (settings.SecurityEnabled)
+                services.AddAuthentication(options =>
+                {
+                    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
 
-            services.AddAuthentication(options =>
-            {
-                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-
-            }).AddJwtBearer(options =>
-            {
-                options.Authority = settings?.Security?.Domain;
-                options.Audience = settings?.Security?.ApiIdentifier;
-            });
+                }).AddJwtBearer(options =>
+                {
+                    options.Authority = settings?.Security?.Domain;
+                    options.Audience = settings?.Security?.ApiIdentifier;
+                });
 
             // Register the Swagger generator, defining 1 or more Swagger documents
             services.AddSwaggerGen(c =>
@@ -105,6 +106,7 @@ namespace ServiceBlock.Core
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IOptions<Options.ServiceBlock> settingsAccessor)
         {
             var settings = settingsAccessor.Value;
+            var logger = app.ApplicationServices.GetService<ILogger<Startup>>();
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -136,9 +138,12 @@ namespace ServiceBlock.Core
 
             app.UseRouting();
 
-
-            app.UseAuthentication();
-            app.UseAuthorization();
+            if (settings.SecurityEnabled)
+            {
+                logger.LogInformation("Security enabled");
+                app.UseAuthentication();
+                app.UseAuthorization();
+            }
 
             app.ApplicationServices.RunServiceWarmUp();
 

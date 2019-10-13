@@ -30,6 +30,7 @@ namespace ServiceBlock.Core
 
             _storage = storage;
 
+            logger.LogDebug("Controller for resource {ResourceType} initialized.", typeof(T).Name);
 
         }
 

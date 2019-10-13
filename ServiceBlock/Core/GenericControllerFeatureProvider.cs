@@ -18,7 +18,6 @@ namespace ServiceBlock.Core
             foreach (var controller in resourceControllers)
             {
                 feature.Controllers.Add(controller);
-                Log.Logger.Information("Controller for resource {ResourceName} has been registered.", controller.GetGenericArguments().FirstOrDefault().Name);
             }
         }
     }
