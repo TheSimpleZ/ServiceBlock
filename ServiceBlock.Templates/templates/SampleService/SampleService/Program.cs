@@ -1,5 +1,4 @@
 using ServiceBlock.Core;
-using SampleService.Interface;
 
 namespace SampleService
 {

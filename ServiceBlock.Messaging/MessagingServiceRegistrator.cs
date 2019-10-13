@@ -26,7 +26,7 @@ namespace ServiceBlock.Messaging
 
             services.TryAddSingleton<EventClient, Clients.RabbitMq>();
 
-            var resourcesWithEvent = Block.GetAppTypes()
+            var resourcesWithEvent = BaseBlock.GetBlockTypes()
             .Where(t => t.HasAttribute<EmitEventsAttribute>());
 
             foreach (var resource in resourcesWithEvent)
@@ -38,7 +38,7 @@ namespace ServiceBlock.Messaging
         public void WarmUp(IServiceProvider services)
         {
             services.GetService<EventClient>();
-            foreach (var resource in Block.GetAppTypes().Where(t => t.HasAttribute<EmitEventsAttribute>()))
+            foreach (var resource in BaseBlock.GetBlockTypes().Where(t => t.HasAttribute<EmitEventsAttribute>()))
             {
                 services.GetServices(typeof(ResourceEventPublisher<>).MakeGenericType(resource));
             }

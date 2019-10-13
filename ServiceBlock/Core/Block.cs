@@ -1,16 +1,31 @@
 #nullable enable
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 using Serilog;
 using Serilog.Core;
 using Serilog.Events;
+using ServiceBlock.Extensions;
+using ServiceBlock.Interface;
+using ServiceBlock.Interface.Resource;
+using ServiceBlock.Interface.Storage;
 
 namespace ServiceBlock.Core
 {
-    public class Block
+    public class Block : BaseBlock
     {
+
+
+        public static IEnumerable<Type> GetResourceTypes() => GetBlockTypes().Where(x => typeof(AbstractResource).IsAssignableFrom(x) && x.IsClass && !x.IsAbstract);
+        public static IEnumerable<IServiceConfiguration> GetServiceConfigurators() =>
+        GetBlockTypes()
+        .Where(t => t.IsClass && typeof(IServiceConfiguration).IsAssignableFrom(t))
+        .Select(Activator.CreateInstance)
+        .Cast<IServiceConfiguration>();
+
         public static void Run(string[] args, Logger? logger = null)
         {
 

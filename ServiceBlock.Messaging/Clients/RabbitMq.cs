@@ -26,14 +26,14 @@ namespace ServiceBlock.Messaging.Clients
             channel = connection.CreateModel();
 
 
-            channel.ExchangeDeclare(Block.Name, ExchangeType.Fanout);
-            channel.QueueDeclare(Block.Name, true, false, false);
+            channel.ExchangeDeclare(BaseBlock.Name, ExchangeType.Fanout);
+            channel.QueueDeclare(BaseBlock.Name, true, false, false);
 
 
 
             foreach (var service in SubscriptionServiceNames)
             {
-                channel.QueueBind(Block.Name, service, Block.Name);
+                channel.QueueBind(BaseBlock.Name, service, BaseBlock.Name);
             }
 
             var consumer = new EventingBasicConsumer(channel);
@@ -53,7 +53,7 @@ namespace ServiceBlock.Messaging.Clients
                     channel.BasicAck(ea.DeliveryTag, false);
                 };
 
-            String consumerTag = channel.BasicConsume(Block.Name, false, consumer);
+            String consumerTag = channel.BasicConsume(BaseBlock.Name, false, consumer);
 
         }
 
@@ -69,8 +69,8 @@ namespace ServiceBlock.Messaging.Clients
                 {nameof(Type), typeof(T).AssemblyQualifiedName}
             };
 
-            channel.BasicPublish(Block.Name,
-                            Block.Name, props,
+            channel.BasicPublish(BaseBlock.Name,
+                            BaseBlock.Name, props,
                             messageBodyBytes);
         }
 

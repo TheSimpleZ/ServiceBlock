@@ -14,15 +14,12 @@ namespace ServiceBlock.Core
     {
         public void PopulateFeature(IEnumerable<ApplicationPart> parts, ControllerFeature feature)
         {
-            var candidates = Assembly.GetEntryAssembly()?.GetAllTypes().Where(x => typeof(AbstractResource).IsAssignableFrom(x) && x.IsClass && !x.IsAbstract);
-            if (candidates != null)
-                foreach (var candidate in candidates)
-                {
-                    feature.Controllers.Add(
-                        typeof(ResourceController<>).MakeGenericType(candidate).GetTypeInfo()
-                    );
-                    Log.Logger.Information("Controller for resource {ResourceName} has been registered.", candidate.Name);
-                }
+            var resourceControllers = Block.GetResourceTypes().Select(r => typeof(ResourceController<>).MakeGenericType(r).GetTypeInfo());
+            foreach (var controller in resourceControllers)
+            {
+                feature.Controllers.Add(controller);
+                Log.Logger.Information("Controller for resource {ResourceName} has been registered.", controller.GetGenericArguments().FirstOrDefault().Name);
+            }
         }
     }
 }

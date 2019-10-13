@@ -5,8 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="ServiceBlock.Interface" Version="1.5.1" />
-    <PackageReference Include="ServiceBlock.Storage" Version="1.5.1" />
+    <PackageReference Include="ServiceBlock.Interface" Version="1.5.*" />
+    <PackageReference Include="ServiceBlock.Storage" Version="1.5.*" />
   </ItemGroup>
 
 </Project>

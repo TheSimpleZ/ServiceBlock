@@ -35,29 +35,19 @@ namespace ServiceBlock.Core
 
         private static void RunServiceConfiguratons(Action<IServiceConfiguration> action)
         {
-            var serviceConfigurations = Assembly.GetEntryAssembly()?
-            .GetAllTypes(recursive: true)
-            .Where(t => t.IsClass && typeof(IServiceConfiguration).IsAssignableFrom(t));
+            var serviceConfigurations = Block.GetServiceConfigurators();
 
-            if (serviceConfigurations != null)
-                foreach (var serviceConfigType in serviceConfigurations)
-                {
-                    IServiceConfiguration? serviceConfig = (IServiceConfiguration?)Activator.CreateInstance(serviceConfigType);
-                    if (serviceConfig != null)
-                        action(serviceConfig);
-                }
+            foreach (var serviceConfig in serviceConfigurations)
+            {
+                action(serviceConfig!);
+            }
         }
 
         public static void AddStorageServices(this IServiceCollection services)
         {
-            var blockTypes = Assembly
-            .GetEntryAssembly()?
-            .GetAllTypes();
 
-            var storageTypes = blockTypes
-            .Where(t => t.HasAttribute<StorageAttribute>())
-            .Select(t => (typeof(Storage<>).MakeGenericType(t!), t.GetCustomAttribute<StorageAttribute>()!.StorageType.MakeGenericType(t)));
-
+            var storageTypes = Block.GetResourceTypes()
+            .Select(t => (typeof(Storage<>).MakeGenericType(t!), t.GetAttributeValue((StorageAttribute a) => a.StorageType).MakeGenericType(t)));
 
             foreach (var (genericStorage, implementation) in storageTypes)
             {

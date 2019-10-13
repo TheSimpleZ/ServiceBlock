@@ -18,7 +18,7 @@ namespace ServiceBlock.Messaging
 
             // If type T is defined in the same service that's running
             // Subscribe to store events
-            if (typeof(T).Assembly.GetName().Name.StartsWith(Block.Name))
+            if (typeof(T).Assembly.GetName().Name.StartsWith(BaseBlock.Name))
             {
 
                 if (CreateIsOverride)

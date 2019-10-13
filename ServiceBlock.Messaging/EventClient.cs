@@ -13,7 +13,7 @@ namespace ServiceBlock.Messaging
         public abstract void Publish<T>(ResourceEventType type, T payload);
         public event EventHandler<ResourceEventArgs>? MessageReceived;
 
-        protected readonly IEnumerable<string> SubscriptionServiceNames = Block.GetAppTypes()
+        protected readonly IEnumerable<string> SubscriptionServiceNames = BaseBlock.GetBlockTypes()
             .Where(t => t.IsSubclassOfRawGeneric(typeof(ResourceEventListener<>)))
             .Select(t => t.BaseType.GetGenericArguments().Single().GetServiceName());
 

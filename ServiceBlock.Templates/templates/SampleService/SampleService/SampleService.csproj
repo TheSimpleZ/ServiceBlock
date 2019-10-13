@@ -2,11 +2,13 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
+    <PreserveCompilationContext>false</PreserveCompilationContext>
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="ServiceBlock" Version="1.5.1" />
-    <PackageReference Include="ServiceBlock.Interface" Version="1.5.1" />
+    <PackageReference Include="ServiceBlock" Version="1.5.*" />
+    <PackageReference Include="ServiceBlock.Interface" Version="1.5.*" />
   </ItemGroup>
 
   <ItemGroup>
