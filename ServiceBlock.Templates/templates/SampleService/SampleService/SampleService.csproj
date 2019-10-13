@@ -7,8 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="ServiceBlock" Version="1.5.*" />
-    <PackageReference Include="ServiceBlock.Interface" Version="1.5.*" />
+    <PackageReference Include="ServiceBlock" Version="1.*.*" />
+    <PackageReference Include="ServiceBlock.Interface" Version="1.*.*" />
   </ItemGroup>
 
   <ItemGroup>
