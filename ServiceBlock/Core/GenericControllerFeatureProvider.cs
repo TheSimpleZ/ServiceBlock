@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.ApplicationParts;
 using Microsoft.AspNetCore.Mvc.Controllers;
 using Serilog;
 using ServiceBlock.Interface.Resource;
+using System.ComponentModel;
 
 namespace ServiceBlock.Core
 {
@@ -14,8 +15,14 @@ namespace ServiceBlock.Core
     {
         public void PopulateFeature(IEnumerable<ApplicationPart> parts, ControllerFeature feature)
         {
-            var resourceControllers = Block.GetResourceTypes().Select(r => typeof(ResourceController<>).MakeGenericType(r).GetTypeInfo());
-            foreach (var controller in resourceControllers)
+            var publicResourceControllers = Block.ResourceTypes.Where(r => !r.HasAttribute<ReadOnlyAttribute>()).Select(r => typeof(ResourceController<>).MakeGenericType(r).GetTypeInfo());
+            foreach (var controller in publicResourceControllers)
+            {
+                feature.Controllers.Add(controller);
+            }
+
+            var readOnlyResourceControllers = Block.ResourceTypes.Where(r => r.HasAttribute<ReadOnlyAttribute>()).Select(r => typeof(ReadOnlyResourceController<>).MakeGenericType(r).GetTypeInfo());
+            foreach (var controller in readOnlyResourceControllers)
             {
                 feature.Controllers.Add(controller);
             }

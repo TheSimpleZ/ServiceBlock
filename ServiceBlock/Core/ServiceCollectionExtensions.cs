@@ -46,8 +46,8 @@ namespace ServiceBlock.Core
         public static void AddStorageServices(this IServiceCollection services)
         {
 
-            var storageTypes = Block.GetResourceTypes()
-            .Select(t => (typeof(Storage<>).MakeGenericType(t!), t.GetAttributeValue((StorageAttribute a) => a.StorageType).MakeGenericType(t)));
+            var storageTypes = Block.ResourceTypes
+            .Select(t => (typeof(Storage<>).MakeGenericType(t!), t.GetAttributeValue((StorageAttribute a) => a.StorageType)!.MakeGenericType(t)));
 
             foreach (var (genericStorage, implementation) in storageTypes)
             {

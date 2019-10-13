@@ -10,6 +10,7 @@ namespace WeatherForecast.Interface
 {
     [Storage(typeof(MemoryStorage<>))]
     [EmitEvents]
+    [ReadOnly(true)]
     public class Invoice : AbstractResource
     {
         public Person Sender { get; set; }

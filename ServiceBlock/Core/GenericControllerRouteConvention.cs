@@ -11,7 +11,6 @@ namespace ServiceBlock.Core
             if (controller.ControllerType.IsGenericType)
             {
                 var genericType = controller.ControllerType.GenericTypeArguments[0];
-                var customNameAttribute = genericType.GetCustomAttribute<RouteAttribute>();
                 var attr = new RouteAttribute($"/{genericType.Name}");
 
                 controller.Selectors.Add(new SelectorModel

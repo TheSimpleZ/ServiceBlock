@@ -11,7 +11,7 @@ namespace ServiceBlock.Extensions
             return m.GetBaseDefinition().DeclaringType != m.DeclaringType;
         }
 
-        public static TValue GetAttributeValue<TAttribute, TValue>(this Type type, Func<TAttribute, TValue> valueSelector) where TAttribute : Attribute
+        public static TValue? GetAttributeValue<TAttribute, TValue>(this Type type, Func<TAttribute, TValue> valueSelector) where TAttribute : Attribute where TValue : class
         {
             var att = type.GetCustomAttributes<TAttribute>(true).FirstOrDefault();
 

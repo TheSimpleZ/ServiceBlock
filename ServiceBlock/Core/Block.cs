@@ -19,7 +19,7 @@ namespace ServiceBlock.Core
     {
 
 
-        public static IEnumerable<Type> GetResourceTypes() => GetBlockTypes().Where(x => typeof(AbstractResource).IsAssignableFrom(x) && x.IsClass && !x.IsAbstract);
+        public static IEnumerable<Type> ResourceTypes => GetBlockTypes().Where(x => typeof(AbstractResource).IsAssignableFrom(x) && x.IsClass && !x.IsAbstract);
         public static IEnumerable<IServiceConfiguration> GetServiceConfigurators() =>
         GetBlockTypes()
         .Where(t => t.IsClass && typeof(IServiceConfiguration).IsAssignableFrom(t))

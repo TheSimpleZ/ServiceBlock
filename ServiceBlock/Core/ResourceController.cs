@@ -11,7 +11,7 @@ using ServiceBlock.Interface.Resource;
 
 namespace ServiceBlock.Core
 {
-    class ResourceController<T> : ControllerBase where T : AbstractResource
+    class ResourceController<T> : ReadOnlyResourceController<T> where T : AbstractResource
     {
 
 
@@ -19,7 +19,7 @@ namespace ServiceBlock.Core
         private readonly Storage<T> _storage;
 
 
-        public ResourceController(ILogger<ResourceController<T>> logger, Storage<T>? storage)
+        public ResourceController(ILogger<ResourceController<T>> logger, Storage<T>? storage) : base(logger, storage)
         {
             _logger = logger;
 
@@ -32,21 +32,6 @@ namespace ServiceBlock.Core
 
             logger.LogDebug("Controller for resource {ResourceType} initialized.", typeof(T).Name);
 
-        }
-
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<T>>> Get()
-        {
-            return await HandleRequest<IEnumerable<T>>(async () =>
-            {
-                return Ok(await _storage.Read());
-            });
-        }
-
-        [HttpGet("{Id}")]
-        public async Task<ActionResult<T>> Get([FromRoute] Guid Id)
-        {
-            return await HandleRequest<T>(async () => Ok(await _storage.Read(Id)));
         }
 
         [HttpPost]
@@ -73,29 +58,6 @@ namespace ServiceBlock.Core
                 await _storage.Delete(Id);
                 return Ok();
             });
-        }
-
-        private async Task<ActionResult<TT>> HandleRequest<TT>(Func<Task<ActionResult<TT>>> onRequest)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            try
-            {
-                return await onRequest();
-            }
-            catch (NotImplementedException e)
-            {
-                _logger.LogError(e, "Method not implemented");
-                return StatusCode(StatusCodes.Status501NotImplemented);
-            }
-            catch (NotFoundException e)
-            {
-                _logger.LogError(e, "Resource not found");
-                return NotFound();
-            }
         }
 
     }
