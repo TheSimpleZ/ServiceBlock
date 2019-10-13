@@ -1,11 +1,13 @@
 using System;
 using ServiceBlock.Interface.Resource;
 using ServiceBlock.Interface.Storage;
+using ServiceBlock.Messaging;
 using ServiceBlock.Storage;
 
 namespace WeatherForecast.Interface
 {
     [Storage(typeof(MemoryStorage<>))]
+    [EmitEvents]
     public class WeatherForecasts : AbstractResource
     {
         public DateTime Date { get; set; }

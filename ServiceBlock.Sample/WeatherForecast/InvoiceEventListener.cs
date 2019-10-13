@@ -7,7 +7,7 @@ namespace WeatherForecast
 {
     public class InvoiceEventListener : ResourceEventListener<Invoice>
     {
-        public InvoiceEventListener(Storage<Invoice> storage, EventClient messageClient, ILogger<InvoiceEventListener> logger) : base(storage, messageClient, logger)
+        public InvoiceEventListener(ILogger<InvoiceEventListener> logger, Storage<Invoice> storage) : base(logger, storage)
         {
         }
 

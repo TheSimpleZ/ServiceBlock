@@ -8,31 +8,20 @@ namespace ServiceBlock.Messaging
 {
     public abstract class ResourceEventListener<T> where T : AbstractResource
     {
+        private bool CreateIsOverride => GetType().HasOverriddenMethod(nameof(OnCreate));
+        private bool UpdateIsOverride => GetType().HasOverriddenMethod(nameof(OnUpdate));
+        private bool DeleteIsOverride => GetType().HasOverriddenMethod(nameof(OnDelete));
 
-        public ResourceEventListener(Storage<T> storage, EventClient messageClient, ILogger logger)
+        public ResourceEventListener(ILogger<ResourceEventListener<T>> logger, EventClient messageClient)
         {
-
-            var CreateIsOverride = GetType().HasOverriddenMethod(nameof(OnCreate));
-            var UpdateIsOverride = GetType().HasOverriddenMethod(nameof(OnUpdate));
-            var DeleteIsOverride = GetType().HasOverriddenMethod(nameof(OnDelete));
-
             // If type T is defined in the same service that's running
-            // Subscribe to store events
             if (typeof(T).Assembly.GetName().Name.StartsWith(BaseBlock.Name))
             {
-
-                if (CreateIsOverride)
-                    storage.OnCreate += (sender, eventArgs) => OnCreate(eventArgs);
-
-                if (UpdateIsOverride)
-                    storage.OnUpdate += (sender, eventArgs) => OnUpdate(eventArgs);
-
-                if (DeleteIsOverride)
-                    storage.OnDelete += (sender, eventArgs) => OnDelete(eventArgs);
+                logger.LogCritical("The resource {ResourceType} is defined in the same service as it's event listener. Please use the other constructor and supply a {StorageName} object", typeof(T), nameof(Storage<T>));
+                throw new ArgumentException($"Provide a {nameof(Storage<T>)} not a {nameof(EventClient)} for types defined in the same service");
             }
-            else // Subscribe to AMQP events
-            {
-                messageClient.MessageReceived += (sender, args) =>
+
+            messageClient.MessageReceived += (sender, args) =>
                 {
                     if (args.Resource?.GetType() == typeof(T))
                     {
@@ -51,7 +40,18 @@ namespace ServiceBlock.Messaging
                         };
                     }
                 };
-            }
+        }
+
+        public ResourceEventListener(ILogger<ResourceEventListener<T>> logger, Storage<T> storage)
+        {
+            if (CreateIsOverride)
+                storage.OnCreate += (sender, eventArgs) => OnCreate(eventArgs);
+
+            if (UpdateIsOverride)
+                storage.OnUpdate += (sender, eventArgs) => OnUpdate(eventArgs);
+
+            if (DeleteIsOverride)
+                storage.OnDelete += (sender, eventArgs) => OnDelete(eventArgs);
         }
 
         public virtual void OnCreate(T resource) => throw new NotImplementedException();

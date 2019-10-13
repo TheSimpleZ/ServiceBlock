@@ -20,7 +20,7 @@ namespace ServiceBlock.Messaging
             services.Scan(scan =>
                 scan.FromApplicationDependencies()
                     .AddClasses(classes => classes.AssignableTo(typeof(ResourceEventListener<>)))
-                    .As(classes => new[] { classes.BaseType })
+                    .AsSelf()
                     .WithSingletonLifetime()
             );
 
@@ -41,6 +41,11 @@ namespace ServiceBlock.Messaging
             foreach (var resource in BaseBlock.GetBlockTypes().Where(t => t.HasAttribute<EmitEventsAttribute>()))
             {
                 services.GetServices(typeof(ResourceEventPublisher<>).MakeGenericType(resource));
+            }
+
+            foreach (var listener in BaseBlock.GetBlockTypes().Where(t => t.IsSubclassOfRawGeneric(typeof(ResourceEventListener<>))))
+            {
+                services.GetServices(listener);
             }
 
         }
