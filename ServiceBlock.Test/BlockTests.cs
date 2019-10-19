@@ -9,29 +9,42 @@ namespace ServiceBlock.Test
     public class BlockTests
     {
         [Fact]
-        public void TestResource_declared__Recognized_as_resource()
+        public void ValidResource_declared__Recognized_as_resource()
         {
             // Arrange
-            // TestResource is declared
+            // ValidResource is declared
 
             // Act 
             var resourceTypes = Block.ResourceTypes;
 
             // Assert
-            resourceTypes.Should().Contain(typeof(TestResource));
+            resourceTypes.Should().Contain(typeof(ValidResource));
         }
 
         [Fact]
-        public void TestResource_declared__Controller_exists()
+        public void ValidResource_declared__Controller_exists()
         {
             // Arrange
-            // TestResource is declared
+            // ValidResource is declared
 
             // Act 
             var controllers = Block.Controllers;
 
             // Assert
-            controllers.Should().Contain(t => t.GetGenericArguments().Single() == typeof(TestResource));
+            controllers.Should().Contain(t => t.GetGenericArguments().Single() == typeof(ValidResource));
+        }
+
+        [Fact]
+        public void InvalidResource_declared__Block_throws_exceptions()
+        {
+            // Arrange
+            // InvalidResource is declared
+
+            // Act 
+            Action runAction = () => Block.Run(new string[] { });
+
+            // Assert
+            runAction.Should().Throw<NoStorageException>();
         }
     }
 }

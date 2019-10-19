@@ -11,26 +11,20 @@ using ServiceBlock.Interface.Resource;
 
 namespace ServiceBlock.Core
 {
-    class ReadOnlyResourceController<T> : ControllerBase where T : AbstractResource
+    class ResourceControllerRead<T> : ControllerBase where T : AbstractResource
     {
 
 
-        private readonly ILogger<ReadOnlyResourceController<T>> _logger;
+        private readonly ILogger<ResourceControllerRead<T>> _logger;
         private readonly Storage<T> _storage;
 
 
-        public ReadOnlyResourceController(ILogger<ReadOnlyResourceController<T>> logger, Storage<T>? storage)
+        public ResourceControllerRead(ILogger<ResourceControllerRead<T>> logger, Storage<T> storage)
         {
             _logger = logger;
-
-            if (storage == null)
-            {
-                throw new NoStorageException($"The resource {typeof(T).Name} does not have a compatible storage associated with it.");
-            }
-
             _storage = storage;
 
-            logger.LogDebug("Read only controller for resource {ResourceType} initialized.", typeof(T).Name);
+            logger.LogDebug("Read controller for resource {ResourceType} initialized.", typeof(T).Name);
 
         }
 
