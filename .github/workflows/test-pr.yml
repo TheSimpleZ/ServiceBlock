@@ -3,7 +3,7 @@ name: Test dotnet core library
 on: pull_request
 
 jobs:
-  pack:
+  test:
     runs-on: ubuntu-latest
 
     steps:

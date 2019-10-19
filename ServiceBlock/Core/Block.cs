@@ -22,11 +22,7 @@ namespace ServiceBlock.Core
 
 
         public static IEnumerable<Type> ResourceTypes => BlockTypes.Where(x => typeof(AbstractResource).IsAssignableFrom(x) && x.IsClass && !x.IsAbstract);
-        public static IEnumerable<TypeInfo> Controllers => ResourceTypes.Where(r => !r.HasAttribute<ReadOnlyAttribute>())
-        .Select(r => typeof(ResourceController<>).MakeGenericType(r).GetTypeInfo())
-        .Concat(ResourceTypes
-            .Where(r => r.HasAttribute<ReadOnlyAttribute>())
-            .Select(r => typeof(ReadOnlyResourceController<>).MakeGenericType(r).GetTypeInfo()));
+        public static IEnumerable<TypeInfo> Controllers => GetResourceController(readOnly: true).Concat(GetResourceController());
 
         public static IEnumerable<IServiceConfiguration> ServiceConfigurators =>
         BlockTypes
@@ -36,6 +32,7 @@ namespace ServiceBlock.Core
 
         public static void Run(string[] args, Logger? logger = null)
         {
+            ValidateResources();
 
             if (logger != null)
             {
@@ -54,12 +51,12 @@ namespace ServiceBlock.Core
 
             try
             {
-                Log.Information("Starting microservice");
+                Log.Information("Starting ServiceBlock");
                 CreateHostBuilder(args).Build().Run();
             }
             catch (Exception ex)
             {
-                Log.Fatal(ex, "Microservice terminated unexpectedly");
+                Log.Fatal(ex, "ServiceBlock terminated unexpectedly");
             }
             finally
             {
@@ -74,5 +71,22 @@ namespace ServiceBlock.Core
                 {
                     webBuilder.UseStartup<Startup>().UseSerilog();
                 });
+
+        private static IEnumerable<TypeInfo> GetResourceController(bool readOnly = false)
+        {
+            bool predicate(Type r) => readOnly ? r.HasAttribute<ReadOnlyAttribute>() : !r.HasAttribute<ReadOnlyAttribute>();
+
+            var controllerType = readOnly ? typeof(ResourceControllerRead<>) : typeof(ResourceControllerWrite<>);
+            return ResourceTypes.Where(predicate).Select(r => controllerType.MakeGenericType(r).GetTypeInfo());
+        }
+
+        private static void ValidateResources()
+        {
+            var exceptions = ResourceTypes.Where(r => r.HasAttribute<StorageAttribute>()).Select(r => new NoStorageException($"The resource {r.GetType().Name} does not have a compatible storage associated with it."));
+            if (exceptions.Any())
+            {
+                throw new AggregateException("One or more resources does not have a storage", exceptions);
+            }
+        }
     }
 }
