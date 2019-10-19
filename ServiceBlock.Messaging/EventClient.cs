@@ -19,7 +19,7 @@ namespace ServiceBlock.Messaging
             logger.LogDebug("{EventClientType} event client initialized", GetType().Name);
         }
 
-        protected readonly IEnumerable<string> SubscriptionServiceNames = BaseBlock.GetBlockTypes()
+        protected readonly IEnumerable<string> SubscriptionServiceNames = BaseBlock.BlockTypes
             .Where(t => t.IsSubclassOfRawGeneric(typeof(ResourceEventListener<>)))
             .Select(t => t.BaseType.GetGenericArguments().Single().GetServiceName());
 

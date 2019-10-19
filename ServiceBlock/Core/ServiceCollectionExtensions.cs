@@ -35,9 +35,8 @@ namespace ServiceBlock.Core
 
         private static void RunServiceConfiguratons(Action<IServiceConfiguration> action)
         {
-            var serviceConfigurations = Block.GetServiceConfigurators();
 
-            foreach (var serviceConfig in serviceConfigurations)
+            foreach (var serviceConfig in Block.ServiceConfigurators)
             {
                 action(serviceConfig!);
             }

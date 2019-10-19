@@ -16,13 +16,10 @@ namespace ServiceBlock.Extensions
         private static bool isServiceBlockAssembly(string a) => a.StartsWith("ServiceBlock") == true || a.Split('.').FirstOrDefault().StartsWith(Name) == true;
 
 
-        public static IEnumerable<Type> GetBlockTypes()
-        {
-
-            var allDlls = Directory.EnumerateFiles(System.AppDomain.CurrentDomain.BaseDirectory, "*.dll", SearchOption.AllDirectories);
-            var serviceBlockDlls = allDlls.Where(f => isServiceBlockAssembly(Path.GetFileNameWithoutExtension(f)));
-
-            return serviceBlockDlls.SelectMany(dll =>
+        public static IEnumerable<Type> BlockTypes =>
+            Directory.EnumerateFiles(System.AppDomain.CurrentDomain.BaseDirectory, "*.dll", SearchOption.AllDirectories)
+            .Where(f => isServiceBlockAssembly(Path.GetFileNameWithoutExtension(f)))
+            .SelectMany(dll =>
             {
                 try
                 {
@@ -33,6 +30,6 @@ namespace ServiceBlock.Extensions
                 catch (BadImageFormatException)
                 { return new Type[] { }; } // If a BadImageFormatException exception is thrown, the file is not an assembly.
             });
-        }
+
     }
 }

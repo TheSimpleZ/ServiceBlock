@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceBlock.Messaging", "S
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceBlock.Extensions", "ServiceBlock.Extensions\ServiceBlock.Extensions.csproj", "{3AF53356-EF2B-481D-A376-2CFF382EA4C8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceBlock.Test", "ServiceBlock.Test\ServiceBlock.Test.csproj", "{4E50F41F-623B-4C03-9142-8BF1A029C9A7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -130,6 +132,18 @@ Global
 		{3AF53356-EF2B-481D-A376-2CFF382EA4C8}.Release|x64.Build.0 = Release|Any CPU
 		{3AF53356-EF2B-481D-A376-2CFF382EA4C8}.Release|x86.ActiveCfg = Release|Any CPU
 		{3AF53356-EF2B-481D-A376-2CFF382EA4C8}.Release|x86.Build.0 = Release|Any CPU
+		{4E50F41F-623B-4C03-9142-8BF1A029C9A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E50F41F-623B-4C03-9142-8BF1A029C9A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E50F41F-623B-4C03-9142-8BF1A029C9A7}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{4E50F41F-623B-4C03-9142-8BF1A029C9A7}.Debug|x64.Build.0 = Debug|Any CPU
+		{4E50F41F-623B-4C03-9142-8BF1A029C9A7}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{4E50F41F-623B-4C03-9142-8BF1A029C9A7}.Debug|x86.Build.0 = Debug|Any CPU
+		{4E50F41F-623B-4C03-9142-8BF1A029C9A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E50F41F-623B-4C03-9142-8BF1A029C9A7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E50F41F-623B-4C03-9142-8BF1A029C9A7}.Release|x64.ActiveCfg = Release|Any CPU
+		{4E50F41F-623B-4C03-9142-8BF1A029C9A7}.Release|x64.Build.0 = Release|Any CPU
+		{4E50F41F-623B-4C03-9142-8BF1A029C9A7}.Release|x86.ActiveCfg = Release|Any CPU
+		{4E50F41F-623B-4C03-9142-8BF1A029C9A7}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{48429EA8-D70D-4B0F-8127-B1BA02EE41A7} = {6B33D772-A3F4-4B4F-A781-29CC99DFA0D5}
