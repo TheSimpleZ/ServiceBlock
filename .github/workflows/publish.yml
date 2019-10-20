@@ -14,8 +14,14 @@ jobs:
       - uses: actions/setup-dotnet@v1
         with:
           dotnet-version: "3.0.100"
+      - name: Install codecov
+        run: curl -s https://codecov.io/bash > codecov && chmod +x codecov
       - name: Test library
-        run: dotnet test
+        run: dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
+      - name: Upload coverage report
+        env:
+          codecov_token: ${{ secrets.CodecovToken }}
+        run: ./codecov -f ServiceBlock.Test/coverage.opencover.xml -t $codecov_token
       - name: Pack nugets
         run: dotnet pack -c Release -o output /p:PackageVersion=$(basename $GITHUB_REF)
       - name: Publish packages

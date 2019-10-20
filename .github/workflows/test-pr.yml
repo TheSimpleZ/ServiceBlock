@@ -12,4 +12,4 @@ jobs:
         with:
           dotnet-version: "3.0.100"
       - name: Test library
-        run: dotnet test
+        run: dotnet test /p:CollectCoverage=true
