@@ -6,6 +6,8 @@
 
 .env
 
+coverage.*
+
 *.swp
 *.*~
 project.lock.json

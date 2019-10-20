@@ -36,7 +36,7 @@ namespace ServiceBlock.Core
         private static void RunServiceConfiguratons(Action<IServiceConfiguration> action)
         {
 
-            foreach (var serviceConfig in Block.ServiceConfigurators)
+            foreach (var serviceConfig in BlockInfo.ServiceConfigurators)
             {
                 action(serviceConfig!);
             }
@@ -45,7 +45,7 @@ namespace ServiceBlock.Core
         public static void AddStorageServices(this IServiceCollection services)
         {
 
-            var storageTypes = Block.ResourceTypes
+            var storageTypes = BlockInfo.ResourceTypes
             .Select(t => (typeof(Storage<>).MakeGenericType(t!), t.GetAttributeValue((StorageAttribute a) => a.StorageType)!.MakeGenericType(t)));
 
             foreach (var (genericStorage, implementation) in storageTypes)

@@ -3,8 +3,9 @@ using Xunit;
 using ServiceBlock.Core;
 using System.Linq;
 using FluentAssertions;
+using ServiceBlock.Interface;
 
-namespace ServiceBlock.Test
+namespace ServiceBlock.Test.Core
 {
     public class BlockTests
     {
@@ -15,7 +16,7 @@ namespace ServiceBlock.Test
             // ValidResource is declared
 
             // Act 
-            var resourceTypes = Block.ResourceTypes;
+            var resourceTypes = BlockInfo.ResourceTypes;
 
             // Assert
             resourceTypes.Should().Contain(typeof(ValidResource));

@@ -9,6 +9,6 @@ namespace ServiceBlock.Test
     [Storage(typeof(MemoryStorage<>))]
     public class ValidResource : AbstractResource
     {
-
+        public int TestProp { get; set; } = 0;
     }
 }

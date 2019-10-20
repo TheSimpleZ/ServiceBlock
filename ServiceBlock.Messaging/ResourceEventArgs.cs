@@ -1,3 +1,6 @@
+using ServiceBlock.Interface.Resource;
+using ServiceBlock.Interface.Storage;
+
 namespace ServiceBlock.Messaging
 {
     public class ResourceEventArgs

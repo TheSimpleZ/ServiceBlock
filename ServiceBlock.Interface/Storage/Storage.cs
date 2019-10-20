@@ -18,7 +18,7 @@ namespace ServiceBlock.Interface.Storage
         public event EventHandler<T>? OnUpdate;
         public event EventHandler<T>? OnDelete;
 
-        public Storage(ILogger<Storage<T>> logger, ResourceTransformer<T>? transformer = null)
+        protected Storage(ILogger<Storage<T>> logger, ResourceTransformer<T>? transformer = null)
         {
             this._logger = logger;
             this._transformer = transformer;
@@ -28,6 +28,7 @@ namespace ServiceBlock.Interface.Storage
         }
 
         private bool IsValidTransform(string name) => _transformer != null && _transformer.GetType().HasOverriddenMethod(name);
+        private bool ResourceHasEvent(ResourceEventType et) => typeof(T).GetAttributeValue((EmitEventsAttribute a) => a.EventTypes)?.Contains(et) == true;
 
 
         public async Task<IEnumerable<T>> Read()
@@ -55,7 +56,8 @@ namespace ServiceBlock.Interface.Storage
 
             var created = await CreateItem(resource);
 
-            await SendEvent(() => OnCreate?.Invoke(this, created), async () => await DeleteItem(resource.Id), resource);
+            if (ResourceHasEvent(ResourceEventType.Created))
+                await SendEvent(() => OnCreate?.Invoke(this, created), async () => await DeleteItem(resource.Id), resource);
 
             return created;
         }
@@ -67,8 +69,8 @@ namespace ServiceBlock.Interface.Storage
 
             var updated = await UpdateItem(resource);
 
-            OnUpdate?.Invoke(this, updated);
-            await SendEvent(() => OnUpdate?.Invoke(this, updated), async () => await UpdateItem(oldResource), resource);
+            if (ResourceHasEvent(ResourceEventType.Updated))
+                await SendEvent(() => OnUpdate?.Invoke(this, updated), async () => await UpdateItem(oldResource), resource);
 
 
             return updated;
@@ -80,9 +82,8 @@ namespace ServiceBlock.Interface.Storage
 
             await DeleteItem(Id);
 
-            OnDelete?.Invoke(this, resource);
-
-            await SendEvent(() => OnDelete?.Invoke(this, resource), async () => await CreateItem(resource), resource);
+            if (ResourceHasEvent(ResourceEventType.Deleted))
+                await SendEvent(() => OnDelete?.Invoke(this, resource), async () => await CreateItem(resource), resource);
 
 
         }

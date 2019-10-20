@@ -3,21 +3,31 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using ServiceBlock.Interface.Resource;
 
-namespace ServiceBlock.Extensions
+namespace ServiceBlock.Interface
 {
     /// <summary>
     /// This class provides methods to easily access a Blocks properties.
     /// </summary>
-    public abstract class BaseBlock
+    public static class BlockInfo
     {
         public static string? Name => Assembly.GetEntryAssembly()?.GetName().Name;
 
         private static bool isServiceBlockAssembly(string a) => a.StartsWith("ServiceBlock") == true || a.Split('.').FirstOrDefault().StartsWith(Name) == true;
 
+        public static IEnumerable<Type> ResourceTypes => BlockTypes.Where(x => typeof(AbstractResource).IsAssignableFrom(x) && x.IsClass && !x.IsAbstract);
+
+        public static IEnumerable<IServiceConfiguration> ServiceConfigurators =>
+        BlockTypes
+        .Where(t => t.IsClass && typeof(IServiceConfiguration).IsAssignableFrom(t))
+        .Select(Activator.CreateInstance)
+        .Cast<IServiceConfiguration>();
+
+
 
         public static IEnumerable<Type> BlockTypes =>
-            Directory.EnumerateFiles(System.AppDomain.CurrentDomain.BaseDirectory, "*.dll", SearchOption.AllDirectories)
+            Directory.EnumerateFiles(AppDomain.CurrentDomain.BaseDirectory, "*.dll", SearchOption.AllDirectories)
             .Where(f => isServiceBlockAssembly(Path.GetFileNameWithoutExtension(f)))
             .SelectMany(dll =>
             {

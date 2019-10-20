@@ -17,18 +17,10 @@ using ServiceBlock.Interface.Storage;
 
 namespace ServiceBlock.Core
 {
-    public class Block : BaseBlock
+    public static class Block
     {
 
-
-        public static IEnumerable<Type> ResourceTypes => BlockTypes.Where(x => typeof(AbstractResource).IsAssignableFrom(x) && x.IsClass && !x.IsAbstract);
         public static IEnumerable<TypeInfo> Controllers => GetResourceController(readOnly: true).Concat(GetResourceController());
-
-        public static IEnumerable<IServiceConfiguration> ServiceConfigurators =>
-        BlockTypes
-        .Where(t => t.IsClass && typeof(IServiceConfiguration).IsAssignableFrom(t))
-        .Select(Activator.CreateInstance)
-        .Cast<IServiceConfiguration>();
 
         public static void Run(string[] args, Logger? logger = null)
         {
@@ -77,12 +69,12 @@ namespace ServiceBlock.Core
             bool predicate(Type r) => readOnly ? r.HasAttribute<ReadOnlyAttribute>() : !r.HasAttribute<ReadOnlyAttribute>();
 
             var controllerType = readOnly ? typeof(ResourceControllerRead<>) : typeof(ResourceControllerWrite<>);
-            return ResourceTypes.Where(predicate).Select(r => controllerType.MakeGenericType(r).GetTypeInfo());
+            return BlockInfo.ResourceTypes.Where(predicate).Select(r => controllerType.MakeGenericType(r).GetTypeInfo());
         }
 
         private static void ValidateResources()
         {
-            var exceptions = ResourceTypes.Where(r => r.HasAttribute<StorageAttribute>()).Select(r => new NoStorageException($"The resource {r.GetType().Name} does not have a compatible storage associated with it."));
+            var exceptions = BlockInfo.ResourceTypes.Where(r => !r.HasAttribute<StorageAttribute>()).Select(r => new NoStorageException($"The resource {r.GetType().Name} does not have a compatible storage associated with it."));
             if (exceptions.Any())
             {
                 throw new AggregateException("One or more resources does not have a storage", exceptions);
