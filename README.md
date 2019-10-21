@@ -16,12 +16,11 @@ Rather, it's to reduce a lot of the noise that comes with setting up a micro-ser
 ## Features
 
 -   Easy CRUD set up.
--   Easy to configure authentication.
+-   [Easy to configure authentication.](https://github.com/TheSimpleZ/ServiceBlock/wiki/Authentication)
 -   Integrated Swagger UI with auto-generated OpenAPI specification.
 -   Extensible interfaces for different types of messaging protocols, storages, etc.
--   Containerized and ready for the cloud.
--   Inter-service communication.
--   Subscribable APIs (internal only for now)
+-   [Containerized and ready for the cloud.](https://github.com/TheSimpleZ/ServiceBlock/wiki/Deployment)
+-   [Subscribable APIs (internal only for now)](https://github.com/TheSimpleZ/ServiceBlock/wiki/ResourceEventListeners)
 
 ### Planned features
 
