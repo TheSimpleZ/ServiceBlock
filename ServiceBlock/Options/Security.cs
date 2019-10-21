@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace ServiceBlock.Options
 {
-    public class Security
+    class Security
     {
         public string? Domain { get; set; }
         public string? ApiIdentifier { get; set; }

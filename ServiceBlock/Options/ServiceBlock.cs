@@ -1,6 +1,6 @@
 namespace ServiceBlock.Options
 {
-    public class ServiceBlock
+    class ServiceBlock
     {
         public Security? Security { get; set; }
 

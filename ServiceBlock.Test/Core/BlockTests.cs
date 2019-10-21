@@ -10,36 +10,22 @@ namespace ServiceBlock.Test.Core
     public class BlockTests
     {
         [Fact]
-        public void ValidResource_declared__Recognized_as_resource()
+        public void ValidResource_declared__Should_exists()
         {
-            // Arrange
-            // ValidResource is declared
-
-            // Act 
-            var resourceTypes = BlockInfo.ResourceTypes;
-
             // Assert
-            resourceTypes.Should().Contain(typeof(ValidResource));
+            BlockInfo.ResourceTypes.Should().Contain(typeof(ValidResource));
         }
 
         [Fact]
-        public void ValidResource_declared__Controller_exists()
+        public void ValidResource_declared__Should_have_controller()
         {
-            // Arrange
-            // ValidResource is declared
-
-            // Act 
-            var controllers = Block.Controllers;
-
             // Assert
-            controllers.Should().Contain(t => t.GetGenericArguments().Single() == typeof(ValidResource));
+            Block.Controllers.Should().Contain(t => t.GetGenericArguments().Single() == typeof(ValidResource));
         }
 
         [Fact]
-        public void InvalidResource_declared__Block_throws_exceptions()
+        public void InvalidResource_declared__Should_throw_exception()
         {
-            // Arrange
-            // InvalidResource is declared
 
             // Act 
             Action runAction = () => Block.Run(new string[] { });

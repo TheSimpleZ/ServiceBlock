@@ -11,6 +11,7 @@ using AutoFixture.Xunit2;
 using ServiceBlock.Interface.Storage;
 using AutoFixture;
 using AutoFixture.AutoFakeItEasy;
+using ServiceBlock.Interface;
 
 namespace ServiceBlock.Test.Storage
 {
@@ -28,6 +29,38 @@ namespace ServiceBlock.Test.Storage
         }
 
         [Theory, AutoFakeItEasyData]
+        public async Task ValidResource_updated__Should_be_updated(Storage<ValidResource> memStorage, ValidResource resource)
+        {
+            // Arrange
+            var before = resource.TestProp;
+            await memStorage.Create(resource);
+
+            resource.TestProp++;
+
+
+            var updated = await memStorage.Update(resource);
+
+            // Assert
+            updated.Should().BeAssignableTo<ValidResource>().Which.TestProp.Should().Be(before + 1);
+            updated.Should().BeAssignableTo<ValidResource>().Which.Id.Should().Be(resource.Id);
+
+        }
+
+        [Theory, AutoFakeItEasyData]
+        public async Task ValidResource_deleted__Should_be_deleted(Storage<ValidResource> memStorage, ValidResource resource)
+        {
+            // Arrange
+            var before = resource.TestProp;
+            await memStorage.Create(resource);
+
+            await memStorage.Delete(resource.Id);
+
+            // Assert
+            memStorage.Invoking(ms => ms.Read(resource.Id)).Should().Throw<NotFoundException>();
+        }
+
+
+        [Theory, AutoFakeItEasyData]
         public async Task ValidResource_created__Should_not_raise_event(Storage<ValidResource> memStorage, ValidResource resource)
         {
             // Act 
@@ -36,7 +69,7 @@ namespace ServiceBlock.Test.Storage
                 await memStorage.Create(resource);
 
                 // Assert
-                monitor.Should().NotRaise(nameof(MemoryStorage<ValidResource>.OnCreate));
+                monitor.Should().NotRaise(nameof(Storage<ValidResource>.OnCreate));
             }
         }
 
@@ -53,10 +86,28 @@ namespace ServiceBlock.Test.Storage
             using (var monitor = memStorage.Monitor())
             {
 
-                await memStorage.Update(resource);
+                var updated = await memStorage.Update(resource);
 
                 // Assert
-                monitor.Should().NotRaise(nameof(Storage<ValidResource>.OnCreate));
+                monitor.Should().NotRaise(nameof(Storage<ValidResource>.OnUpdate));
+            }
+        }
+
+        [Theory, AutoFakeItEasyData]
+        public async Task ValidResource_deleted__Should_not_raise_event(Storage<ValidResource> memStorage, ValidResource resource)
+        {
+            // Arrange
+            var before = resource.TestProp;
+            await memStorage.Create(resource);
+
+            // Act 
+            using (var monitor = memStorage.Monitor())
+            {
+
+                await memStorage.Delete(resource.Id);
+
+                // Assert
+                monitor.Should().NotRaise(nameof(Storage<ValidResource>.OnDelete));
             }
         }
 
