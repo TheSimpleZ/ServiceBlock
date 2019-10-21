@@ -15,7 +15,7 @@ using Microsoft.Extensions.Options;
 using System.Reflection;
 using Microsoft.Extensions.Logging;
 
-namespace ServiceBlock.Core
+namespace ServiceBlock.Internal
 {
     class Startup
     {

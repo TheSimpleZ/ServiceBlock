@@ -1,10 +1,8 @@
 using System.Collections.Generic;
-using System.Linq;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
-namespace ServiceBlock.Core
+namespace ServiceBlock.Internal
 {
     class SecurityRequirementsOperationFilter : IOperationFilter
     {

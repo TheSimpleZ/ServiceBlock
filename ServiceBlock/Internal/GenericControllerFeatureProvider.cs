@@ -1,12 +1,9 @@
 using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using ServiceBlock.Extensions;
 using Microsoft.AspNetCore.Mvc.ApplicationParts;
 using Microsoft.AspNetCore.Mvc.Controllers;
-using System.ComponentModel;
+using ServiceBlock.Core;
 
-namespace ServiceBlock.Core
+namespace ServiceBlock.Internal
 {
     class GenericControllerFeatureProvider : IApplicationFeatureProvider<ControllerFeature>
     {

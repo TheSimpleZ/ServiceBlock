@@ -1,15 +1,12 @@
 ﻿#nullable enable
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
-using ServiceBlock.Interface;
 using ServiceBlock.Interface.Storage;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using ServiceBlock.Interface.Resource;
 
-namespace ServiceBlock.Core
+namespace ServiceBlock.Internal
 {
     class ResourceControllerWrite<T> : ResourceControllerRead<T> where T : AbstractResource
     {

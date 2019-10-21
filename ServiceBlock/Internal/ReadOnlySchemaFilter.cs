@@ -5,7 +5,7 @@ using System.Reflection;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
-namespace ServiceBlock.Core
+namespace ServiceBlock.Internal
 {
     class ReadOnlySchemaFilter : ISchemaFilter
     {

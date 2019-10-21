@@ -1,8 +1,7 @@
-using System.Reflection;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
 
-namespace ServiceBlock.Core
+namespace ServiceBlock.Internal
 {
     class GenericControllerRouteConvention : IControllerModelConvention
     {

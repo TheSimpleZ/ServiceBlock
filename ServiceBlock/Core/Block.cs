@@ -5,15 +5,14 @@ using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Hosting;
 using Serilog;
 using Serilog.Core;
 using Serilog.Events;
 using ServiceBlock.Extensions;
 using ServiceBlock.Interface;
-using ServiceBlock.Interface.Resource;
 using ServiceBlock.Interface.Storage;
+using ServiceBlock.Internal;
 
 namespace ServiceBlock.Core
 {

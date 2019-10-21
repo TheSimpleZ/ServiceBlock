@@ -1,6 +1,5 @@
 using System;
 using System.Linq;
-using System.Reflection;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using ServiceBlock.Extensions;
@@ -8,7 +7,7 @@ using ServiceBlock.Interface;
 using ServiceBlock.Interface.Resource;
 using ServiceBlock.Interface.Storage;
 
-namespace ServiceBlock.Core
+namespace ServiceBlock.Internal
 {
     static class ServiceCollectionExtensions
     {

@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using ServiceBlock.Interface.Resource;
 
-namespace ServiceBlock.Core
+namespace ServiceBlock.Internal
 {
     class ResourceControllerRead<T> : ControllerBase where T : AbstractResource
     {

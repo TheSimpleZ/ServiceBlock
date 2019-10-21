@@ -18,7 +18,7 @@
     },
     {
       "label": "test",
-      "command": "dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=\"lcov\" /p:CoverletOutput=../lcov",
+      "command": "dotnet test /p:Exclude=\\\"[*]*Internal*,[*]*Options*\\\" /p:CollectCoverage=true /p:CoverletOutputFormat=\"lcov\" /p:CoverletOutput=../lcov",
       "type": "shell",
       "group": {
         "kind": "test",
