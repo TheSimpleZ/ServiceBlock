@@ -1,16 +1,7 @@
-using System;
 using Xunit;
-using ServiceBlock.Core;
-using System.Linq;
 using FluentAssertions;
-using ServiceBlock.Storage;
-using FakeItEasy;
-using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
-using AutoFixture.Xunit2;
 using ServiceBlock.Interface.Storage;
-using AutoFixture;
-using AutoFixture.AutoFakeItEasy;
 using ServiceBlock.Interface;
 
 namespace ServiceBlock.Test.Storage
@@ -108,6 +99,57 @@ namespace ServiceBlock.Test.Storage
 
                 // Assert
                 monitor.Should().NotRaise(nameof(Storage<ValidResource>.OnDelete));
+            }
+        }
+
+        [Theory, AutoFakeItEasyData]
+        public async Task EmitEventsResource_created__Should_raise_event(Storage<EmitEventsResource> memStorage, EmitEventsResource resource)
+        {
+            // Act 
+            using (var monitor = memStorage.Monitor())
+            {
+                await memStorage.Create(resource);
+
+                // Assert
+                monitor.Should().Raise(nameof(Storage<EmitEventsResource>.OnCreate));
+            }
+        }
+
+        [Theory, AutoFakeItEasyData]
+        public async Task EmitEventsResource_updated__Should_raise_event(Storage<EmitEventsResource> memStorage, EmitEventsResource resource)
+        {
+            // Arrange
+            var before = resource.TestProp;
+            await memStorage.Create(resource);
+
+            resource.TestProp++;
+
+            // Act 
+            using (var monitor = memStorage.Monitor())
+            {
+
+                var updated = await memStorage.Update(resource);
+
+                // Assert
+                monitor.Should().Raise(nameof(Storage<EmitEventsResource>.OnUpdate));
+            }
+        }
+
+        [Theory, AutoFakeItEasyData]
+        public async Task EmitEventsResource_deleted__Should_raise_event(Storage<EmitEventsResource> memStorage, EmitEventsResource resource)
+        {
+            // Arrange
+            var before = resource.TestProp;
+            await memStorage.Create(resource);
+
+            // Act 
+            using (var monitor = memStorage.Monitor())
+            {
+
+                await memStorage.Delete(resource.Id);
+
+                // Assert
+                monitor.Should().Raise(nameof(Storage<EmitEventsResource>.OnDelete));
             }
         }
 

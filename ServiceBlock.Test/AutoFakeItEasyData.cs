@@ -1,7 +1,6 @@
 using AutoFixture;
 using AutoFixture.AutoFakeItEasy;
 using AutoFixture.Xunit2;
-using ServiceBlock.Interface.Resource;
 using ServiceBlock.Storage;
 using ServiceBlock.Interface.Storage;
 using Microsoft.Extensions.Logging;
