@@ -1,10 +1,8 @@
-using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
 using ServiceBlock.Interface.Resource;
 using ServiceBlock.Interface.Storage;
 using ServiceBlock.Storage;
-using ServiceBlock.Messaging;
 
 namespace WeatherForecast.Interface
 {
@@ -13,6 +11,8 @@ namespace WeatherForecast.Interface
     [ReadOnly(true)]
     public class Invoice : AbstractResource
     {
+        [Queryable]
+        public string InvoiceNumber { get; set; }
         public Person Sender { get; set; }
     }
 

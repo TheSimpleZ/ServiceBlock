@@ -84,6 +84,7 @@ namespace ServiceBlock.Internal
                 if (settings.SecurityEnabled)
                 {
                     c.OperationFilter<SecurityRequirementsOperationFilter>();
+                    c.OperationFilter<QueryParametersOperationFilter>();
 
                     c.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
                     {

@@ -1,6 +1,8 @@
 using System;
 using System.Reflection;
 using System.Linq;
+using System.Collections.Generic;
+
 namespace ServiceBlock.Extensions
 {
     public static class TypeExtensions
@@ -36,6 +38,11 @@ namespace ServiceBlock.Extensions
         }
 
         public static bool HasAttribute<T>(this Type type) where T : Attribute
+        {
+            return type.GetCustomAttributes<T>(true).Any();
+        }
+
+        public static bool HasAttribute<T>(this PropertyInfo type) where T : Attribute
         {
             return type.GetCustomAttributes<T>(true).Any();
         }
