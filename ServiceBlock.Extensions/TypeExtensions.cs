@@ -2,6 +2,7 @@ using System;
 using System.Reflection;
 using System.Linq;
 using System.Collections.Generic;
+using Newtonsoft.Json.Schema.Generation;
 
 namespace ServiceBlock.Extensions
 {
@@ -46,6 +47,9 @@ namespace ServiceBlock.Extensions
         {
             return type.GetCustomAttributes<T>(true).Any();
         }
+
+        public static string GetJsonType(this PropertyInfo pi) => new JSchemaGenerator().Generate(pi.PropertyType).Type.ToString();
+
 
         public static bool IsSubclassOfRawGeneric(this Type toCheck, Type generic)
         {

@@ -6,6 +6,8 @@ using Microsoft.Extensions.Logging;
 using ServiceBlock.Interface.Resource;
 using ServiceBlock.Interface;
 using ServiceBlock.Interface.Storage;
+using Newtonsoft.Json;
+using System.Text.RegularExpressions;
 
 namespace ServiceBlock.Storage
 {
@@ -20,9 +22,24 @@ namespace ServiceBlock.Storage
         }
 
 
-        protected override Task<IEnumerable<T>> ReadItems()
+        protected override Task<IEnumerable<T>> ReadItems(Dictionary<string, string> searchParams)
         {
-            return Task.FromResult(storage.Values.AsEnumerable());
+            return Task.FromResult(storage.Values.Where(item => searchParams.All(p => CheckSearchParam(item, (p.Key, p.Value)))));
+        }
+
+        private bool CheckSearchParam(T item, (string name, string val) queryParam)
+        {
+
+            var propInfo = typeof(T).GetProperty(queryParam.name);
+            var propVal = propInfo.GetValue(item);
+
+            var propString = propInfo.PropertyType == typeof(string) ? (string)propVal : JsonConvert.SerializeObject(propVal);
+            var propStringNormalized = Regex.Replace(propString, @"\s", "");
+
+            var queryParamValNormalized = Regex.Replace(queryParam.val, @"\s", "");
+
+
+            return propStringNormalized.Equals(queryParamValNormalized, StringComparison.InvariantCultureIgnoreCase);
         }
 
         protected override Task<T> ReadItem(Guid Id)

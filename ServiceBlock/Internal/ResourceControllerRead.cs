@@ -8,6 +8,13 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using ServiceBlock.Interface.Resource;
+using System.Linq;
+using ServiceBlock.Extensions;
+using Newtonsoft.Json.Linq;
+using System.Reflection;
+using System.Collections;
+using System.ComponentModel;
+using Newtonsoft.Json;
 
 namespace ServiceBlock.Internal
 {
@@ -17,6 +24,8 @@ namespace ServiceBlock.Internal
 
         private readonly ILogger<ResourceControllerRead<T>> _logger;
         private readonly Storage<T> _storage;
+
+        private readonly IEnumerable<string> queryStringParameterNames = AbstractResource.GetQueryableProperties(typeof(T)).Select(q => q.Name);
 
 
         public ResourceControllerRead(ILogger<ResourceControllerRead<T>> logger, Storage<T> storage)
@@ -33,7 +42,11 @@ namespace ServiceBlock.Internal
         {
             return await HandleRequest<IEnumerable<T>>(async () =>
             {
-                return Ok(await _storage.Read());
+                var query = HttpContext.Request.Query;
+
+                var queryParams = query.Where(kv => queryStringParameterNames.Contains(kv.Key)).ToDictionary(kv => kv.Key, kv => (string)kv.Value);
+
+                return Ok(await _storage.Read(queryParams));
             });
         }
 

@@ -9,6 +9,7 @@ using ServiceBlock.Extensions;
 using ServiceBlock.Interface.Resource;
 using Newtonsoft.Json.Schema;
 using Newtonsoft.Json.Schema.Generation;
+using System;
 
 namespace ServiceBlock.Internal
 {
@@ -29,7 +30,7 @@ namespace ServiceBlock.Internal
                         In = ParameterLocation.Query,
                         Schema = new OpenApiSchema()
                         {
-                            Type = new JSchemaGenerator().Generate(q.PropertyType).Type.ToString()
+                            Type = q.GetJsonType()
                         }
                     });
 

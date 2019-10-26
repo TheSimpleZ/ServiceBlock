@@ -3,16 +3,18 @@ using System.ComponentModel;
 using ServiceBlock.Interface.Resource;
 using ServiceBlock.Interface.Storage;
 using ServiceBlock.Storage;
-
+using System.Collections.Generic;
 namespace WeatherForecast.Interface
 {
     [Storage(typeof(MemoryStorage<>))]
     [EmitEvents]
-    [ReadOnly(true)]
     public class Invoice : AbstractResource
     {
+        public IEnumerable<int> InvoiceNumber { get; set; }
         [Queryable]
-        public string InvoiceNumber { get; set; }
+        public string Name { get; set; }
+
+        [Queryable]
         public Person Sender { get; set; }
     }
 

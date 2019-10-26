@@ -31,9 +31,9 @@ namespace ServiceBlock.Interface.Storage
         private bool ResourceHasEvent(ResourceEventType et) => typeof(T).GetAttributeValue((EmitEventsAttribute a) => a.EventTypes)?.Contains(et) == true;
 
 
-        public async Task<IEnumerable<T>> Read()
+        public async Task<IEnumerable<T>> Read(Dictionary<string, string> searchParams)
         {
-            var resources = await ReadItems();
+            var resources = await ReadItems(searchParams);
 
 
             return IsValidTransform(nameof(_transformer.OnRead))
@@ -111,7 +111,7 @@ namespace ServiceBlock.Interface.Storage
             }
         }
 
-        protected abstract Task<IEnumerable<T>> ReadItems();
+        protected abstract Task<IEnumerable<T>> ReadItems(Dictionary<string, string> searchParams);
         protected abstract Task<T> ReadItem(Guid Id);
 
         protected abstract Task<T> CreateItem(T resource);
