@@ -16,6 +16,7 @@ namespace ServiceBlock.Interface.Resource
         {
             return Task.FromResult(resource);
         }
+
         public virtual Task<T> OnUpdate(T resource)
         {
             return Task.FromResult(resource);

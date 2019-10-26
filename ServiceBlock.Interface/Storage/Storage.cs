@@ -111,11 +111,39 @@ namespace ServiceBlock.Interface.Storage
             }
         }
 
+        /// <summary>
+        /// Get all items from database filtered by searchParams
+        /// </summary>
+        /// <param name="searchParams">A dictionary mapping property name to expected value as a string</param>
+        /// <returns>All items of type T from the database</returns>
         protected abstract Task<IEnumerable<T>> ReadItems(Dictionary<string, string> searchParams);
+
+        /// <summary>
+        /// Get item from database by Id
+        /// </summary>
+        /// <param name="Id">The Id of the resource</param>
+        /// <returns>The requested resource</returns>
         protected abstract Task<T> ReadItem(Guid Id);
 
+        /// <summary>
+        /// Create resource
+        /// </summary>
+        /// <param name="resource">Resource to be created</param>
+        /// <returns>The created resource</returns>
         protected abstract Task<T> CreateItem(T resource);
+
+        /// <summary>
+        /// Update resource
+        /// </summary>
+        /// <param name="resource">New version of a resource</param>
+        /// <returns>The updated resource</returns>
         protected abstract Task<T> UpdateItem(T resource);
+
+        /// <summary>
+        /// Delete resource
+        /// </summary>
+        /// <param name="Id">Id of resource to delete</param>
+        /// <returns>Nothing</returns>
         protected abstract Task DeleteItem(Guid Id);
     }
 }

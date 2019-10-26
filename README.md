@@ -27,3 +27,5 @@ Rather, it's to reduce a lot of the noise that comes with setting up a micro-ser
 -   Service discovery.
 -   Secret management.
 -   Remote config with hot-reloading.
+
+[![codecov](https://codecov.io/gh/TheSimpleZ/ServiceBlock/branch/master/graph/badge.svg)](https://codecov.io/gh/TheSimpleZ/ServiceBlock)
