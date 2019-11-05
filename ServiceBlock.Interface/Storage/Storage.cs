@@ -9,6 +9,8 @@ using ServiceBlock.Interface.Resource;
 
 namespace ServiceBlock.Interface.Storage
 {
+    // Abstract storage class.
+    // Use this class to implement different types of storages for your resources.
     public abstract class Storage<T> where T : AbstractResource
     {
         private readonly ILogger<Storage<T>> _logger;
@@ -111,39 +113,38 @@ namespace ServiceBlock.Interface.Storage
             }
         }
 
-        /// <summary>
-        /// Get all items from database filtered by searchParams
-        /// </summary>
-        /// <param name="searchParams">A dictionary mapping property name to expected value as a string</param>
-        /// <returns>All items of type T from the database</returns>
+
+        // Summary: Get all items from database filtered by searchParams
+        // Parameters: 
+        //   searchParams: A dictionary mapping property name to expected value as a string
+        // Returns: All items of type T from the database
         protected abstract Task<IEnumerable<T>> ReadItems(Dictionary<string, string> searchParams);
 
-        /// <summary>
-        /// Get item from database by Id
-        /// </summary>
-        /// <param name="Id">The Id of the resource</param>
-        /// <returns>The requested resource</returns>
+
+        // Summary: Get item from database by Id
+        // Parameters:
+        //   Id: The Id of the resource
+        // Returns: The requested resource
         protected abstract Task<T> ReadItem(Guid Id);
 
-        /// <summary>
-        /// Create resource
-        /// </summary>
-        /// <param name="resource">Resource to be created</param>
-        /// <returns>The created resource</returns>
+
+        // Summary: Create resource
+        // Parameters:
+        //   resource: Resource to be created
+        // Returns: The created resource
         protected abstract Task<T> CreateItem(T resource);
 
-        /// <summary>
-        /// Update resource
-        /// </summary>
-        /// <param name="resource">New version of a resource</param>
-        /// <returns>The updated resource</returns>
+
+        // Summary: Update resource
+        // Parameters:
+        //   resource: New version of a resource
+        // Returns: The updated resource
         protected abstract Task<T> UpdateItem(T resource);
 
-        /// <summary>
-        /// Delete resource
-        /// </summary>
-        /// <param name="Id">Id of resource to delete</param>
-        /// <returns>Nothing</returns>
+
+        // Summary: Delete resource
+        // Parameters:
+        //   Id: Id of resource to delete
         protected abstract Task DeleteItem(Guid Id);
     }
 }
