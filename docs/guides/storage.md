@@ -17,3 +17,4 @@ The `Storage<T>` abstract class defines the necessary functions for any storage 
 ## Memory storage
 
 Currently there is only one type of storage implemented, the memory storage. The memory storage holds all values in a dictionary, in memory. It's not persistent.
+

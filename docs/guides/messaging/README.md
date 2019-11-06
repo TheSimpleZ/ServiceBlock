@@ -32,3 +32,4 @@ public class Invoice : AbstractResource
     public DateTime CreatedDate { get; set; } = DateTime.UtcNow();
 }
 ```
+

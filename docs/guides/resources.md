@@ -12,11 +12,11 @@ public class Invoice : AbstractResource
 
 Whenever a resource is defined the ServiceBlock framework will create 5 endpoints.
 
--   GET /Invoice
--   GET /Invoice/{Id}
--   POST /Invoice
--   PUT /Invoice/{Id}
--   DELETE /Invoice/{Id}
+* GET /Invoice
+* GET /Invoice/{Id}
+* POST /Invoice
+* PUT /Invoice/{Id}
+* DELETE /Invoice/{Id}
 
 Where {Id} is a guid.
 
@@ -60,3 +60,4 @@ public class Invoice : AbstractResource
 ```
 
 Will enable you to use `GET /Invoice?InvoiceNumber=asd` to search for all invoices with `asd` as the invoice number.
+
