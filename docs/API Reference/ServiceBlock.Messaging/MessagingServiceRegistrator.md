@@ -1,6 +1,6 @@
 MessagingServiceRegistrator
 ======
-##### Namespace: ServiceBlock.Messaging
+###### Namespace: ServiceBlock.Messaging
 
 
 
