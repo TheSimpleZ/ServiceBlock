@@ -1,6 +1,6 @@
 AbstractResource
 ======
-###### Namespace: ServiceBlock.Interface.Resource
+> Namespace: ServiceBlock.Interface.Resource
 
 
 

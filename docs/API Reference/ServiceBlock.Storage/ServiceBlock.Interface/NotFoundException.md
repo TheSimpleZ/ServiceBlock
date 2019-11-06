@@ -1,6 +1,6 @@
 NotFoundException
 ======
-###### Namespace: ServiceBlock.Interface
+> Namespace: ServiceBlock.Interface
 
 
 

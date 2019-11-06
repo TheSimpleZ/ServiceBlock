@@ -1,6 +1,6 @@
 ResourceExtensions
 ======
-###### Namespace: ServiceBlock.Extensions
+> Namespace: ServiceBlock.Extensions
 
 
 

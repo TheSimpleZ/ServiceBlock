@@ -1,6 +1,6 @@
 Storage
 ======
-###### Namespace: ServiceBlock.Interface.Storage
+> Namespace: ServiceBlock.Interface.Storage
 
 Abstract storage class.
 Use this class to implement different types of storages for your resources.

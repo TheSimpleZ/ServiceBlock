@@ -1,6 +1,6 @@
 Block
 ======
-###### Namespace: ServiceBlock.Core
+> Namespace: ServiceBlock.Core
 
 
 

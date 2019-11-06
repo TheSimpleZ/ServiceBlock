@@ -1,6 +1,6 @@
 InvalidStorageException
 ======
-###### Namespace: ServiceBlock.Interface.Storage
+> Namespace: ServiceBlock.Interface.Storage
 
 
 
