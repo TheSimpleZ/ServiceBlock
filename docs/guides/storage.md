@@ -6,7 +6,7 @@ You can implement your own type of storage by implementing the [Storage](storage
 
 ## StorageAttribute
 
-Every [Resource](https://github.com/TheSimpleZ/ServiceBlock/tree/29e77821cf280f319f55327427d6cb2db6dcdca9/docs/Guides/Resources/README.md) must have a storage associated with it. To associate a storage type with a resource, use the `StorageAttribute`.
+Every [Resource](resources.md) must have a storage associated with it. To associate a storage type with a resource, use the `StorageAttribute`.
 
 The `StorageAttribute` accepts a `Type` that implements the [Storage](storage.md#Storage%3CT%3E) abstract class.
 
@@ -17,4 +17,3 @@ The `Storage<T>` abstract class defines the necessary functions for any storage 
 ## Memory storage
 
 Currently there is only one type of storage implemented, the memory storage. The memory storage holds all values in a dictionary, in memory. It's not persistent.
-

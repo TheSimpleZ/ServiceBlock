@@ -8,22 +8,21 @@ The purpose of this library is not to provide customizability. Rather, it's to r
 
 ## Requirements
 
-* .Net Core 3
+-   .Net Core 3
 
 ## Features
 
-* Easy CRUD set up.
-* [Easy to configure authentication.](guides/authentication.md)
-* Integrated Swagger UI with auto-generated OpenAPI specification.
-* Extensible interfaces for different types of messaging protocols, storages, etc.
-* [Containerized and ready for the cloud.](https://github.com/TheSimpleZ/ServiceBlock/tree/02c3c5f8089399df692e8433b69a012161f7fc37/docs/guides/deployment/README.md)
-* [Subscribable APIs \(internal only for now\)](https://github.com/TheSimpleZ/ServiceBlock/tree/02c3c5f8089399df692e8433b69a012161f7fc37/docs/guides/messaging/resourceeventlisteners/README.md)
+-   Easy CRUD set up.
+-   [Easy to configure authentication.](guides/authentication.md)
+-   Integrated Swagger UI with auto-generated OpenAPI specification.
+-   Extensible interfaces for different types of messaging protocols, storages, etc.
+-   [Containerized and ready for the cloud.](guides/deployment.md)
+-   [Subscribable APIs \(internal only for now\)](guides/messaging/resourceeventlisteners.md)
 
 ### Planned features
 
-* Service discovery.
-* Secret management.
-* Remote config with hot-reloading.
+-   Service discovery.
+-   Secret management.
+-   Remote config with hot-reloading.
 
 [![codecov](https://codecov.io/gh/TheSimpleZ/ServiceBlock/branch/master/graph/badge.svg)](https://codecov.io/gh/TheSimpleZ/ServiceBlock)
-
