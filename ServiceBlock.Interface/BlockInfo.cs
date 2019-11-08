@@ -7,21 +7,15 @@ using ServiceBlock.Interface.Resource;
 
 namespace ServiceBlock.Interface
 {
-    /// <summary>
-    /// This class provides methods to easily access a Blocks properties.
-    /// </summary>
+    // This class provides methods to easily access a Blocks properties.
     public static class BlockInfo
     {
-        /// <summary>
-        /// Name of the current service
-        /// </summary>
+        // Name of the current service
         public static string? Name => Assembly.GetEntryAssembly()?.GetName().Name;
 
         private static bool isServiceBlockAssembly(string a) => a.StartsWith("ServiceBlock") == true || a.Split('.').FirstOrDefault().StartsWith(Name) == true;
 
-        /// <summary>
-        /// All resources defined in the current service and the ServiceBlock Framework
-        /// </summary>
+        // All resources defined in the current service and the ServiceBlock Framework
         public static IEnumerable<Type> ResourceTypes => BlockTypes.Where(x => typeof(AbstractResource).IsAssignableFrom(x) && x.IsClass && !x.IsAbstract);
 
         public static IEnumerable<IServiceConfiguration> ServiceConfigurators =>
