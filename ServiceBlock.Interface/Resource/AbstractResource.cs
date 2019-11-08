@@ -14,5 +14,7 @@ namespace ServiceBlock.Interface.Resource
 
         public static IEnumerable<PropertyInfo> GetQueryableProperties(Type type) => type.GetProperties().Where(p => p.HasAttribute<QueryableAttribute>());
 
+        public static string GetServiceName(Type type) => type.Assembly.GetName().Name.Split('.').FirstOrDefault();
+
     }
 }
