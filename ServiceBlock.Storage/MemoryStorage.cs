@@ -11,6 +11,9 @@ using System.Text.RegularExpressions;
 
 namespace ServiceBlock.Storage
 {
+    // Summary: In-memory resource storage
+    //   Parameters:
+    //     T: The resource type
     public class MemoryStorage<T> : Storage<T> where T : AbstractResource
     {
         private Dictionary<Guid, T> storage = new Dictionary<Guid, T>();

@@ -15,6 +15,9 @@ using ServiceBlock.Storage.Options;
 
 namespace ServiceBlock.Storage
 {
+    // Summary: ServiceBlock storage backed by mongo db.
+    //   Parameters:
+    //     T: The resource type
     public class MongoDbStorage<T> : Storage<T> where T : AbstractResource
     {
         private readonly IMongoCollection<T> resources;
@@ -40,21 +43,6 @@ namespace ServiceBlock.Storage
                 filter = filter & builder.Eq(kv.Key, kv.Value);
             }
             return (await resources.FindAsync(filter)).ToEnumerable();
-        }
-
-        private bool CheckSearchParam(T item, (string name, string val) queryParam)
-        {
-
-            var propInfo = typeof(T).GetProperty(queryParam.name);
-            var propVal = propInfo.GetValue(item);
-
-            var propString = propInfo.PropertyType == typeof(string) ? (string)propVal : JsonConvert.SerializeObject(propVal);
-            var propStringNormalized = Regex.Replace(propString, @"\s", "");
-
-            var queryParamValNormalized = Regex.Replace(queryParam.val, @"\s", "");
-
-
-            return propStringNormalized.Equals(queryParamValNormalized, StringComparison.InvariantCultureIgnoreCase);
         }
 
         protected override async Task<T> ReadItem(Guid Id)
