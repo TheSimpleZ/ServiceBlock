@@ -23,10 +23,10 @@ namespace ServiceBlock.Storage
         private readonly IMongoCollection<T> resources;
         private readonly ILogger<MemoryStorage<T>> _logger;
 
-        public MongoDbStorage(ILogger<MemoryStorage<T>> logger, IConfiguration config, IOptions<MongoDb> options, ResourceTransformer<T>? transformer = null) : base(logger, transformer)
+        public MongoDbStorage(ILogger<MemoryStorage<T>> logger, IConfiguration config, IOptionsMonitor<MongoDb> options, ResourceTransformer<T>? transformer = null) : base(logger, transformer)
         {
             var client = new MongoClient(config.GetConnectionString(nameof(MongoDb)));
-            var database = client.GetDatabase(options.Value.DatabaseName);
+            var database = client.GetDatabase(options.CurrentValue.DatabaseName);
 
             resources = database.GetCollection<T>(typeof(T).Name);
 

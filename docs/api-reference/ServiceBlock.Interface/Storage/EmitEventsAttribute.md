@@ -13,7 +13,9 @@ public class EmitEventsAttribute : Attribute
 
 EmitEventsAttribute(ResourceEventType[])
 ------
-
+Summary: This attribute can be used on a resource to make it emit certain types of events. Defaults to all types
+  Parameters:
+    eventTypes: The types of events that should be emitted
 
 ```
 public EmitEventsAttribute(params ResourceEventType[] eventTypes)

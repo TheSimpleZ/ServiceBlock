@@ -10,6 +10,9 @@ namespace ServiceBlock.Interface.Storage
 
         public Type StorageType { get; set; }
 
+        // Summary: This attribute should be used to mark the storage type of a resource
+        //   Parameters:
+        //     storageType: The type of storage that should be used
         public StorageAttribute(Type storageType)
         {
             if (!storageType.IsSubclassOfRawGeneric(typeof(Storage<>)))
