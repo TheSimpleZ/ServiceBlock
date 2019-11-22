@@ -14,7 +14,7 @@ To enable Messaging simply install the NuGet package:
 dotnet add package ServiceBlock.Messaging
 ```
 
-The RabbitMQ client expects a connection string provided in the appsettings.json under the key `AMQP`. Alternatively set the environment variable `ASPNETCORE_ConnectionStrings__AMQP`.
+The RabbitMQ client expects a connection string provided in the appsettings.json under the key `RabbitMq`. Alternatively set the environment variable `ASPNETCORE_ConnectionStrings__RabbitMq`.
 
 ## Emit events
 
@@ -32,4 +32,3 @@ public class Invoice : AbstractResource
     public DateTime CreatedDate { get; set; } = DateTime.UtcNow();
 }
 ```
-

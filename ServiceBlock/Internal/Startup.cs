@@ -104,9 +104,9 @@ namespace ServiceBlock.Internal
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IOptions<Options.ServiceBlock> settingsAccessor)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IOptionsMonitor<Options.ServiceBlock> settingsAccessor)
         {
-            var settings = settingsAccessor.Value;
+            var settings = settingsAccessor.CurrentValue;
             var logger = app.ApplicationServices.GetService<ILogger<Startup>>();
             if (env.IsDevelopment())
             {

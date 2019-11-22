@@ -1,0 +1,55 @@
+BlockInfo
+======
+> Namespace: ServiceBlock.Interface
+
+This class provides methods to easily access a Blocks properties.
+
+```
+public static class BlockInfo
+```
+
+## Properties
+
+Name
+------
+Name of the current service
+
+```
+public static string? Name => Assembly.GetEntryAssembly()?.GetName().Name;
+```
+
+
+ResourceTypes
+------
+All resources defined in the current service and the ServiceBlock Framework
+
+```
+public static IEnumerable<Type> ResourceTypes => BlockTypes.Where(x => typeof(AbstractResource).IsAssignableFrom(x) && x.IsClass && !x.IsAbstract);
+```
+
+
+ServiceConfigurators
+------
+
+
+```
+public static IEnumerable<IServiceConfiguration> ServiceConfigurators =>
+BlockTypes
+.Where(t => t.IsClass && typeof(IServiceConfiguration).IsAssignableFrom(t))
+.Select(Activator.CreateInstance)
+.Cast<IServiceConfiguration>();
+```
+
+
+BlockTypes
+------
+
+
+```
+public static IEnumerable<Type> BlockTypes =>
+Directory.EnumerateFiles(AppDomain.CurrentDomain.BaseDirectory, "*.dll", SearchOption.AllDirectories)
+.Where(f => isServiceBlockAssembly(Path.GetFileNameWithoutExtension(f)))
+.SelectMany(dll =>
+```
+
+

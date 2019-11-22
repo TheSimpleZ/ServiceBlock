@@ -2,7 +2,7 @@ using Xunit;
 using FluentAssertions;
 using System.Threading.Tasks;
 using ServiceBlock.Interface.Storage;
-using ServiceBlock.Interface;
+using ServiceBlock.Storage;
 
 namespace ServiceBlock.Test.Storage
 {

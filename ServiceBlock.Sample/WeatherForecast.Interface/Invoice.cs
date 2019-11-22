@@ -1,12 +1,11 @@
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel;
 using ServiceBlock.Interface.Resource;
 using ServiceBlock.Interface.Storage;
 using ServiceBlock.Storage;
 using System.Collections.Generic;
 namespace WeatherForecast.Interface
 {
-    [Storage(typeof(MemoryStorage<>))]
+    [Storage(typeof(MongoDbStorage<>))]
     [EmitEvents]
     public class Invoice : AbstractResource
     {
