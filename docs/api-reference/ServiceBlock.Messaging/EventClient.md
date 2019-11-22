@@ -18,15 +18,6 @@ EventClient(ILogger<EventClient>)
 protected EventClient(ILogger<EventClient> logger)
 ```
 
-### Parameters
-Name | Description
---- | ---
-logger | 
-
-
-
-
-
 
 
 
@@ -40,11 +31,6 @@ Publish(ResourceEventType, T)
 public abstract void Publish<T>(ResourceEventType type, T payload);
 ```
 
-### Parameters
-Name | Description
---- | ---
-type | 
-payload | 
 
 
 
@@ -56,11 +42,6 @@ OnMessageReceived(ResourceEventArgs)
 ```
 protected virtual void OnMessageReceived(ResourceEventArgs args)
 ```
-
-### Parameters
-Name | Description
---- | ---
-args | 
 
 
 

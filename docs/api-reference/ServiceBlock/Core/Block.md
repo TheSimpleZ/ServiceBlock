@@ -8,10 +8,6 @@ Block
 public static class Block
 ```
 
-
-
-
-
 ## Properties
 
 Controllers
@@ -23,7 +19,6 @@ public static IEnumerable<TypeInfo> Controllers => GetResourceController(readOnl
 ```
 
 
-
 ## Methods
 
 Run(string[], Logger?)
@@ -33,12 +28,6 @@ Run(string[], Logger?)
 ```
 public static void Run(string[] args, Logger? logger = null)
 ```
-
-### Parameters
-Name | Description
---- | ---
-args | 
-logger | 
 
 
 

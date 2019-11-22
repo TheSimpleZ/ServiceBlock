@@ -18,12 +18,6 @@ ResourceEventArgs(ResourceEventType, dynamic)
 public ResourceEventArgs(ResourceEventType type, dynamic resource)
 ```
 
-### Parameters
-Name | Description
---- | ---
-type | 
-resource | 
-
 
 
 
@@ -45,10 +39,5 @@ EventType
 ```
 public ResourceEventType EventType
 ```
-
-
-
-
-
 
 

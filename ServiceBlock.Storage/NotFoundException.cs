@@ -2,7 +2,7 @@
 using System;
 using System.Runtime.Serialization;
 
-namespace ServiceBlock.Interface
+namespace ServiceBlock.Storage
 {
     [Serializable]
     public class NotFoundException : Exception

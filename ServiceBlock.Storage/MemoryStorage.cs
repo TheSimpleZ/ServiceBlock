@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using System.Linq;
 using Microsoft.Extensions.Logging;
 using ServiceBlock.Interface.Resource;
-using ServiceBlock.Interface;
 using ServiceBlock.Interface.Storage;
 using Newtonsoft.Json;
 using System.Text.RegularExpressions;
@@ -12,8 +11,8 @@ using System.Text.RegularExpressions;
 namespace ServiceBlock.Storage
 {
     // Summary: In-memory resource storage
-    //   Parameters:
-    //     T: The resource type
+    // Parameters:
+    //   T: The resource type
     public class MemoryStorage<T> : Storage<T> where T : AbstractResource
     {
         private Dictionary<Guid, T> storage = new Dictionary<Guid, T>();

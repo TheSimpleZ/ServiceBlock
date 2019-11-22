@@ -9,10 +9,6 @@ To create a resource, you must extend this class
 public abstract class AbstractResource
 ```
 
-
-
-
-
 ## Properties
 
 Id
@@ -26,7 +22,6 @@ public virtual Guid Id
 ```
 
 
-
 ## Methods
 
 GetQueryableProperties(Type)
@@ -37,10 +32,6 @@ Retrives a list of all properties with the QueryableAttribute
 public static IEnumerable<PropertyInfo> GetQueryableProperties(Type type) => type.GetProperties().Where(p => p.HasAttribute<QueryableAttribute>());
 ```
 
-### Parameters
-Name | Description
---- | ---
-type | 
 
 
 
@@ -52,11 +43,6 @@ This method gets the name of the service that the resource belongs to
 ```
 public static string GetServiceName(Type type) => type.Assembly.GetName().Name.Split('.').FirstOrDefault();
 ```
-
-### Parameters
-Name | Description
---- | ---
-type | 
 
 
 

@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using System.Linq;
 using Microsoft.Extensions.Logging;
 using ServiceBlock.Interface.Resource;
-using ServiceBlock.Interface;
 using ServiceBlock.Interface.Storage;
 using Newtonsoft.Json;
 using System.Text.RegularExpressions;
@@ -16,8 +15,8 @@ using ServiceBlock.Storage.Options;
 namespace ServiceBlock.Storage
 {
     // Summary: ServiceBlock storage backed by mongo db.
-    //   Parameters:
-    //     T: The resource type
+    // Parameters:
+    //   T: The resource type
     public class MongoDbStorage<T> : Storage<T> where T : AbstractResource
     {
         private readonly IMongoCollection<T> resources;

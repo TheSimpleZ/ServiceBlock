@@ -2,13 +2,18 @@ ResourceEventListener
 ======
 > Namespace: ServiceBlock.Storage
 
-Summary: Abstract class meant to be extended when creating resource event listeners.
-  Parameters:
-    T: The resource to listen to
+Abstract class meant to be extended when creating resource event listeners.
 
 ```
 public abstract class ResourceEventListener<T> where T : AbstractResource
 ```
+
+### Parameters
+
+Name | Description
+--- | ---
+T | The resource to listen to
+
 
 ## Constructors
 
@@ -20,16 +25,6 @@ ResourceEventListener(ILogger<ResourceEventListener<T>>, Storage<T>)
 public ResourceEventListener(ILogger<ResourceEventListener<T>> logger, Storage<T> storage)
 ```
 
-### Parameters
-Name | Description
---- | ---
-logger | 
-storage | 
-
-
-
-
-
 
 
 
@@ -37,55 +32,51 @@ storage |
 
 OnCreate(T)
 ------
-Summary: This method will be fired whenever a resource of type T is created
-  Parameters:
-    resource: The resource that was created
+This method will be fired whenever a resource of type T is created
 
 ```
 public virtual void OnCreate(T resource) => throw new NotImplementedException();
 ```
 
 ### Parameters
+
 Name | Description
 --- | ---
-resource | 
+resource | The resource that was created
 
 
 
 
 OnUpdate(T)
 ------
-Summary: This method will be fired whenever a resource of type T is updated
-  Parameters:
-    resource: The resource that was updated
+This method will be fired whenever a resource of type T is updated
 
 ```
 public virtual void OnUpdate(T resource) => throw new NotImplementedException();
 ```
 
 ### Parameters
+
 Name | Description
 --- | ---
-resource | 
+resource | The resource that was updated
 
 
 
 
 OnDelete(T)
 ------
-Summary: This method will be fired whenever a resource of type T is deleted
-  Parameters:
-    resource: The resource that was deleted
+This method will be fired whenever a resource of type T is deleted
 
 ```
 public virtual void OnDelete(T resource) => throw new NotImplementedException();
 ```
 
 ### Parameters
+
 Name | Description
 --- | ---
-resource | 
-
+resource | The resource that was deleted
 
 
 

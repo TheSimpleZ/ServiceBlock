@@ -9,15 +9,3 @@ This attribute makes the property of a resource queryable through url query para
 public sealed class QueryableAttribute : System.Attribute
 ```
 
-
-
-
-
-
-
-
-
-
-
-
-

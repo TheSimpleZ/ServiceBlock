@@ -8,10 +8,6 @@ This class provides methods to easily access a Blocks properties.
 public static class BlockInfo
 ```
 
-
-
-
-
 ## Properties
 
 Name
@@ -55,10 +51,5 @@ Directory.EnumerateFiles(AppDomain.CurrentDomain.BaseDirectory, "*.dll", SearchO
 .Where(f => isServiceBlockAssembly(Path.GetFileNameWithoutExtension(f)))
 .SelectMany(dll =>
 ```
-
-
-
-
-
 
 
