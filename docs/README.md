@@ -64,6 +64,10 @@ class EmployeeController : ControllerBase
 }
 ```
 
+{% hint style="info" %}
+The above code does not implement any security features, validation or error handling.
+{% endhint %}
+
 Then there is at least equal amounts of code going into implementing the storage, security, documentation and all other things.
 However, most of these aspects can be generically programmed, allowing the developer to simply fill in the blanks as needed.
 
@@ -75,11 +79,11 @@ public class Employee : AbstractResource
 { }
 ```
 
-Once the resource have been defined, the ServiceBlock framework will generate a CRUD API at `http://localhost/Invoice` with a swagger page at `http://localhost/swagger`. The resource will be stored in memory as defined by the storage attribute.
+Once the resource have been defined, the ServiceBlock framework will generate a CRUD API at `http://localhost/Invoice` with a swagger page at `http://localhost/swagger`. The resource will be stored in memory as defined by the storage attribute. Validation and error handling has default behaviors in place.
 
 The same goes for most things not tied to business logic. For example, by standardizing the implementation of storages, people can simply define the storage place for a resource using an attribute.
 
-To see all of the features please read through the guides in [the documentation](https://mote93.gitbook.io/serviceblock/)
+To see all of the features please read through [the guides](./guides).
 
 ## How?
 
