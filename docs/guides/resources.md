@@ -1,6 +1,6 @@
 # Resources
 
-Resources are a core part of every ServiceBlock. They are represented by a class inheriting from the `AbstractResource` class. Here's an example of an Invoice resource with Memory [storage](storage.md):
+Resources are a core part of every ServiceBlock. They are represented by a class inheriting from the `AbstractResource` class. Here's an example of an Invoice resource with Memory [storage](./storage.md):
 
 ```csharp
 [Storage(typeof(MemoryStorage<>))]
@@ -12,11 +12,11 @@ public class Invoice : AbstractResource
 
 Whenever a resource is defined the ServiceBlock framework will create 5 endpoints.
 
-* GET /Invoice
-* GET /Invoice/{Id}
-* POST /Invoice
-* PUT /Invoice/{Id}
-* DELETE /Invoice/{Id}
+-   GET /Invoice
+-   GET /Invoice/{Id}
+-   POST /Invoice
+-   PUT /Invoice/{Id}
+-   DELETE /Invoice/{Id}
 
 Where {Id} is a guid.
 
@@ -26,7 +26,9 @@ The GET endpoints will retrieve the resource from storage. The POST endpoint wil
 
 Sometimes you might want to have a property which can be read, but not modified through the API, for example the date a resource was created. To achieve this, you can use the `ReadOnlyAttribute` from `System.ComponentModel`. When you use the `ReadOnlyAttribute` you must also define a default value for when a resource is created. Below is an example of adding created-date to our Invoice resource.
 
-**Note:** You may also apply the ReadOnly attribute to the resource itself, which will disable all write actions.
+{% hint style="info" %}
+You may also apply the ReadOnly attribute to the resource itself, which will disable all write actions.
+{% endhint %}
 
 ```csharp
 [Storage(typeof(MemoryStorage<>))]
@@ -60,4 +62,3 @@ public class Invoice : AbstractResource
 ```
 
 Will enable you to use `GET /Invoice?InvoiceNumber=asd` to search for all invoices with `asd` as the invoice number.
-
