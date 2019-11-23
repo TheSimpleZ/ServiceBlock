@@ -14,7 +14,7 @@ ResourceEventArgs(ResourceEventType, dynamic)
 ------
 
 
-```
+```csharp
 public ResourceEventArgs(ResourceEventType type, dynamic resource)
 ```
 
@@ -23,20 +23,20 @@ public ResourceEventArgs(ResourceEventType type, dynamic resource)
 
 ## Properties
 
-###Resource
+### Resource
 
 
 
-```
+```csharp
 public dynamic? Resource
 ```
 
 
-###EventType
+### EventType
 
 
 
-```
+```csharp
 public ResourceEventType EventType
 ```
 

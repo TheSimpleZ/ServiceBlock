@@ -10,11 +10,11 @@ public class MessagingServiceRegistrator : IServiceConfiguration
 
 ## Methods
 
-###Registrations(IServiceCollection, IConfiguration)
+### Registrations(IServiceCollection, IConfiguration)
 
 
 
-```
+```csharp
 public void Registrations(IServiceCollection services, IConfiguration config)
 ```
 
@@ -22,11 +22,11 @@ public void Registrations(IServiceCollection services, IConfiguration config)
 
 
 
-###WarmUp(IServiceProvider)
+### WarmUp(IServiceProvider)
 
 
 
-```
+```csharp
 public void WarmUp(IServiceProvider services)
 ```
 

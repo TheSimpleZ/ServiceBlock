@@ -21,7 +21,7 @@ ResourceEventListener(ILogger<ResourceEventListener<T>>, Storage<T>)
 ------
 
 
-```
+```csharp
 public ResourceEventListener(ILogger<ResourceEventListener<T>> logger, Storage<T> storage)
 ```
 
@@ -30,11 +30,11 @@ public ResourceEventListener(ILogger<ResourceEventListener<T>> logger, Storage<T
 
 ## Methods
 
-###OnCreate(T)
+### OnCreate(T)
 
 This method will be fired whenever a resource of type T is created
 
-```
+```csharp
 public virtual void OnCreate(T resource) => throw new NotImplementedException();
 ```
 
@@ -47,11 +47,11 @@ resource | The resource that was created
 
 
 
-###OnUpdate(T)
+### OnUpdate(T)
 
 This method will be fired whenever a resource of type T is updated
 
-```
+```csharp
 public virtual void OnUpdate(T resource) => throw new NotImplementedException();
 ```
 
@@ -64,11 +64,11 @@ resource | The resource that was updated
 
 
 
-###OnDelete(T)
+### OnDelete(T)
 
 This method will be fired whenever a resource of type T is deleted
 
-```
+```csharp
 public virtual void OnDelete(T resource) => throw new NotImplementedException();
 ```
 

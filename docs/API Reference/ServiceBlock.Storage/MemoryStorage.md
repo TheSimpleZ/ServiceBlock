@@ -17,12 +17,12 @@ T | The resource type
 
 ## Constructors
 
-MemoryStorage(ILogger<MemoryStorage<T>>, ResourceTransformer<T>?)
+MemoryStorage(ILogger<MemoryStorage<T>>)
 ------
 
 
-```
-public MemoryStorage(ILogger<MemoryStorage<T>> logger, ResourceTransformer<T>? transformer = null) : base(logger, transformer)
+```csharp
+public MemoryStorage(ILogger<MemoryStorage<T>> logger) : base(logger)
 ```
 
 
@@ -30,11 +30,11 @@ public MemoryStorage(ILogger<MemoryStorage<T>> logger, ResourceTransformer<T>? t
 
 ## Methods
 
-###ReadItems(Dictionary<string, string>)
+### ReadItems(Dictionary<string, string>)
 
 
 
-```
+```csharp
 protected override Task<IEnumerable<T>> ReadItems(Dictionary<string, string> searchParams)
 ```
 
@@ -42,11 +42,11 @@ protected override Task<IEnumerable<T>> ReadItems(Dictionary<string, string> sea
 
 
 
-###ReadItem(Guid)
+### ReadItem(Guid)
 
 
 
-```
+```csharp
 protected override Task<T> ReadItem(Guid Id)
 ```
 
@@ -54,11 +54,11 @@ protected override Task<T> ReadItem(Guid Id)
 
 
 
-###CreateItem(T)
+### CreateItem(T)
 
 
 
-```
+```csharp
 protected override Task<T> CreateItem(T resource)
 ```
 
@@ -66,11 +66,11 @@ protected override Task<T> CreateItem(T resource)
 
 
 
-###DeleteItem(Guid)
+### DeleteItem(Guid)
 
 
 
-```
+```csharp
 protected override Task DeleteItem(Guid Id)
 ```
 
@@ -78,11 +78,11 @@ protected override Task DeleteItem(Guid Id)
 
 
 
-###UpdateItem(T)
+### UpdateItem(T)
 
 
 
-```
+```csharp
 protected override Task<T> UpdateItem(T resource)
 ```
 

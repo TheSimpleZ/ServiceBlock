@@ -17,12 +17,12 @@ T | The resource type
 
 ## Constructors
 
-MongoDbStorage(ILogger<MemoryStorage<T>>, IConfiguration, IOptionsMonitor<MongoDb>, ResourceTransformer<T>?)
+MongoDbStorage(ILogger<MemoryStorage<T>>, IConfiguration, IOptionsMonitor<MongoDb>)
 ------
 
 
-```
-public MongoDbStorage(ILogger<MemoryStorage<T>> logger, IConfiguration config, IOptionsMonitor<MongoDb> options, ResourceTransformer<T>? transformer = null) : base(logger, transformer)
+```csharp
+public MongoDbStorage(ILogger<MemoryStorage<T>> logger, IConfiguration config, IOptionsMonitor<MongoDb> options) : base(logger)
 ```
 
 
@@ -30,11 +30,11 @@ public MongoDbStorage(ILogger<MemoryStorage<T>> logger, IConfiguration config, I
 
 ## Methods
 
-###ReadItems(Dictionary<string, string>)
+### ReadItems(Dictionary<string, string>)
 
 
 
-```
+```csharp
 protected override async Task<IEnumerable<T>> ReadItems(Dictionary<string, string> searchParams)
 ```
 
@@ -42,11 +42,11 @@ protected override async Task<IEnumerable<T>> ReadItems(Dictionary<string, strin
 
 
 
-###ReadItem(Guid)
+### ReadItem(Guid)
 
 
 
-```
+```csharp
 protected override async Task<T> ReadItem(Guid Id)
 ```
 
@@ -54,11 +54,11 @@ protected override async Task<T> ReadItem(Guid Id)
 
 
 
-###CreateItem(T)
+### CreateItem(T)
 
 
 
-```
+```csharp
 protected override async Task<T> CreateItem(T resource)
 ```
 
@@ -66,11 +66,11 @@ protected override async Task<T> CreateItem(T resource)
 
 
 
-###DeleteItem(Guid)
+### DeleteItem(Guid)
 
 
 
-```
+```csharp
 protected override async Task DeleteItem(Guid Id) => await resources.DeleteOneAsync(r => r.Id == Id);
 ```
 
@@ -78,11 +78,11 @@ protected override async Task DeleteItem(Guid Id) => await resources.DeleteOneAs
 
 
 
-###UpdateItem(T)
+### UpdateItem(T)
 
 
 
-```
+```csharp
 protected override async Task<T> UpdateItem(T resource)
 ```
 

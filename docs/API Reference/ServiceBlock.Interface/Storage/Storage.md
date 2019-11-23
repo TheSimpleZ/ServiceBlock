@@ -11,12 +11,12 @@ public abstract class Storage<T> where T : AbstractResource
 
 ## Constructors
 
-Storage(ILogger<Storage<T>>, ResourceTransformer<T>?)
+Storage(ILogger<Storage<T>>)
 ------
 
 
-```
-protected Storage(ILogger<Storage<T>> logger, ResourceTransformer<T>? transformer = null)
+```csharp
+protected Storage(ILogger<Storage<T>> logger)
 ```
 
 
@@ -24,11 +24,11 @@ protected Storage(ILogger<Storage<T>> logger, ResourceTransformer<T>? transforme
 
 ## Methods
 
-###Read(Dictionary<string, string>)
+### Read(Dictionary<string, string>)
 
 
 
-```
+```csharp
 public async Task<IEnumerable<T>> Read(Dictionary<string, string> searchParams)
 ```
 
@@ -36,11 +36,11 @@ public async Task<IEnumerable<T>> Read(Dictionary<string, string> searchParams)
 
 
 
-###Read(Guid)
+### Read(Guid)
 
 
 
-```
+```csharp
 public async Task<T> Read(Guid Id)
 ```
 
@@ -48,11 +48,11 @@ public async Task<T> Read(Guid Id)
 
 
 
-###Create(T)
+### Create(T)
 
 
 
-```
+```csharp
 public async Task<T> Create(T resource)
 ```
 
@@ -60,11 +60,11 @@ public async Task<T> Create(T resource)
 
 
 
-###Update(T)
+### Update(T)
 
 
 
-```
+```csharp
 public async Task<T> Update(T resource)
 ```
 
@@ -72,11 +72,11 @@ public async Task<T> Update(T resource)
 
 
 
-###Delete(Guid)
+### Delete(Guid)
 
 
 
-```
+```csharp
 public async Task Delete(Guid Id)
 ```
 
@@ -84,11 +84,11 @@ public async Task Delete(Guid Id)
 
 
 
-###ReadItems(Dictionary<string, string>)
+### ReadItems(Dictionary<string, string>)
 
 Get all items from database filtered by searchParams
 
-```
+```csharp
 protected abstract Task<IEnumerable<T>> ReadItems(Dictionary<string, string> searchParams);
 ```
 
@@ -101,11 +101,11 @@ searchParams | A dictionary mapping property name to expected value as a string
 **Returns:** All items of type T from the database
 
 
-###ReadItem(Guid)
+### ReadItem(Guid)
 
 Get item from database by Id
 
-```
+```csharp
 protected abstract Task<T> ReadItem(Guid Id);
 ```
 
@@ -118,11 +118,11 @@ Id | The Id of the resource
 **Returns:** The requested resource
 
 
-###CreateItem(T)
+### CreateItem(T)
 
 Create resource
 
-```
+```csharp
 protected abstract Task<T> CreateItem(T resource);
 ```
 
@@ -135,11 +135,11 @@ resource | Resource to be created
 **Returns:** The created resource
 
 
-###UpdateItem(T)
+### UpdateItem(T)
 
 Update resource
 
-```
+```csharp
 protected abstract Task<T> UpdateItem(T resource);
 ```
 
@@ -152,11 +152,11 @@ resource | New version of a resource
 **Returns:** The updated resource
 
 
-###DeleteItem(Guid)
+### DeleteItem(Guid)
 
 Delete resource
 
-```
+```csharp
 protected abstract Task DeleteItem(Guid Id);
 ```
 

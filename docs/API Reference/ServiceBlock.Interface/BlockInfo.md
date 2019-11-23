@@ -10,29 +10,29 @@ public static class BlockInfo
 
 ## Properties
 
-###Name
+### Name
 
 Name of the current service
 
-```
+```csharp
 public static string? Name => Assembly.GetEntryAssembly()?.GetName().Name;
 ```
 
 
-###ResourceTypes
+### ResourceTypes
 
 All resources defined in the current service and the ServiceBlock Framework
 
-```
+```csharp
 public static IEnumerable<Type> ResourceTypes => BlockTypes.Where(x => typeof(AbstractResource).IsAssignableFrom(x) && x.IsClass && !x.IsAbstract);
 ```
 
 
-###ServiceConfigurators
+### ServiceConfigurators
 
 
 
-```
+```csharp
 public static IEnumerable<IServiceConfiguration> ServiceConfigurators =>
 BlockTypes
 .Where(t => t.IsClass && typeof(IServiceConfiguration).IsAssignableFrom(t))
@@ -41,11 +41,11 @@ BlockTypes
 ```
 
 
-###BlockTypes
+### BlockTypes
 
 
 
-```
+```csharp
 public static IEnumerable<Type> BlockTypes =>
 Directory.EnumerateFiles(AppDomain.CurrentDomain.BaseDirectory, "*.dll", SearchOption.AllDirectories)
 .Where(f => isServiceBlockAssembly(Path.GetFileNameWithoutExtension(f)))
