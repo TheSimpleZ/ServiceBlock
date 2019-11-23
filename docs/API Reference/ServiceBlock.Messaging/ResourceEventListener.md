@@ -34,8 +34,8 @@ public ResourceEventListener(ILogger<ResourceEventListener<T>> logger, Storage<T
 
 ## Methods
 
-OnCreate(T)
-------
+###OnCreate(T)
+
 
 
 ```
@@ -46,8 +46,8 @@ public virtual void OnCreate(T resource) => throw new NotImplementedException();
 
 
 
-OnUpdate(T)
-------
+###OnUpdate(T)
+
 
 
 ```
@@ -58,8 +58,8 @@ public virtual void OnUpdate(T resource) => throw new NotImplementedException();
 
 
 
-OnDelete(T)
-------
+###OnDelete(T)
+
 
 
 ```

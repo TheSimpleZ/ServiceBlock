@@ -10,8 +10,8 @@ public static class Block
 
 ## Properties
 
-Controllers
-------
+###Controllers
+
 
 
 ```
@@ -21,8 +21,8 @@ public static IEnumerable<TypeInfo> Controllers => GetResourceController(readOnl
 
 ## Methods
 
-Run(string[], Logger?)
-------
+###Run(string[], Logger?)
+
 
 
 ```

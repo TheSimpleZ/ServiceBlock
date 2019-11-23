@@ -30,8 +30,8 @@ public MemoryStorage(ILogger<MemoryStorage<T>> logger, ResourceTransformer<T>? t
 
 ## Methods
 
-ReadItems(Dictionary<string, string>)
-------
+###ReadItems(Dictionary<string, string>)
+
 
 
 ```
@@ -42,8 +42,8 @@ protected override Task<IEnumerable<T>> ReadItems(Dictionary<string, string> sea
 
 
 
-ReadItem(Guid)
-------
+###ReadItem(Guid)
+
 
 
 ```
@@ -54,8 +54,8 @@ protected override Task<T> ReadItem(Guid Id)
 
 
 
-CreateItem(T)
-------
+###CreateItem(T)
+
 
 
 ```
@@ -66,8 +66,8 @@ protected override Task<T> CreateItem(T resource)
 
 
 
-DeleteItem(Guid)
-------
+###DeleteItem(Guid)
+
 
 
 ```
@@ -78,8 +78,8 @@ protected override Task DeleteItem(Guid Id)
 
 
 
-UpdateItem(T)
-------
+###UpdateItem(T)
+
 
 
 ```

@@ -10,8 +10,8 @@ public static class BlockInfo
 
 ## Properties
 
-Name
-------
+###Name
+
 Name of the current service
 
 ```
@@ -19,8 +19,8 @@ public static string? Name => Assembly.GetEntryAssembly()?.GetName().Name;
 ```
 
 
-ResourceTypes
-------
+###ResourceTypes
+
 All resources defined in the current service and the ServiceBlock Framework
 
 ```
@@ -28,8 +28,8 @@ public static IEnumerable<Type> ResourceTypes => BlockTypes.Where(x => typeof(Ab
 ```
 
 
-ServiceConfigurators
-------
+###ServiceConfigurators
+
 
 
 ```
@@ -41,8 +41,8 @@ BlockTypes
 ```
 
 
-BlockTypes
-------
+###BlockTypes
+
 
 
 ```

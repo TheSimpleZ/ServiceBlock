@@ -29,8 +29,8 @@ storageType | The type of storage that should be used
 
 ## Properties
 
-StorageType
-------
+###StorageType
+
 
 
 ```

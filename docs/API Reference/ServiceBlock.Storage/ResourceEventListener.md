@@ -30,8 +30,8 @@ public ResourceEventListener(ILogger<ResourceEventListener<T>> logger, Storage<T
 
 ## Methods
 
-OnCreate(T)
-------
+###OnCreate(T)
+
 This method will be fired whenever a resource of type T is created
 
 ```
@@ -47,8 +47,8 @@ resource | The resource that was created
 
 
 
-OnUpdate(T)
-------
+###OnUpdate(T)
+
 This method will be fired whenever a resource of type T is updated
 
 ```
@@ -64,8 +64,8 @@ resource | The resource that was updated
 
 
 
-OnDelete(T)
-------
+###OnDelete(T)
+
 This method will be fired whenever a resource of type T is deleted
 
 ```

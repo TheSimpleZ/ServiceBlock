@@ -30,8 +30,8 @@ public MongoDbStorage(ILogger<MemoryStorage<T>> logger, IConfiguration config, I
 
 ## Methods
 
-ReadItems(Dictionary<string, string>)
-------
+###ReadItems(Dictionary<string, string>)
+
 
 
 ```
@@ -42,8 +42,8 @@ protected override async Task<IEnumerable<T>> ReadItems(Dictionary<string, strin
 
 
 
-ReadItem(Guid)
-------
+###ReadItem(Guid)
+
 
 
 ```
@@ -54,8 +54,8 @@ protected override async Task<T> ReadItem(Guid Id)
 
 
 
-CreateItem(T)
-------
+###CreateItem(T)
+
 
 
 ```
@@ -66,8 +66,8 @@ protected override async Task<T> CreateItem(T resource)
 
 
 
-DeleteItem(Guid)
-------
+###DeleteItem(Guid)
+
 
 
 ```
@@ -78,8 +78,8 @@ protected override async Task DeleteItem(Guid Id) => await resources.DeleteOneAs
 
 
 
-UpdateItem(T)
-------
+###UpdateItem(T)
+
 
 
 ```

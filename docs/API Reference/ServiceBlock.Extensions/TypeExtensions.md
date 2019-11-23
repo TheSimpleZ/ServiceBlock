@@ -10,8 +10,8 @@ public static class TypeExtensions
 
 ## Methods
 
-HasOverriddenMethod(Type, string)
-------
+###HasOverriddenMethod(Type, string)
+
 
 
 ```
@@ -22,8 +22,8 @@ public static bool HasOverriddenMethod(this Type t, string methodName)
 
 
 
-GetAttributeValue(Type, Func<TAttribute, TValue>)
-------
+###GetAttributeValue(Type, Func<TAttribute, TValue>)
+
 
 
 ```
@@ -34,8 +34,8 @@ public static TValue? GetAttributeValue<TAttribute, TValue>(this Type type, Func
 
 
 
-PrettyName(Type)
-------
+###PrettyName(Type)
+
 
 
 ```
@@ -46,8 +46,8 @@ public static string PrettyName(this Type type)
 
 
 
-HasAttribute(Type)
-------
+###HasAttribute(Type)
+
 
 
 ```
@@ -58,8 +58,8 @@ public static bool HasAttribute<T>(this Type type) where T : Attribute
 
 
 
-HasAttribute(PropertyInfo)
-------
+###HasAttribute(PropertyInfo)
+
 
 
 ```
@@ -70,8 +70,8 @@ public static bool HasAttribute<T>(this PropertyInfo type) where T : Attribute
 
 
 
-GetJsonType(PropertyInfo)
-------
+###GetJsonType(PropertyInfo)
+
 
 
 ```
@@ -82,8 +82,8 @@ public static string GetJsonType(this PropertyInfo pi) => new JSchemaGenerator()
 
 
 
-IsSubclassOfRawGeneric(Type, Type)
-------
+###IsSubclassOfRawGeneric(Type, Type)
+
 
 
 ```

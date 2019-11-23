@@ -23,8 +23,8 @@ public ResourceEventArgs(ResourceEventType type, dynamic resource)
 
 ## Properties
 
-Resource
-------
+###Resource
+
 
 
 ```
@@ -32,8 +32,8 @@ public dynamic? Resource
 ```
 
 
-EventType
-------
+###EventType
+
 
 
 ```

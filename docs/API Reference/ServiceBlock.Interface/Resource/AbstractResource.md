@@ -11,8 +11,8 @@ public abstract class AbstractResource
 
 ## Properties
 
-Id
-------
+###Id
+
 This parameter is used to identify the resource in the API
 If overridden, you must ensure uniqueness
 
@@ -24,8 +24,8 @@ public virtual Guid Id
 
 ## Methods
 
-GetQueryableProperties(Type)
-------
+###GetQueryableProperties(Type)
+
 Retrives a list of all properties with the QueryableAttribute
 
 ```
@@ -36,8 +36,8 @@ public static IEnumerable<PropertyInfo> GetQueryableProperties(Type type) => typ
 
 
 
-GetServiceName(Type)
-------
+###GetServiceName(Type)
+
 This method gets the name of the service that the resource belongs to
 
 ```

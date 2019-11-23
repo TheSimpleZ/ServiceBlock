@@ -17,8 +17,8 @@ T | The type of resource to transform
 
 ## Methods
 
-OnRead(T)
-------
+###OnRead(T)
+
 This method will be fired after the resource has been retrieved from storage, but before it's returned to the client.
 
 ```
@@ -34,8 +34,8 @@ resource | The resource that was retrieved from storage
 **Returns:** The item to be returned to the client.
 
 
-OnCreate(T)
-------
+###OnCreate(T)
+
 This method will be fired after the resource has been received from the API, but before it's written to the storage.
 
 ```
@@ -51,8 +51,8 @@ resource | The resource that was received from the API
 **Returns:** The item to be written to storage.
 
 
-OnUpdate(T)
-------
+###OnUpdate(T)
+
 This method will be fired after the resource has been received from the API, but before it's written to the storage.
 
 ```

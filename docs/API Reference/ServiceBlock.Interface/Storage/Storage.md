@@ -24,8 +24,8 @@ protected Storage(ILogger<Storage<T>> logger, ResourceTransformer<T>? transforme
 
 ## Methods
 
-Read(Dictionary<string, string>)
-------
+###Read(Dictionary<string, string>)
+
 
 
 ```
@@ -36,8 +36,8 @@ public async Task<IEnumerable<T>> Read(Dictionary<string, string> searchParams)
 
 
 
-Read(Guid)
-------
+###Read(Guid)
+
 
 
 ```
@@ -48,8 +48,8 @@ public async Task<T> Read(Guid Id)
 
 
 
-Create(T)
-------
+###Create(T)
+
 
 
 ```
@@ -60,8 +60,8 @@ public async Task<T> Create(T resource)
 
 
 
-Update(T)
-------
+###Update(T)
+
 
 
 ```
@@ -72,8 +72,8 @@ public async Task<T> Update(T resource)
 
 
 
-Delete(Guid)
-------
+###Delete(Guid)
+
 
 
 ```
@@ -84,8 +84,8 @@ public async Task Delete(Guid Id)
 
 
 
-ReadItems(Dictionary<string, string>)
-------
+###ReadItems(Dictionary<string, string>)
+
 Get all items from database filtered by searchParams
 
 ```
@@ -101,8 +101,8 @@ searchParams | A dictionary mapping property name to expected value as a string
 **Returns:** All items of type T from the database
 
 
-ReadItem(Guid)
-------
+###ReadItem(Guid)
+
 Get item from database by Id
 
 ```
@@ -118,8 +118,8 @@ Id | The Id of the resource
 **Returns:** The requested resource
 
 
-CreateItem(T)
-------
+###CreateItem(T)
+
 Create resource
 
 ```
@@ -135,8 +135,8 @@ resource | Resource to be created
 **Returns:** The created resource
 
 
-UpdateItem(T)
-------
+###UpdateItem(T)
+
 Update resource
 
 ```
@@ -152,8 +152,8 @@ resource | New version of a resource
 **Returns:** The updated resource
 
 
-DeleteItem(Guid)
-------
+###DeleteItem(Guid)
+
 Delete resource
 
 ```

@@ -23,8 +23,8 @@ protected EventClient(ILogger<EventClient> logger)
 
 ## Methods
 
-Publish(ResourceEventType, T)
-------
+###Publish(ResourceEventType, T)
+
 
 
 ```
@@ -35,8 +35,8 @@ public abstract void Publish<T>(ResourceEventType type, T payload);
 
 
 
-OnMessageReceived(ResourceEventArgs)
-------
+###OnMessageReceived(ResourceEventArgs)
+
 
 
 ```

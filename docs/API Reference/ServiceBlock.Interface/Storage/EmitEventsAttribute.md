@@ -29,8 +29,8 @@ eventTypes | The types of events that should be emitted
 
 ## Properties
 
-EventTypes
-------
+###EventTypes
+
 
 
 ```
