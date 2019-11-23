@@ -14,22 +14,19 @@ namespace ServiceBlock.Interface.Storage
     public abstract class Storage<T> where T : AbstractResource
     {
         private readonly ILogger<Storage<T>> _logger;
-        private readonly ResourceTransformer<T>? _transformer;
 
         public event EventHandler<T>? OnCreate;
         public event EventHandler<T>? OnUpdate;
         public event EventHandler<T>? OnDelete;
 
-        protected Storage(ILogger<Storage<T>> logger, ResourceTransformer<T>? transformer = null)
+        protected Storage(ILogger<Storage<T>> logger)
         {
             this._logger = logger;
-            this._transformer = transformer;
 
             logger.LogDebug("{StorageType} initialized", GetType().PrettyName());
 
         }
 
-        private bool IsValidTransform(string name) => _transformer != null && _transformer.GetType().HasOverriddenMethod(name);
         private bool ResourceHasEvent(ResourceEventType et) => typeof(T).GetAttributeValue((EmitEventsAttribute a) => a.EventTypes)?.Contains(et) == true;
 
 
@@ -37,24 +34,20 @@ namespace ServiceBlock.Interface.Storage
         {
             var resources = await ReadItems(searchParams);
 
-
-            return IsValidTransform(nameof(_transformer.OnRead))
-                    ? await Task.WhenAll(resources.Select(r => _transformer!.OnRead(r)))
-                    : resources;
+            await Task.WhenAll(resources.Select(r => r.OnRead()));
+            return resources;
         }
         public async Task<T> Read(Guid Id)
         {
             var resource = await ReadItem(Id);
 
-            return IsValidTransform(nameof(_transformer.OnRead))
-                    ? (await _transformer!.OnRead(resource))
-                    : resource;
+            await resource.OnRead();
+            return resource;
         }
 
         public async Task<T> Create(T resource)
         {
-            if (IsValidTransform(nameof(_transformer.OnCreate)))
-                resource = await _transformer!.OnCreate(resource);
+            await resource.OnCreate();
 
             var created = await CreateItem(resource);
 
@@ -65,8 +58,7 @@ namespace ServiceBlock.Interface.Storage
         }
         public async Task<T> Update(T resource)
         {
-            if (IsValidTransform(nameof(_transformer.OnUpdate)))
-                resource = await _transformer!.OnUpdate(resource);
+            await resource.OnUpdate();
             var oldResource = await Read(resource.Id);
 
             var updated = await UpdateItem(resource);

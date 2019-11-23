@@ -11,16 +11,6 @@ namespace ServiceBlock.Internal
 {
     static class ServiceCollectionExtensions
     {
-        public static void AddResourceTransformers(this IServiceCollection services)
-        {
-            services.Scan(scan =>
-                scan.FromEntryAssembly()
-                    .AddClasses(classes => classes.AssignableTo(typeof(ResourceTransformer<>)))
-                    .As(classes => new[] { classes.BaseType })
-                    .WithSingletonLifetime()
-            );
-        }
-
         public static void RunServiceRegistrators(this IServiceCollection services, IConfiguration config)
         {
             RunServiceConfiguratons(sc => sc.Registrations(services, config));

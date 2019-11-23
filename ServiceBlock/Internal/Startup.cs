@@ -48,7 +48,6 @@ namespace ServiceBlock.Internal
             ));
 
             services.AddHealthChecks();
-            services.AddResourceTransformers();
             services.AddStorageServices();
             services.RunServiceRegistrators(Configuration);
 

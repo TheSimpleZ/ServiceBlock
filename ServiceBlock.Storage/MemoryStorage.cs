@@ -18,7 +18,7 @@ namespace ServiceBlock.Storage
         private Dictionary<Guid, T> storage = new Dictionary<Guid, T>();
         private readonly ILogger<MemoryStorage<T>> _logger;
 
-        public MemoryStorage(ILogger<MemoryStorage<T>> logger, ResourceTransformer<T>? transformer = null) : base(logger, transformer)
+        public MemoryStorage(ILogger<MemoryStorage<T>> logger) : base(logger)
         {
             _logger = logger;
         }

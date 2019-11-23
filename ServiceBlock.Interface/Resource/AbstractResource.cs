@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
+using System.Threading.Tasks;
 using ServiceBlock.Extensions;
 
 namespace ServiceBlock.Interface.Resource
@@ -21,6 +22,15 @@ namespace ServiceBlock.Interface.Resource
 
         // This method gets the name of the service that the resource belongs to
         public static string GetServiceName(Type type) => type.Assembly.GetName().Name.Split('.').FirstOrDefault();
+
+        // This method will be fired after the resource has been retrieved from storage, but before it's returned to the client.
+        public virtual Task OnRead() => Task.CompletedTask;
+
+        // This method will be fired after the resource has been received from the API, but before it's written to the storage.
+        public virtual Task OnCreate() => Task.CompletedTask;
+
+        // This method will be fired after the resource has been received from the API, but before it's written to the storage.
+        public virtual Task OnUpdate() => Task.CompletedTask;
 
     }
 }

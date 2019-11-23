@@ -3,6 +3,8 @@ using ServiceBlock.Interface.Resource;
 using ServiceBlock.Interface.Storage;
 using ServiceBlock.Storage;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+
 namespace WeatherForecast.Interface
 {
     [Storage(typeof(MongoDbStorage<>))]
@@ -15,6 +17,12 @@ namespace WeatherForecast.Interface
 
         [Queryable]
         public Person Sender { get; set; }
+
+        public override Task OnRead()
+        {
+            Name = Name + Name;
+            return base.OnRead();
+        }
     }
 
     public class Person
