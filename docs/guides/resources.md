@@ -62,3 +62,13 @@ public class Invoice : AbstractResource
 ```
 
 Will enable you to use `GET /Invoice?InvoiceNumber=asd` to search for all invoices with `asd` as the invoice number.
+
+## Resource life cycle hooks
+
+There are 3 methods you can use to alter the state of a resource whenever there's interaction.
+
+-   OnRead
+-   OnCreate
+-   OnUpdate
+
+All of them are described in the [API Reference](../api-reference/serviceblock.interface/resource/abstractresource.md)
