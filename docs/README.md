@@ -11,7 +11,6 @@ The purpose of this library is to reduce a lot of the noise that comes with sett
 A typical example of a simple controller for a CRUD API written in ASP.NET Core looks roughly like this:
 
 ```csharp
-
 class Employee
 {
     public Guid Id { get; set; }
