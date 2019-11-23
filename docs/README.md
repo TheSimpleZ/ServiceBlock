@@ -68,8 +68,7 @@ class EmployeeController : ControllerBase
 The above code does not implement any security features, validation or error handling.
 {% endhint %}
 
-Then there is at least equal amounts of code going into implementing the storage, security, documentation and all other things.
-However, most of these aspects can be generically programmed, allowing the developer to simply fill in the blanks as needed.
+Then there is at least equal amounts of code going into implementing the storage, security, documentation and all other things. However, most of these aspects can be generically programmed, allowing the developer to simply fill in the blanks as needed.
 
 By following standards such as REST, OpenAPI and OAuth we can reduce the code needed to get a CRUD API going to:
 
@@ -83,11 +82,11 @@ Once the resource have been defined, the ServiceBlock framework will generate a 
 
 The same goes for most things not tied to business logic. For example, by standardizing the implementation of storages, people can simply define the storage place for a resource using an attribute.
 
-To see all of the features please read through [the guides](./guides).
+To see all of the features please read through [the guides](guides/).
 
 ## How?
 
-We use a technique called assembly scanning to register generic implementations of controllers, storages, messaging clients etc.
-By looking for the classes and attributes you've defined ServiceBlock will know what storage to use for which type of resource.
+We use a technique called assembly scanning to register generic implementations of controllers, storages, messaging clients etc. By looking for the classes and attributes you've defined ServiceBlock will know what storage to use for which type of resource.
 
 [![codecov](https://codecov.io/gh/TheSimpleZ/ServiceBlock/branch/master/graph/badge.svg)](https://codecov.io/gh/TheSimpleZ/ServiceBlock)
+

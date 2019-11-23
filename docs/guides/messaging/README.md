@@ -4,7 +4,7 @@ The messaging package enables you to emit resource events for any resource you h
 
 By default, there's also a RabbitMQ EventClient registered that will publish any events emitted by the store to the configured RabbitMQ client.
 
-Any [ResourceEventListener](./resourceeventlisteners.md) defined for your resource will pick up and handle these events, even if they are in other services.
+Any [ResourceEventListener](resourceeventlisteners.md) defined for your resource will pick up and handle these events, even if they are in other services.
 
 ## Installation
 
@@ -32,3 +32,4 @@ public class Invoice : AbstractResource
     public DateTime CreatedDate { get; set; } = DateTime.UtcNow();
 }
 ```
+

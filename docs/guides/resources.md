@@ -1,6 +1,6 @@
 # Resources
 
-Resources are a core part of every ServiceBlock. They are represented by a class inheriting from the `AbstractResource` class. Here's an example of an Invoice resource with Memory [storage](./storage.md):
+Resources are a core part of every ServiceBlock. They are represented by a class inheriting from the `AbstractResource` class. Here's an example of an Invoice resource with Memory [storage](storage.md):
 
 ```csharp
 [Storage(typeof(MemoryStorage<>))]
@@ -12,11 +12,11 @@ public class Invoice : AbstractResource
 
 Whenever a resource is defined the ServiceBlock framework will create 5 endpoints.
 
--   GET /Invoice
--   GET /Invoice/{Id}
--   POST /Invoice
--   PUT /Invoice/{Id}
--   DELETE /Invoice/{Id}
+* GET /Invoice
+* GET /Invoice/{Id}
+* POST /Invoice
+* PUT /Invoice/{Id}
+* DELETE /Invoice/{Id}
 
 Where {Id} is a guid.
 
@@ -67,8 +67,9 @@ Will enable you to use `GET /Invoice?InvoiceNumber=asd` to search for all invoic
 
 There are 3 methods you can use to alter the state of a resource whenever there's interaction.
 
--   OnRead
--   OnCreate
--   OnUpdate
+* OnRead
+* OnCreate
+* OnUpdate
 
-All of them are described in the [API Reference](/../api-reference/serviceblock.interface/resource/abstractresource)
+All of them are described in the [API Reference](../api-reference/serviceblock.interface/resource/abstractresource.md)
+
