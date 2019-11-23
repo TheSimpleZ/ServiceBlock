@@ -71,4 +71,4 @@ There are 3 methods you can use to alter the state of a resource whenever there'
 -   OnCreate
 -   OnUpdate
 
-All of them are described in the [API Reference](../api-reference/serviceblock.interface/resource/abstractresource.md)
+All of them are described in the [API Reference](./abstractresource)
