@@ -26,14 +26,14 @@ namespace ServiceBlock.Messaging.Clients
             channel = connection.CreateModel();
 
 
-            channel.ExchangeDeclare(BlockInfo.Name, ExchangeType.Fanout);
-            channel.QueueDeclare(BlockInfo.Name, true, false, false);
+            channel.ExchangeDeclare(exchange: BlockInfo.Name, type: ExchangeType.Fanout);
+            channel.QueueDeclare(queue: BlockInfo.Name, durable: true, exclusive: false, autoDelete: false);
 
 
 
             foreach (var service in SubscriptionServiceNames)
             {
-                channel.QueueBind(BlockInfo.Name, service, BlockInfo.Name);
+                channel.QueueBind(queue: BlockInfo.Name, exchange: service, routingKey: BlockInfo.Name);
             }
 
             var consumer = new EventingBasicConsumer(channel);
