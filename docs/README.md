@@ -22,10 +22,9 @@ class Employee
 [Route("[controller]")]
 class EmployeeController : ControllerBase
 {
-    private readonly ILogger<EmployeeController> _logger;
     private readonly Storage<Employee> _storage;
 
-    public EmployeeController(ILogger<EmployeeController> logger, Storage<Employee> storage)
+    public EmployeeController(Storage<Employee> storage)
     {
         _logger = logger;
         _storage = storage;
