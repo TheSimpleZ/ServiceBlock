@@ -4,12 +4,20 @@
 
 # Features
 
--   Easy CRUD set up.
+-   Swagger documentation.
+-   [Automatic CRUD API setup.](./guides/resources.md)
 -   [Easy to configure authentication.](./guides/authentication.md)
--   Integrated Swagger UI with auto-generated OpenAPI specification.
--   Extensible interfaces for different types of messaging protocols, storages, etc.
 -   [Containerized and ready for the cloud.](./deployment.md)
 -   [Subscribable APIs \(internal only for now\)](./guides/messaging/resourceeventlisteners.md)
+
+## [Storages](./guides/storage.md)
+
+-   Internal memory storage
+-   MongoDB storage
+
+## [Messaging queues](./guides/messaging/README.md)
+
+-   RabbitMQ
 
 # Planned features
 

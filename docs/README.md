@@ -6,6 +6,9 @@ The purpose of this library is to reduce a lot of the noise that comes with sett
 
 **Since this library is still in early development APIs might change drastically until v2.0.0**
 
+To get a quick overview of what this framework offers [check out the requirements and features](./Requirements&features.md).
+If you want to get started right away, check out the [Quick start guide](./Quickstart.md).
+
 ## Why?
 
 A typical example of a simple controller for a CRUD API written in ASP.NET Core looks roughly like this:

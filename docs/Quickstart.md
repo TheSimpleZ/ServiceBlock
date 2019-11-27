@@ -4,16 +4,21 @@ The dotnet CLI comes with build in scaffolding tools. We provide a package conta
 
 To install all templates, run:
 
-```text
+```bash
 dotnet new -i ServiceBlock.Templates
 ```
 
 ## Create a ServiceBlock service
 
-```text
+The easiest way to get started is to use the basic serviceblock template.
+Run the following commands to create the necessary files for a simple serviceblock project.
+
+```bash
 mkdir <YOUR_PROJECT_NAME> && cd <YOUR_PROJECT_NAME>
 dotnet new serviceblock
 ```
+
+Now you can start defining [resources](./guides/resources.md) in your Interface project.
 
 ## Migrate existing project
 

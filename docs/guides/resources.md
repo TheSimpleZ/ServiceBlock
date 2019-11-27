@@ -65,7 +65,7 @@ Will enable you to use `GET /Invoice?InvoiceNumber=asd` to search for all invoic
 
 ## Resource life cycle hooks
 
-There are 3 methods you can use to alter the state of a resource whenever there's interaction.
+There are 3 methods you can override to alter the state of a resource whenever there's an interaction.
 
 -   OnRead
 -   OnCreate
