@@ -19,11 +19,13 @@ namespace ServiceBlock.Interface
         public static IEnumerable<Type> ResourceTypes => BlockTypes.Where(x => typeof(AbstractResource).IsAssignableFrom(x) && x.IsClass && !x.IsAbstract);
 
         public static IEnumerable<IServiceConfiguration> ServiceConfigurators =>
-        BlockTypes
-        .Where(t => t.IsClass && typeof(IServiceConfiguration).IsAssignableFrom(t))
-        .Select(Activator.CreateInstance)
-        .Cast<IServiceConfiguration>();
+        GetInstances<IServiceConfiguration>();
 
+        private static IEnumerable<T> GetInstances<T>() =>
+        BlockTypes
+        .Where(t => t.IsClass && typeof(T).IsAssignableFrom(t))
+        .Select(Activator.CreateInstance)
+        .Cast<T>();
 
 
         public static IEnumerable<Type> BlockTypes =>

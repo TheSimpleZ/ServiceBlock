@@ -14,6 +14,11 @@ using System;
 using Microsoft.Extensions.Options;
 using System.Reflection;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.IdentityModel.Protocols.OpenIdConnect;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.AspNetCore.Authentication.OpenIdConnect;
+using System.Threading.Tasks;
 
 namespace ServiceBlock.Internal
 {
@@ -54,16 +59,35 @@ namespace ServiceBlock.Internal
 
 
             if (settings.SecurityEnabled)
+            {
                 services.AddAuthentication(options =>
-                {
-                    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+               {
+                   options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                   options.DefaultChallengeScheme = OpenIdConnectDefaults.AuthenticationScheme;
+               })
+               .AddCookie()
+               .AddOpenIdConnect(options =>
+               {
+                   options.Authority = "https://dev-nlzfjvrr.eu.auth0.com";
+                   options.ClientId = settings?.Security?.ClientId;
+                   options.ClientSecret = settings?.Security?.ClientSecret;
+                   options.ResponseType = OpenIdConnectResponseType.Code;
+                   options.GetClaimsFromUserInfoEndpoint = true;
+                   options.Scope.Add("openid");
+                   options.Scope.Add("profile");
+                   //    options.SaveTokens = true;
 
-                }).AddJwtBearer(options =>
-                {
-                    options.Authority = settings?.Security?.Domain;
-                    options.Audience = settings?.Security?.ApiIdentifier;
-                });
+                   options.Events = new OpenIdConnectEvents
+                   {
+                       OnRedirectToIdentityProvider = context =>
+                       {
+                           context.ProtocolMessage.SetParameter("audience", settings?.Security?.ApiIdentifier);
+
+                           return Task.FromResult(0);
+                       }
+                   };
+               });
+            }
 
             // Register the Swagger generator, defining 1 or more Swagger documents
             services.AddSwaggerGen(c =>
@@ -93,7 +117,7 @@ namespace ServiceBlock.Internal
                             Implicit = new OpenApiOAuthFlow
                             {
                                 AuthorizationUrl = new Uri($"{settings?.Security?.Domain}authorize", UriKind.Absolute),
-                                Scopes = settings?.Security?.Scopes
+                                Scopes = settings?.Security?.Scopes.ToDictionary(k => k)
                             }
                         },
 
@@ -129,6 +153,7 @@ namespace ServiceBlock.Internal
                 if (settings.SecurityEnabled)
                 {
                     c.OAuthClientId(settings.Security?.ClientId);
+                    c.OAuthClientSecret(settings.Security?.ClientSecret);
                     c.OAuthAppName(apiName);
                     c.OAuthAdditionalQueryStringParams(new Dictionary<string, string> {
                         {"audience", settings.Security?.ApiIdentifier ?? ""}
