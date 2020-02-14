@@ -5,7 +5,6 @@ using ServiceBlock.Interface.Storage;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using ServiceBlock.Interface.Resource;
-using System.Security.Claims;
 
 namespace ServiceBlock.Internal
 {
@@ -29,7 +28,6 @@ namespace ServiceBlock.Internal
         [HttpPost]
         public async Task<ActionResult<T>> Post([FromBody]T resource)
         {
-            var apa = User.FindFirst(ClaimTypes.GivenName)?.Value;
             return await HandleRequest<T>(async () =>
             {
                 var createdResource = await _storage.Create(resource);
