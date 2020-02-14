@@ -4,7 +4,7 @@ This library gives you a declarative approach to defining REST APIs. It's based 
 
 The purpose of this library is to reduce a lot of the noise that comes with setting up a micro-service. Allowing the developer to focus on writing business logic.
 
-{% hint style="warn" %}
+{% hint style="warning" %}
 Since this library is still in early development APIs might change drastically until v2.0.0
 {% endhint %}
 
