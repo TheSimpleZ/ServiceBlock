@@ -8,7 +8,6 @@ The purpose of this library is to reduce a lot of the noise that comes with sett
 Since this library is still in early development APIs might change drastically until v2.0.0
 {% endhint %}
 
-To get a quick overview of what this framework offers [check out the requirements and features](./Requirements&features.md).
 If you want to get started right away, check out the [Quick start guide](./Quickstart.md).
 
 ## Why?
