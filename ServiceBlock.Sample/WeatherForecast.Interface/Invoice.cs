@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace WeatherForecast.Interface
 {
-    [Storage(typeof(MemoryStorage<>))]
+    [Storage(typeof(MongoDbStorage<>))]
     [EmitEvents]
     public class Invoice : AbstractResource
     {

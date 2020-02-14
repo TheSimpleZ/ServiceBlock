@@ -9,16 +9,12 @@ using Microsoft.AspNetCore.Mvc.Controllers;
 using Serilog;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc.Authorization;
-using System.Collections.Generic;
 using System;
 using Microsoft.Extensions.Options;
 using System.Reflection;
 using Microsoft.Extensions.Logging;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using Microsoft.IdentityModel.Tokens;
-using Microsoft.AspNetCore.Authentication.OpenIdConnect;
-using System.Threading.Tasks;
+using System.Security.Claims;
 
 namespace ServiceBlock.Internal
 {
@@ -62,31 +58,18 @@ namespace ServiceBlock.Internal
             {
                 services.AddAuthentication(options =>
                {
-                   options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-                   options.DefaultChallengeScheme = OpenIdConnectDefaults.AuthenticationScheme;
+                   options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                   options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
                })
-               .AddCookie()
-               .AddOpenIdConnect(options =>
-               {
-                   options.Authority = "https://dev-nlzfjvrr.eu.auth0.com";
-                   options.ClientId = settings?.Security?.ClientId;
-                   options.ClientSecret = settings?.Security?.ClientSecret;
-                   options.ResponseType = OpenIdConnectResponseType.Code;
-                   options.GetClaimsFromUserInfoEndpoint = true;
-                   options.Scope.Add("openid");
-                   options.Scope.Add("profile");
-                   //    options.SaveTokens = true;
-
-                   options.Events = new OpenIdConnectEvents
-                   {
-                       OnRedirectToIdentityProvider = context =>
-                       {
-                           context.ProtocolMessage.SetParameter("audience", settings?.Security?.ApiIdentifier);
-
-                           return Task.FromResult(0);
-                       }
-                   };
-               });
+               .AddJwtBearer(options =>
+                {
+                    options.Authority = settings?.Security?.Domain;
+                    options.Audience = settings?.Security?.ApiIdentifier;
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        NameClaimType = ClaimTypes.NameIdentifier
+                    };
+                });
             }
 
             // Register the Swagger generator, defining 1 or more Swagger documents
@@ -103,13 +86,16 @@ namespace ServiceBlock.Internal
                 // Filter out readonly properties from write ops
                 c.SchemaFilter<ReadOnlySchemaFilter>();
 
+                c.OperationFilter<ReDocOperationFilter>();
+
+
                 // If security is enabled
                 if (settings.SecurityEnabled)
                 {
                     c.OperationFilter<SecurityRequirementsOperationFilter>();
                     c.OperationFilter<QueryParametersOperationFilter>();
 
-                    c.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
+                    c.AddSecurityDefinition("OAuth2", new OpenApiSecurityScheme
                     {
                         Type = SecuritySchemeType.OAuth2,
                         Flows = new OpenApiOAuthFlows
@@ -143,22 +129,10 @@ namespace ServiceBlock.Internal
             // Enable middleware to serve generated Swagger as a JSON endpoint.
             app.UseSwagger();
 
-            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.),
-            // specifying the Swagger JSON endpoint.
-            app.UseSwaggerUI(c =>
+            app.UseReDoc(c =>
             {
-                var apiName = Assembly.GetEntryAssembly()?.GetName().Name ?? "ServiceBlock API";
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", apiName);
-                c.RoutePrefix = string.Empty;
-                if (settings.SecurityEnabled)
-                {
-                    c.OAuthClientId(settings.Security?.ClientId);
-                    c.OAuthClientSecret(settings.Security?.ClientSecret);
-                    c.OAuthAppName(apiName);
-                    c.OAuthAdditionalQueryStringParams(new Dictionary<string, string> {
-                        {"audience", settings.Security?.ApiIdentifier ?? ""}
-                    });
-                }
+                c.SpecUrl("/swagger/v1/swagger.json");
+                c.RoutePrefix = "";
             });
 
             app.UseRouting();
