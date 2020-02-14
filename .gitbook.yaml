@@ -1,4 +1,4 @@
 root: ./docs/
 
 structure:
-  readme: ServiceBlock.md
+  readme: ./ServiceBlock.md
