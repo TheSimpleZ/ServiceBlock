@@ -32,7 +32,10 @@ namespace ServiceBlock.Internal
         public void ConfigureServices(IServiceCollection services)
         {
 
+            // Supress default start-up messages
             services.Configure<ConsoleLifetimeOptions>(options => options.SuppressStatusMessages = true);
+
+            // Load ServiceBlock settings
             var section = Configuration.GetSection(nameof(ServiceBlock));
             var settings = section.Get<Options.ServiceBlock>() ?? new Options.ServiceBlock();
             services.Configure<Options.ServiceBlock>(section);
