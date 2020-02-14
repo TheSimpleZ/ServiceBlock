@@ -4,7 +4,7 @@
 
 # Features
 
--   Swagger documentation.
+-   OpenAPI documentation with ReDoc UI.
 -   [Automatic CRUD API setup.](./guides/resources.md)
 -   [Easy to configure authentication.](./guides/authentication.md)
 -   [Containerized and ready for the cloud.](./deployment.md)
