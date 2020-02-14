@@ -8,7 +8,7 @@
     <Authors>Zrean Tofiq</Authors>
     <Description>Templates to use when creating a ServiceBlock application.</Description>
     <PackageTags>dotnet-new;templates;serviceblock</PackageTags>
-    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
 
     <IncludeContentInPack>true</IncludeContentInPack>
     <IncludeBuildOutput>false</IncludeBuildOutput>

@@ -9,11 +9,12 @@ using Microsoft.AspNetCore.Mvc.Controllers;
 using Serilog;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc.Authorization;
-using System.Collections.Generic;
 using System;
 using Microsoft.Extensions.Options;
 using System.Reflection;
 using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Tokens;
+using System.Security.Claims;
 
 namespace ServiceBlock.Internal
 {
@@ -31,7 +32,10 @@ namespace ServiceBlock.Internal
         public void ConfigureServices(IServiceCollection services)
         {
 
+            // Supress default start-up messages
             services.Configure<ConsoleLifetimeOptions>(options => options.SuppressStatusMessages = true);
+
+            // Load ServiceBlock settings
             var section = Configuration.GetSection(nameof(ServiceBlock));
             var settings = section.Get<Options.ServiceBlock>() ?? new Options.ServiceBlock();
             services.Configure<Options.ServiceBlock>(section);
@@ -54,16 +58,22 @@ namespace ServiceBlock.Internal
 
 
             if (settings.SecurityEnabled)
+            {
                 services.AddAuthentication(options =>
-                {
-                    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-
-                }).AddJwtBearer(options =>
+               {
+                   options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                   options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+               })
+               .AddJwtBearer(options =>
                 {
                     options.Authority = settings?.Security?.Domain;
                     options.Audience = settings?.Security?.ApiIdentifier;
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        NameClaimType = ClaimTypes.NameIdentifier
+                    };
                 });
+            }
 
             // Register the Swagger generator, defining 1 or more Swagger documents
             services.AddSwaggerGen(c =>
@@ -79,13 +89,16 @@ namespace ServiceBlock.Internal
                 // Filter out readonly properties from write ops
                 c.SchemaFilter<ReadOnlySchemaFilter>();
 
+                c.OperationFilter<ReDocOperationFilter>();
+
+
                 // If security is enabled
                 if (settings.SecurityEnabled)
                 {
                     c.OperationFilter<SecurityRequirementsOperationFilter>();
                     c.OperationFilter<QueryParametersOperationFilter>();
 
-                    c.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
+                    c.AddSecurityDefinition("OAuth2", new OpenApiSecurityScheme
                     {
                         Type = SecuritySchemeType.OAuth2,
                         Flows = new OpenApiOAuthFlows
@@ -93,7 +106,7 @@ namespace ServiceBlock.Internal
                             Implicit = new OpenApiOAuthFlow
                             {
                                 AuthorizationUrl = new Uri($"{settings?.Security?.Domain}authorize", UriKind.Absolute),
-                                Scopes = settings?.Security?.Scopes
+                                Scopes = settings?.Security?.Scopes.ToDictionary(k => k)
                             }
                         },
 
@@ -119,21 +132,10 @@ namespace ServiceBlock.Internal
             // Enable middleware to serve generated Swagger as a JSON endpoint.
             app.UseSwagger();
 
-            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.),
-            // specifying the Swagger JSON endpoint.
-            app.UseSwaggerUI(c =>
+            app.UseReDoc(c =>
             {
-                var apiName = Assembly.GetEntryAssembly()?.GetName().Name ?? "ServiceBlock API";
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", apiName);
-                c.RoutePrefix = string.Empty;
-                if (settings.SecurityEnabled)
-                {
-                    c.OAuthClientId(settings.Security?.ClientId);
-                    c.OAuthAppName(apiName);
-                    c.OAuthAdditionalQueryStringParams(new Dictionary<string, string> {
-                        {"audience", settings.Security?.ApiIdentifier ?? ""}
-                    });
-                }
+                c.SpecUrl("/swagger/v1/swagger.json");
+                c.RoutePrefix = "";
             });
 
             app.UseRouting();

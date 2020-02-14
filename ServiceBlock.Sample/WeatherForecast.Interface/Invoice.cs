@@ -12,6 +12,7 @@ namespace WeatherForecast.Interface
     public class Invoice : AbstractResource
     {
         public IEnumerable<int> InvoiceNumber { get; set; }
+
         [Queryable]
         public string Name { get; set; }
 

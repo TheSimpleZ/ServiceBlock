@@ -82,7 +82,7 @@ public class Employee : AbstractResource
 { }
 ```
 
-Once the resource have been defined, the ServiceBlock framework will generate a CRUD API at `http://localhost/Invoice` with a swagger page at `http://localhost/swagger`. The resource will be stored in memory as defined by the storage attribute. Validation and error handling has default behaviors in place.
+Once the resource have been defined, the ServiceBlock framework will generate a CRUD API at `http://localhost/Invoice` with a ReDoc page at `http://localhost:5001/`. The resource will be stored in memory as defined by the storage attribute. Validation and error handling has default behaviors in place.
 
 The same goes for most things not tied to business logic. For example, by standardizing the implementation of storages, people can simply define the storage place for a resource using an attribute.
 

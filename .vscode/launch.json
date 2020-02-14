@@ -9,7 +9,7 @@
       "type": "coreclr",
       "request": "launch",
       "preLaunchTask": "build",
-      "program": "${workspaceFolder}/ServiceBlock.Sample/WeatherForecast/bin/Debug/netcoreapp3.0/WeatherForecast.dll",
+      "program": "${workspaceFolder}/ServiceBlock.Sample/WeatherForecast/bin/Debug/netcoreapp3.1/WeatherForecast.dll",
       "args": [],
       "cwd": "${workspaceFolder}/ServiceBlock.Sample/WeatherForecast",
       "console": "internalConsole",
