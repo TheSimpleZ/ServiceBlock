@@ -121,4 +121,5 @@ By looking for the classes and attributes you've defined ServiceBlock will know 
 -   Secret management.
 -   Remote config with hot-reloading.
 
+![Pack and publish dotnet core library](https://github.com/TheSimpleZ/ServiceBlock/workflows/Pack%20and%20publish%20dotnet%20core%20library/badge.svg)
 [![codecov](https://codecov.io/gh/TheSimpleZ/ServiceBlock/branch/master/graph/badge.svg)](https://codecov.io/gh/TheSimpleZ/ServiceBlock)
