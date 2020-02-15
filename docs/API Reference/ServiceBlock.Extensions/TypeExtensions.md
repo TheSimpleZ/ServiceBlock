@@ -75,7 +75,7 @@ public static bool HasAttribute<T>(this PropertyInfo type) where T : Attribute
 
 
 ```csharp
-public static string GetJsonType(this PropertyInfo pi) => new JSchemaGenerator().Generate(pi.PropertyType).Type.ToString();
+public static string GetJsonType(this PropertyInfo pi) => JsonSchema.FromType(pi.PropertyType).Type.ToString().ToLowerInvariant();
 ```
 
 

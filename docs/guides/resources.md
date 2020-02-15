@@ -20,7 +20,10 @@ Whenever a resource is defined the ServiceBlock framework will create 5 endpoint
 
 Where {Id} is a guid.
 
-The GET endpoints will retrieve the resource from storage. The POST endpoint will create a resource. The PUT will replace it. And the DELETE will remove the resource.
+The GET endpoints will retrieve the resource from storage.
+The POST endpoint will create a resource.
+The PUT will replace it.
+And the DELETE will remove the resource.
 
 ## The ReadOnly attribute
 

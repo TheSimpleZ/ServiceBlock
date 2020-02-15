@@ -43,6 +43,6 @@ dotnet add package ServiceBlock.Interface
 dotnet add package ServiceBlock.Storage
 ```
 
-Then go to your Program.cs and call `ServiceBlock.Startup.Block.Run(args)` from your main function.
+Then go to your Program.cs and call `ServiceBlock.Core.Block.Run(args)` from your main function.
 
 You can now start declaring ServiceBlock resources in your interface.

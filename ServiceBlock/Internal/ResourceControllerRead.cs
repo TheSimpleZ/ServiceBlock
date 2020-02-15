@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using ServiceBlock.Interface.Resource;
+using ServiceBlock.Interface;
 using System.Linq;
 using ServiceBlock.Extensions;
 using Newtonsoft.Json.Linq;
@@ -25,7 +26,7 @@ namespace ServiceBlock.Internal
         private readonly ILogger<ResourceControllerRead<T>> _logger;
         private readonly Storage<T> _storage;
 
-        private readonly IEnumerable<string> queryStringParameterNames = AbstractResource.GetQueryableProperties(typeof(T)).Select(q => q.Name);
+        private readonly IEnumerable<string> queryStringParameterNames = typeof(T).GetQueryableProperties().Select(q => q.Name);
 
 
         public ResourceControllerRead(ILogger<ResourceControllerRead<T>> logger, Storage<T> storage)

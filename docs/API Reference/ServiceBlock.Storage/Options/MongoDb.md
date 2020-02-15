@@ -2,7 +2,7 @@ MongoDb
 ======
 > Namespace: ServiceBlock.Storage.Options
 
-All settings for MongoDb storages
+All settings for MongoDb storages.
 
 ```
 public class MongoDb

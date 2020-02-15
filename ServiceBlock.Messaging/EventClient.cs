@@ -23,7 +23,7 @@ namespace ServiceBlock.Messaging
 
         protected readonly IEnumerable<string> SubscriptionServiceNames = BlockInfo.BlockTypes
             .Where(t => t.IsSubclassOfRawGeneric(typeof(ResourceEventListener<>)))
-            .Select(t => AbstractResource.GetServiceName(t.BaseType.GetGenericArguments().Single()));
+            .Select(t => t.BaseType.GetGenericArguments().Single().GetServiceName());
 
         protected virtual void OnMessageReceived(ResourceEventArgs args)
         {

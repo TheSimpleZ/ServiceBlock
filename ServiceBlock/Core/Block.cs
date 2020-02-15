@@ -26,19 +26,13 @@ namespace ServiceBlock.Core
         {
             ValidateResources();
 
-            if (logger != null)
-            {
-                Log.Logger = logger;
-            }
-            else
-            {
-                Log.Logger = new LoggerConfiguration()
-               .Enrich.FromLogContext()
-               .MinimumLevel.Debug()
-               .MinimumLevel.Override("Microsoft", LogEventLevel.Warning)
-               .WriteTo.ColoredConsole()
-                   .CreateLogger();
-            }
+            Log.Logger = logger ?? new LoggerConfiguration()
+            .Enrich.FromLogContext()
+            .MinimumLevel.Debug()
+            .MinimumLevel.Override("Microsoft", LogEventLevel.Warning)
+            .WriteTo.ColoredConsole()
+                .CreateLogger();
+
 
 
             try
@@ -81,7 +75,10 @@ namespace ServiceBlock.Core
 
         private static void ValidateResources()
         {
-            var exceptions = BlockInfo.ResourceTypes.Where(r => !r.HasAttribute<StorageAttribute>()).Select(r => new NoStorageException($"The resource {r.GetType().Name} does not have a compatible storage associated with it."));
+            var exceptions = BlockInfo.ResourceTypes
+                .Where(r => !r.HasAttribute<StorageAttribute>())
+                .Select(r => new NoStorageException($"The resource {r.GetType().Name} does not have a compatible storage associated with it."));
+
             if (exceptions.Any())
             {
                 throw new AggregateException("One or more resources does not have a storage", exceptions);

@@ -13,6 +13,8 @@ If you want to get started right away, check out the [Quick start guide](./Quick
 A typical example of a simple controller for a CRUD API written in ASP.NET Core looks roughly like this:
 
 ```csharp
+
+// The model
 class Employee
 {
     public Guid Id { get; set; }
@@ -81,13 +83,13 @@ public class Employee : AbstractResource
 { }
 ```
 
-Once the resource have been defined, the ServiceBlock framework will generate a CRUD API at `http://localhost/Invoice` with a ReDoc page at `http://localhost:5001/`. The resource will be stored in memory as defined by the storage attribute. Validation and error handling has default behaviors in place.
+Once the resource have been defined, the ServiceBlock framework will generate a CRUD API at `http://localhost:5001/Employee` with a ReDoc page at `http://localhost:5001/`. The resource will be stored in memory as defined by the storage attribute. Validation and error handling has default behaviors in place.
 
 The same goes for most things not tied to business logic. For example, by standardizing the implementation of storages, people can simply define the storage place for a resource using an attribute.
 
 To see all of the features please read through [the guides](./guides).
 
-## How?
+## How do we do it?
 
 We use a technique called assembly scanning to register generic implementations of controllers, storages, messaging clients etc.
 By looking for the classes and attributes you've defined ServiceBlock will know what storage to use for which type of resource.

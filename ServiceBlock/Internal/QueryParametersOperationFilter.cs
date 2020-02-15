@@ -3,7 +3,7 @@ using System.Net.Http;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using ServiceBlock.Extensions;
-using ServiceBlock.Interface.Resource;
+using ServiceBlock.Interface;
 
 namespace ServiceBlock.Internal
 {
@@ -17,7 +17,7 @@ namespace ServiceBlock.Internal
                 var resourceType = context.MethodInfo.DeclaringType?.GetGenericArguments().Single();
                 if (resourceType != null)
                 {
-                    var queryables = AbstractResource.GetQueryableProperties(resourceType);
+                    var queryables = resourceType.GetQueryableProperties();
                     var parameters = queryables.Select(q => new OpenApiParameter()
                     {
                         Name = q.Name,

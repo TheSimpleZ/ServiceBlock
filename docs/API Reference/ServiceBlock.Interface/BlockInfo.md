@@ -12,7 +12,7 @@ public static class BlockInfo
 
 ### Name
 
-Name of the current service
+Name of the current service.
 
 ```csharp
 public static string? Name => Assembly.GetEntryAssembly()?.GetName().Name;
@@ -21,7 +21,7 @@ public static string? Name => Assembly.GetEntryAssembly()?.GetName().Name;
 
 ### ResourceTypes
 
-All resources defined in the current service and the ServiceBlock Framework
+All resources defined in the current service and the ServiceBlock Framework.
 
 ```csharp
 public static IEnumerable<Type> ResourceTypes => BlockTypes.Where(x => typeof(AbstractResource).IsAssignableFrom(x) && x.IsClass && !x.IsAbstract);
@@ -34,10 +34,7 @@ public static IEnumerable<Type> ResourceTypes => BlockTypes.Where(x => typeof(Ab
 
 ```csharp
 public static IEnumerable<IServiceConfiguration> ServiceConfigurators =>
-BlockTypes
-.Where(t => t.IsClass && typeof(IServiceConfiguration).IsAssignableFrom(t))
-.Select(Activator.CreateInstance)
-.Cast<IServiceConfiguration>();
+GetInstances<IServiceConfiguration>();
 ```
 
 
