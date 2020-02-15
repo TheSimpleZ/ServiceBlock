@@ -3,12 +3,11 @@ name: Delete merged branch
 on:
   pull_request:
     branches:
-    - master
+      - master
     types: [closed]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
