@@ -1,15 +1,9 @@
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Net.Http;
-using System.Reflection;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using ServiceBlock.Extensions;
 using ServiceBlock.Interface.Resource;
-using Newtonsoft.Json.Schema;
-using Newtonsoft.Json.Schema.Generation;
-using System;
 
 namespace ServiceBlock.Internal
 {
