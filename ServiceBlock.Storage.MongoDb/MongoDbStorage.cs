@@ -5,14 +5,12 @@ using System.Linq;
 using Microsoft.Extensions.Logging;
 using ServiceBlock.Interface.Resource;
 using ServiceBlock.Interface.Storage;
-using Newtonsoft.Json;
-using System.Text.RegularExpressions;
 using MongoDB.Driver;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
-using ServiceBlock.Storage.Options;
+using ServiceBlock.Storage.MongoDb.Options;
 
-namespace ServiceBlock.Storage
+namespace ServiceBlock.Storage.MongoDb
 {
     // Summary: ServiceBlock storage backed by mongo db.
     // Parameters:
@@ -22,7 +20,7 @@ namespace ServiceBlock.Storage
         private readonly IMongoCollection<T> resources;
         private readonly ILogger<MemoryStorage<T>> _logger;
 
-        public MongoDbStorage(ILogger<MemoryStorage<T>> logger, IConfiguration config, IOptionsMonitor<MongoDb> options) : base(logger)
+        public MongoDbStorage(ILogger<MemoryStorage<T>> logger, IConfiguration config, IOptionsMonitor<Options.MongoDb> options) : base(logger)
         {
             var client = new MongoClient(config.GetConnectionString(nameof(MongoDb)));
             var database = client.GetDatabase(options.CurrentValue.DatabaseName);

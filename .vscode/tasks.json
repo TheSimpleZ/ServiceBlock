@@ -22,6 +22,12 @@
         "isDefault": true
       },
       "problemMatcher": "$msCompile"
+    },
+    {
+      "label": "docs",
+      "command": "doccore -o \"docs/API Reference/\" -e \"*Template*\" -e \"*Sample*\" -e \"*Test*\"",
+      "type": "shell",
+      "problemMatcher": []
     }
   ]
 }

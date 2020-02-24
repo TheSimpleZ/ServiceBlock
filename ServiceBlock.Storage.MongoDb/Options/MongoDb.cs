@@ -1,4 +1,4 @@
-namespace ServiceBlock.Storage.Options
+namespace ServiceBlock.Storage.MongoDb.Options
 {
     // All settings for MongoDb storages
     public class MongoDb

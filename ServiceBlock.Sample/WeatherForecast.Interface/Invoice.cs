@@ -1,9 +1,9 @@
 using System.ComponentModel.DataAnnotations;
 using ServiceBlock.Interface.Resource;
 using ServiceBlock.Interface.Storage;
-using ServiceBlock.Storage;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using ServiceBlock.Storage.MongoDb;
 
 namespace WeatherForecast.Interface
 {
